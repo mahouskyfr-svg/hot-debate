@@ -6,7 +6,7 @@
 <title>全球热点交锋</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:#0d1017;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;padding:12px 12px 84px;line-height:1.5}
+body{background:#0d1017;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;padding:12px 12px 86px;line-height:1.55}
 .panel{background:#151923;border:1px solid #262d3d;border-radius:14px;padding:12px;margin-bottom:12px}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .brand{font-size:18px;font-weight:700;display:flex;align-items:center;gap:7px}
@@ -14,6 +14,7 @@ body{background:#0d1017;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFo
 .btn{background:#ff2442;color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer}
 .btn-ghost{background:#1e2433;border:1px solid #333c52;color:#e5e7eb}
 .btn-purple{background:#7c3aed}
+.btn-mini{background:#1b2130;border:1px solid #2e374d;color:#d1d5db;border-radius:7px;padding:4px 9px;font-size:11px;cursor:pointer}
 .sub{font-size:11px;color:#9ca3af;margin-top:6px}
 .search{width:100%;background:#0e1118;border:1px solid #262d3d;border-radius:10px;padding:9px 12px;color:#fff;font-size:14px;margin:10px 0;outline:none}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
@@ -27,13 +28,17 @@ body{background:#0d1017;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFo
 .card-title{font-size:14px;font-weight:700;line-height:1.4}
 .card-prev{font-size:12px;color:#9ca3af}
 .card-foot{margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:#9ca3af;display:flex;justify-content:space-between}
-.modal{display:none;position:fixed;inset:0;background:#0d1017;z-index:100;overflow-y:auto;padding:14px 14px 86px}
+.modal{display:none;position:fixed;inset:0;background:#0d1017;z-index:100;overflow-y:auto;padding:14px 14px 90px}
 .modal.open{display:block}
+.sec-hd{font-size:12px;font-weight:700;color:#9ca3af;margin-bottom:6px;letter-spacing:.3px}
 .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:6px}
 .pro{background:rgba(16,185,129,.18);color:#34d399}
 .con{background:rgba(255,36,66,.18);color:#fda4af}
 .deep{background:rgba(59,130,246,.18);color:#93c5fd}
-textarea{width:100%;min-height:76px;background:#0e1118;border:1px solid #262d3d;border-radius:10px;padding:10px;color:#fff;font-size:13px;margin:8px 0;outline:none}
+.scene-box{background:#10141d;border:1px dashed #2e3850;border-radius:10px;padding:10px 12px;font-size:13px;color:#cbd5e1;margin-bottom:12px}
+.chip-list{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.chip{background:#10141d;border:1px solid #252c3d;border-radius:9px;padding:8px 10px;font-size:12px;color:#d1d5db}
+textarea{width:100%;min-height:80px;background:#0e1118;border:1px solid #262d3d;border-radius:10px;padding:10px;color:#fff;font-size:13px;margin:8px 0;outline:none}
 .pt{background:#161126;border-left:3px solid #a855f7;padding:9px 11px;border-radius:8px;font-size:13px;color:#f3e8ff;margin-top:8px}
 .note-item{background:#0e1118;border:1px solid #262d3d;border-radius:10px;padding:10px;margin-top:8px;font-size:12px}
 .bottom-nav{position:fixed;left:0;right:0;bottom:0;background:rgba(13,16,23,.96);border-top:1px solid #262d3d;display:flex;justify-content:space-around;padding:8px 12px 16px;z-index:50}
@@ -65,7 +70,10 @@ textarea{width:100%;min-height:76px;background:#0e1118;border:1px solid #262d3d;
 
 <div id="vaultView" style="display:none">
   <div class="panel">
-    <div class="brand">我的观点笔记</div>
+    <div class="row">
+      <div class="brand">我的观点笔记</div>
+      <button class="btn-mini" onclick="clearAllNotes()">清空笔记</button>
+    </div>
     <div class="sub" id="vaultCount">累计记录 0 条随想与锐评</div>
   </div>
   <div id="vaultList"></div>
@@ -77,17 +85,32 @@ textarea{width:100%;min-height:76px;background:#0e1118;border:1px solid #262d3d;
     <span id="dMeta" style="font-size:12px;color:#9ca3af"></span>
   </div>
   <h2 id="dTitle" style="font-size:18px;line-height:1.4;margin-bottom:8px"></h2>
-  <div class="panel" id="dBrief" style="border-left:3px solid #ff2442;font-size:13px;color:#d1d5db"></div>
+
+  <div class="panel" style="border-left:3px solid #ff2442">
+    <div class="sec-hd">事件脉络与核心争议</div>
+    <div id="dBrief" style="font-size:13px;color:#e5e7eb"></div>
+    <div class="chip-list" id="dPoints"></div>
+  </div>
+
+  <div class="scene-box">
+    <div class="sec-hd">日常场景对照</div>
+    <div id="dScene"></div>
+  </div>
+
+  <div class="sec-hd">多视角观点交锋</div>
   <div class="panel"><span class="tag pro" id="dL1"></span><div id="dT1" style="font-size:13px"></div></div>
   <div class="panel"><span class="tag con" id="dL2"></span><div id="dT2" style="font-size:13px"></div></div>
   <div class="panel"><span class="tag deep" id="dL3"></span><div id="dT3" style="font-size:13px"></div></div>
+
   <div class="panel">
-    <div style="font-size:12px;font-weight:700;color:#9ca3af">写下你的看法 & 让反方拆一拆</div>
-    <textarea id="noteInput" placeholder="输入你的观点或吐槽，点紫色按钮看反方三点质询..."></textarea>
+    <div class="sec-hd">写下你的看法 & 让反方拆一拆</div>
+    <textarea id="noteInput" placeholder="写下你的判断、吐槽或实测体会，点紫色按钮看反方三点质询..."></textarea>
     <div class="row" style="justify-content:flex-start">
       <button class="btn" onclick="saveNote()">保存随想</button>
       <button class="btn btn-purple" onclick="runRebuttal()">⚡ 反方三点质询</button>
+      <button class="btn-mini" onclick="copyTopicShare()">复制话题+观点</button>
     </div>
+    <div id="copyTip" class="sub"></div>
     <div id="rebutPanel" style="display:none;margin-top:8px">
       <div class="pt" id="rp1"></div>
       <div class="pt" id="rp2"></div>
@@ -104,117 +127,17 @@ textarea{width:100%;min-height:76px;background:#0e1118;border:1px solid #262d3d;
 
 <script>
 var seedTopics=[
-{id:"t1",cat:"数码与交互",heat:"98.4万",bg:"linear-gradient(135deg,#831843,#ec4899)",title:"折叠屏外屏交互与窄屏排版：为什么很多界面总留一块没用的空白？",brief:"小尺寸外屏和窄屏分屏下，固定栏位或未适配布局容易把内容挤窄或留出大片闲置区。",d:[["赞成派 · 秩序与防误触","留出固定边距或状态区能减少误触，也给系统控件留出稳定呼吸感。"],["反对派 · 空间浪费太明显","本来屏幕就不宽，再被固定条占掉一块，看正文和按钮就得反复滑动或缩放。"],["知乎高赞视角 · 交互本质","好交互不是把桌面端硬塞进来，而是让高频动作少点几下、信息层级够清楚。"]]},
-{id:"t2",cat:"AI与效率",heat:"89.2万",bg:"linear-gradient(135deg,#312e81,#6366f1)",title:"AI 写代码与做内容：到底是在帮普通人提效，还是制造更多半成品？",brief:"借助 AI 生成页面、文案和剪辑流程越来越快，但真正能跑通、能用顺手的往往在细节。",d:[["赞成派 · 门槛大幅降低","过去要搭环境、写半天模板的事，现在几分钟就能看到雏形，试错成本低很多。"],["反对派 · 拼凑感变强","拼出来的东西如果没人兜底测试和打磨，一到真实场景就会卡壳。"],["知乎高赞视角 · 人机分工","AI 适合快速出草稿和改报错，真正决定好不好用的是人的审美和判断。"]]},
-{id:"t3",cat:"内容与生活",heat:"84.6万",bg:"linear-gradient(135deg,#7c2d12,#f97316)",title:"信息流越来越吵：为什么大家反而开始怀念安静、克制的阅读体验？",brief:"满屏弹窗、带货推销和同质化模板让人疲惫，清爽卡片流和个人笔记重新受到欢迎。",d:[["赞成派 · 夺回注意力","少一点干扰、多一点留白和深度观点，刷手机才不会越刷越烦躁。"],["反对派 · 商业与活跃难兼顾","完全没有商业化或热闹互动的社区，也很难长期养活创作者和内容更新。"],["知乎高赞视角 · 情绪价值","大家反感的不是推荐，而是被当成流量收割机的廉价感和喧嚣感。"]]},
-{id:"t4",cat:"AI与效率",heat:"79.5万",bg:"linear-gradient(135deg,#065f46,#10b981)",title:"语音助手 vs 真正能看懂屏幕的 AI：现在的智能交互差在哪？",brief:"很多助手只会按固定话术回答或跳步骤，面对复杂上下文时依然显得笨拙。",d:[["赞成派 · 方向已经对了","多模态理解和跨应用执行正在推进，只要接口打通，体验会跃升。"],["反对派 · 离聪明还远","一遇到没见过的界面或稍微绕一点的需求就答非所问，实用性有限。"],["知乎高赞视角 · 体验分水岭","真正好用的工具应该顺着人的意图走，而不是让人去迁就它的固定套路。"]]},
-{id:"t5",cat:"数码与交互",heat:"75.1万",bg:"linear-gradient(135deg,#1e3a8a,#38bdf8)",title:"纯手机折腾创作与开发：一部手机能不能扛起日常主力工作流？",brief:"从写脚本、改代码到预览效果、发帖记录，越来越多人尝试把工作流搬到手机上。",d:[["赞成派 · 随时随地能推进","不用等回电脑前，躺在沙发或路上就能把想法变成可看的东西，节奏极快。"],["反对派 · 屏幕与权限掣肘","手机系统权限、文件管理和复杂调试依然有边界，重度任务还是会碰壁。"],["知乎高赞视角 · 抓大放小","把适合手机做的轻量化创作和验证放在手机上，卡点处换思路绕开即可。"]]},
-{id:"t6",cat:"内容与生活",heat:"71.3万",bg:"linear-gradient(135deg,#581c87,#c084fc)",title:"做一期真诚好玩的测评或分享，最重要的到底是参数还是真实感受？",brief:"参数表人人都会念，但真实踩坑经历、对比细节和坦诚吐槽才最容易让人看进去。",d:[["赞成派 · 真实感最打动人","把哪里好用、哪里别扭讲清楚，哪怕有点小毛病也比假大空吹捧更有共鸣。"],["反对派 · 基础信息不能少","没有基本事实和对比依据，光靠情绪输出也很难让人信服。"],["知乎高赞视角 · 真实 + 清晰","先讲清楚发生了什么，再亮出自己的真实体验和结论，既有干货又有温度。"]]}
-];
-var topics=seedTopics.slice(),activeCat="全部",currentTopic=null,notesStore={};
-try{var sn=localStorage.getItem("hot_life_notes_v3");if(sn)notesStore=JSON.parse(sn)}catch(e){}
-function saveNotesStore(){try{localStorage.setItem("hot_life_notes_v3",JSON.stringify(notesStore))}catch(e){}}
-function resetDemo(){topics=seedTopics.slice();renderFeed();document.getElementById("statusBar").innerText="已恢复 6 条热议话题"}
-function switchTab(t){
-  document.getElementById("feedView").style.display=t==="feed"?"block":"none";
-  document.getElementById("vaultView").style.display=t==="vault"?"block":"none";
-  document.getElementById("navFeed").className="nav-btn"+(t==="feed"?" on":"");
-  document.getElementById("navVault").className="nav-btn"+(t==="vault"?" on":"");
-  if(t==="vault")renderVault();
-}
-function chooseCat(c,el){
-  activeCat=c;
-  var list=document.getElementById("catTabs").children;
-  for(var i=0;i<list.length;i++)list[i].className="tab";
-  if(el)el.className="tab active";
-  renderFeed();
-}
-function renderFeed(){
-  var kw=(document.getElementById("searchBox").value||"").toLowerCase().trim(),html="",count=0;
-  for(var i=0;i<topics.length;i++){
-    var t=topics[i];
-    if((activeCat==="全部"||t.cat===activeCat)&&(!kw||t.title.toLowerCase().indexOf(kw)>-1||t.brief.toLowerCase().indexOf(kw)>-1)){
-      count++;
-      html+='<div class="card" onclick="openDetail(\''+t.id+'\')"><div class="banner" style="background:'+t.bg+'"><span>'+t.cat+'</span><span>🔥 '+t.heat+'</span></div><div class="card-body"><div class="card-title">'+t.title+'</div><div class="card-prev">'+t.d[0][0]+'：'+t.d[0][1]+'</div><div class="card-foot"><span>3 方观点交锋</span><span>展开 →</span></div></div></div>';
-    }
-  }
-  document.getElementById("feedGrid").innerHTML=html||'<div class="panel">没有匹配的话题，换个关键词试试。</div>';
-  document.getElementById("statusBar").innerText="已加载 "+count+" / "+topics.length+" 条话题 · "+activeCat;
-}
-function openDetail(id){
-  var f=null;
-  for(var i=0;i<topics.length;i++)if(topics[i].id===id)f=topics[i];
-  if(!f)return;
-  currentTopic=f;
-  document.getElementById("dMeta").innerText=f.cat+" · 热度 "+f.heat;
-  document.getElementById("dTitle").innerText=f.title;
-  document.getElementById("dBrief").innerText=f.brief;
-  document.getElementById("dL1").innerText=f.d[0][0];document.getElementById("dT1").innerText=f.d[0][1];
-  document.getElementById("dL2").innerText=f.d[1][0];document.getElementById("dT2").innerText=f.d[1][1];
-  document.getElementById("dL3").innerText=f.d[2][0];document.getElementById("dT3").innerText=f.d[2][1];
-  document.getElementById("noteInput").value="";
-  document.getElementById("rebutPanel").style.display="none";
-  renderTopicNotes(f.id);
-  document.getElementById("detailModal").className="modal open";
-  document.getElementById("detailModal").scrollTop=0;
-}
-function closeDetail(){document.getElementById("detailModal").className="modal";currentTopic=null}
-function renderTopicNotes(id){
-  var arr=notesStore[id]||[],h="";
-  for(var i=0;i<arr.length;i++)h+='<div class="note-item"><div>'+arr[i].text+'</div><div class="sub">'+arr[i].time+'</div></div>';
-  document.getElementById("topicNotes").innerHTML=h;
-}
-function saveNote(){
-  if(!currentTopic)return;
-  var txt=(document.getElementById("noteInput").value||"").trim();
-  if(!txt)return;
-  if(!notesStore[currentTopic.id])notesStore[currentTopic.id]=[];
-  notesStore[currentTopic.id].unshift({topicTitle:currentTopic.title,text:txt,time:new Date().toLocaleString("zh-CN")});
-  saveNotesStore();
-  document.getElementById("noteInput").value="";
-  renderTopicNotes(currentTopic.id);
-}
-function runRebuttal(){
-  var raw=(document.getElementById("noteInput").value||"").trim();
-  var a=raw?("针对你说的「"+raw.slice(0,26)+(raw.length>26?"…":"")+"」"):"针对当前这个话题";
-  document.getElementById("rp1").innerText="1. 换个前提看："+a+"，如果换一种常见使用场景或人群，这个结论还站得住吗？";
-  document.getElementById("rp2").innerText="2. 唱反调视角：支持另一边的人最看重什么？他们担心的痛点是不是也有道理？";
-  document.getElementById("rp3").innerText="3. 代价与取舍：顺着你的想法走，会牺牲掉哪些便利、时间或体验？";
-  document.getElementById("rebutPanel").style.display="block";
-  document.getElementById("detailModal").scrollTop=99999;
-}
-function renderVault(){
-  var all=[];
-  for(var k in notesStore)if(Object.prototype.hasOwnProperty.call(notesStore,k)){
-    var l=notesStore[k]||[];for(var i=0;i<l.length;i++)all.push(l[i]);
-  }
-  document.getElementById("vaultCount").innerText="累计记录 "+all.length+" 条随想笔记";
-  if(!all.length){document.getElementById("vaultList").innerHTML='<div class="panel"><div class="sub">还没有保存过随想，点开任意话题写几句就能存到这里。</div></div>';return}
-  var html="";
-  for(var j=0;j<all.length;j++)html+='<div class="panel"><div style="font-size:11px;color:#ff6b81;margin-bottom:4px">话题：'+all[j].topicTitle+'</div><div style="font-size:13px">'+all[j].text+'</div><div class="sub">'+all[j].time+'</div></div>';
-  document.getElementById("vaultList").innerHTML=html;
-}
-function isStaleTitle(t){
-  var s=String(t||"").toLowerCase();
-  if(s.indexOf("2020")>-1||s.indexOf("2021")>-1||s.indexOf("2022")>-1||s.indexOf("2023")>-1||s.indexOf("2024")>-1||s.indexOf("2025")>-1)return true;
-  if(s.indexOf("top 10 ")>-1||s.indexOf("best ai tools")>-1)return true;
-  return false;
-}
-function fetchFresh(){
-  document.getElementById("statusBar").innerText="正在拉取全球实时热议条目...";
-  fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fhnrss.org%2Ffrontpage").then(function(r){return r.json()}).then(function(res){
-    var items=(res&&res.items)||[],cats=["AI与效率","数码与交互","内容与生活"],bgs=["linear-gradient(135deg,#831843,#ec4899)","linear-gradient(135deg,#312e81,#6366f1)","linear-gradient(135deg,#7c2d12,#f97316)","linear-gradient(135deg,#065f46,#10b981)"],fresh=[];
-    for(var i=0;i<items.length&&fresh.length<5;i++){
-      var t=items[i].title||"";
-      if(!t||isStaleTitle(t))continue;
-      var idx=fresh.length;
-      fresh.push({id:"live_"+idx,cat:cats[idx%3],heat:(94-idx*3)+".0万",bg:bgs[idx%4],title:t,brief:"实时抓取引用的全球热议话题，点开看看多方视角和反方拆解。",d:[["赞成派 · 顺势视角","不少人认为这个新动向带来了更快的效率或新鲜玩法。"],["反对派 · 冷静视角","也有人觉得实际体验还得看后续落地，别急着吹太高。"],["知乎高赞视角 · 关键追问","真正值得留意的，是它到底改变了谁的日常习惯。"]]});
-    }
-    if(fresh.length){topics=fresh.concat(seedTopics);renderFeed();document.getElementById("statusBar").innerText="已更新 "+fresh.length+" 条较新话题"}
-    else{document.getElementById("statusBar").innerText="暂未筛出更新条目，已保留默认话题"}
-  }).catch(function(){document.getElementById("statusBar").innerText="当前网络下未能联网刷新，已保留默认话题"});
-}
-renderFeed();
-</script>
-</body>
-</html>
+{id:"t1",cat:"数码与交互",heat:"98.4万",bg:"linear-gradient(135deg,#831843,#ec4899)",
+title:"折叠屏外屏交互与窄屏排版：为什么很多界面总留一块没用的空白？",
+brief:"小尺寸外屏、分屏或窄视口下，固定边栏或未重排布局容易把内容挤窄，或者在侧边留出大片闲置区。",
+bullets:["痛点 1：固定占位区压缩有效视口，长文案和按钮需要反复滑动。","痛点 2：部分网页或组件未适配窄屏，缩放后排版容易错位。","争论焦点：是靠系统/浏览器缩放兜底，还是界面本身做到自适应与轻量化？"],
+scene:"在窄屏或折叠屏外屏刷信息流、写随想时，按钮太大或侧边留白过多会直接影响单手操作效率。",
+d:[["赞成派 · 秩序与防误触","预留固定边距或状态区能减少误触，也给系统控件留出稳定呼吸感。"],["反对派 · 空间浪费太明显","本来横向空间就不宽，再被固定区域占掉一块，看正文和点按钮都很别扭。"],["知乎高赞视角 · 交互本质","好交互不是把宽屏布局硬塞进来，而是让高频动作少点几步、信息层级足够清楚。"]]},
+{id:"t2",cat:"AI与效率",heat:"89.2万",bg:"linear-gradient(135deg,#312e81,#6366f1)",
+title:"AI 写代码与做内容：到底是在帮普通人提效，还是制造更多半成品？",
+brief:"借助 AI 生成页面、文案、字幕和剪辑流程越来越快，但真正能跑通、用顺手的往往卡在细节和联调。",
+bullets:["现状：从零搭框架到出第一版可运行效果，时间从几天缩短到几分钟。","隐患：只复制粘贴不验证边界，一旦遇到兼容或长文本就容易掉链子。","争论焦点：AI 放大的是个人执行力，还是把“能跑起来”误当成“能交付”？"],
+scene:"用 AI 改前端页面、调脚本或做图文/视频草稿时，最耗时间的往往不是出第一版，而是修边缘报错和统一风格。",
+d:[["赞成派 · 门槛大幅降低","过去要搭环境、写半天模板的事，现在几分钟就能看到雏形，试错成本低很多。"],["反对派 · 半成品变多了","拼出来的东西如果没人兜底测试和打磨，一到真实场景就会卡壳或白屏。"],["知乎高赞视角 · 人机分工","AI 适合快速出草稿、改报错和试方案，真正决定好不好用的是人的判断和耐心。"]]},
+{id:"t3",cat:"内容与生活",heat:"84.6万",bg:"linear-gradient(135deg,#7c2d12,#f97316)",
+title:"信息流越来越吵：为什么大家反而开始怀念安静、克制的
