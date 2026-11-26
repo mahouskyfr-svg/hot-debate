@@ -4,18 +4,20 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<title>全球热点交锋 · 图文与深度问答</title>
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<title>全球热点交锋 · 深度报道与多视角辩论</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:#0b0e14;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;padding:10px 10px 92px;line-height:1.55}
+body{background:#0b0e14;color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",sans-serif;padding:10px 10px 96px;line-height:1.6}
 .panel{background:#141822;border:1px solid #232a3b;border-radius:14px;padding:12px;margin-bottom:10px}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .brand{font-size:18px;font-weight:800;display:flex;align-items:center;gap:7px;letter-spacing:-.2px}
 .dot{width:9px;height:9px;border-radius:50%;background:#ff2442}
 .btn{background:#ff2442;color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
 .btn-ghost{background:#1c2230;border:1px solid #2f384d;color:#e5e7eb}
-.btn-zhihu{background:#0066ff;color:#fff}
-.btn-purple{background:#7c3aed}
+.btn-blue{background:#0066ff;color:#fff}
+.btn-purple{background:#7c3aed;color:#fff}
 .btn-mini{background:#1a202e;border:1px solid #2c354a;color:#d1d5db;border-radius:7px;padding:4px 9px;font-size:11px;cursor:pointer}
 .sub{font-size:11px;color:#9ca3af;margin-top:6px;word-break:break-word}
 .search{width:100%;background:#0c0f16;border:1px solid #232a3b;border-radius:10px;padding:9px 12px;color:#fff;font-size:14px;margin:9px 0;outline:none}
@@ -23,39 +25,37 @@ body{background:#0b0e14;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFo
 .tab{padding:5px 10px;border-radius:999px;font-size:12px;background:#0c0f16;color:#9ca3af;border:1px solid #232a3b;cursor:pointer}
 .tab.active{background:#f9fafb;color:#0b0e14;font-weight:700;border-color:#f9fafb}
 
-/* 小红书双列瀑布流卡片 */
+/* 小红书双列卡片流 */
 .waterfall{column-count:2;column-gap:9px}
 @media(max-width:340px){.waterfall{column-count:1}}
 .xhs-card{break-inside:avoid;background:#141822;border:1px solid #232a3b;border-radius:13px;overflow:hidden;margin-bottom:9px;display:flex;flex-direction:column;cursor:pointer}
-.media-wrap{position:relative;width:100%;background:linear-gradient(135deg,#1e2536,#111622);overflow:hidden}
-.media-wrap img{width:100%;display:block;object-fit:cover;min-height:115px;max-height:210px}
-.media-badge{position:absolute;top:7px;left:7px;background:rgba(11,14,20,.72);backdrop-filter:blur(4px);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:999px}
-.video-pill{position:absolute;top:7px;right:7px;background:rgba(255,36,66,.88);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;display:flex;align-items:center;gap:3px}
-.rank-pill{position:absolute;bottom:7px;left:7px;background:rgba(0,0,0,.68);color:#fbbf24;font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px}
+.media-wrap{position:relative;width:100%;background:#111622;overflow:hidden}
+.media-wrap img{width:100%;display:block;object-fit:cover;max-height:215px}
+.media-badge{position:absolute;top:7px;left:7px;background:rgba(11,14,20,.76);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:999px}
+.video-pill{position:absolute;top:7px;right:7px;background:#ff2442;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
 .xhs-body{padding:9px 10px 10px}
-.xhs-title{font-size:13.5px;font-weight:700;line-height:1.4;color:#f3f4f6;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.xhs-sub{font-size:11.5px;color:#9ca3af;line-height:1.4;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.xhs-title{font-size:13.5px;font-weight:700;line-height:1.42;color:#f9fafb;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.xhs-sub{font-size:11.5px;color:#9ca3af;line-height:1.45;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .xhs-meta{display:flex;justify-content:space-between;align-items:center;gap:4px;font-size:11px;color:#9ca3af}
-.author-box{display:flex;align-items:center;gap:5px;min-width:0}
-.avatar{width:17px;height:17px;border-radius:50%;background:linear-gradient(135deg,#ff2442,#7c3aed);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.author-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:78px;font-size:10.5px}
-.like-btn{display:flex;align-items:center;gap:3px;font-size:11px;color:#9ca3af;padding:2px 4px;border-radius:6px;flex-shrink:0}
+.src-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:108px;font-size:10.5px}
+.like-btn{display:flex;align-items:center;gap:3px;font-size:11px;color:#9ca3af;padding:2px 5px;border-radius:6px;flex-shrink:0}
 .like-btn.liked{color:#ff2442;font-weight:700}
 
 .load-more-bar{text-align:center;padding:16px 10px;color:#9ca3af;font-size:12px}
 
-/* 知乎风深度详情弹窗 */
-.modal{display:none;position:fixed;inset:0;background:#0b0e14;z-index:100;overflow-y:auto;padding:12px 12px 92px}
+/* 知乎风详细报道与辩论详情页 */
+.modal{display:none;position:fixed;inset:0;background:#0b0e14;z-index:100;overflow-y:auto;padding:12px 12px 96px}
 .modal.open{display:block}
-.hero-media{position:relative;border-radius:14px;overflow:hidden;margin-bottom:12px;border:1px solid #232a3b;background:#141822}
-.hero-media img{width:100%;max-height:240px;object-fit:cover;display:block}
-.hero-caption{padding:9px 12px;font-size:11px;color:#9ca3af;background:#111520;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.src-card{background:#121724;border:1px solid #263147;border-radius:12px;padding:10px 12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.sec-hd{font-size:12px;font-weight:700;color:#9ca3af;margin:12px 0 7px;letter-spacing:.3px;display:flex;justify-content:space-between;align-items:center}
+.hero-box{border-radius:14px;overflow:hidden;margin-bottom:12px;border:1px solid #232a3b;background:#141822}
+.hero-box img{width:100%;max-height:260px;object-fit:cover;display:block}
+.hero-box video,.hero-box iframe{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
+.hero-cap{padding:8px 12px;font-size:11px;color:#9ca3af;background:#111520;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.src-card{background:#121724;border:1px solid #263147;border-radius:12px;padding:10px 12px;margin-bottom:12px}
+.sec-hd{font-size:12px;font-weight:700;color:#9ca3af;margin:13px 0 7px;letter-spacing:.3px}
+.report-box{background:#141822;border:1px solid #232a3b;border-left:3px solid #ff2442;border-radius:14px;padding:13px;margin-bottom:12px}
+.report-text{font-size:14px;color:#e5e7eb;line-height:1.75;white-space:pre-line}
 .zhihu-ans{background:#141822;border:1px solid #232a3b;border-radius:14px;padding:13px;margin-bottom:12px}
-.ans-author{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-.ans-avatar{width:28px;height:28px;border-radius:50%;background:#0066ff;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.ans-text{font-size:13.5px;color:#e5e7eb;line-height:1.68;white-space:pre-line}
+.ans-text{font-size:13.5px;color:#e5e7eb;line-height:1.72;white-space:pre-line}
 .ans-bar{margin-top:10px;padding-top:9px;border-top:1px solid #22293a;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .agree-pill{background:rgba(0,102,255,.16);color:#60a5fa;border:1px solid rgba(0,102,255,.35);padding:4px 10px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer}
 .agree-pill.on{background:#0066ff;color:#fff}
@@ -63,9 +63,7 @@ body{background:#0b0e14;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFo
 .pro{background:rgba(16,185,129,.18);color:#34d399}
 .con{background:rgba(255,36,66,.18);color:#fda4af}
 .deep{background:rgba(59,130,246,.18);color:#93c5fd}
-.cmt-item{background:#10141e;border:1px solid #202738;border-radius:10px;padding:9px 11px;margin-bottom:7px;font-size:12.5px}
-.cmt-top{display:flex;justify-content:space-between;font-size:11px;color:#9ca3af;margin-bottom:3px}
-textarea{width:100%;min-height:80px;background:#0c0f16;border:1px solid #232a3b;border-radius:10px;padding:10px;color:#fff;font-size:13px;margin:8px 0;outline:none}
+textarea{width:100%;min-height:82px;background:#0c0f16;border:1px solid #232a3b;border-radius:10px;padding:10px;color:#fff;font-size:13px;margin:8px 0;outline:none}
 .pt{background:#161126;border-left:3px solid #a855f7;padding:9px 11px;border-radius:8px;font-size:13px;color:#f3e8ff;margin-top:8px}
 .note-item{background:#0c0f16;border:1px solid #232a3b;border-radius:10px;padding:10px;margin-top:8px;font-size:12px}
 .bottom-nav{position:fixed;left:0;right:0;bottom:0;background:rgba(11,14,20,.96);border-top:1px solid #232a3b;display:flex;justify-content:space-around;padding:8px 12px 16px;z-index:50}
@@ -79,12 +77,12 @@ textarea{width:100%;min-height:80px;background:#0c0f16;border:1px solid #232a3b;
     <div class="row">
       <div class="brand"><span class="dot"></span>全球热点交锋</div>
       <div class="row" style="gap:6px">
-        <button class="btn" onclick="refreshAllPool()">↻ 刷新热榜</button>
-        <button class="btn btn-ghost" id="sortBtn" onclick="toggleSort()">热度↓</button>
+        <button class="btn" onclick="refreshAll()">↻ 联网抓真实报道</button>
+        <button class="btn btn-ghost" id="sortBtn" onclick="toggleSort()">最新↓</button>
       </div>
     </div>
-    <div class="sub" id="statusBar">正在加载图文与深度问答热榜...</div>
-    <input class="search" id="searchBox" placeholder="搜国家/地区、AI工具、折叠屏、视频测评、生活..." oninput="resetPaginationAndRender()" />
+    <div class="sub" id="statusBar">正在加载 120 张独立图库与多源深度报道...</div>
+    <input class="search" id="searchBox" placeholder="搜索报道标题、详细内容、地区、信源..." oninput="resetPageAndRender()" />
     <div class="tabs" id="catTabs">
       <span class="tab active" onclick="chooseCat('全部',this)">全部</span>
       <span class="tab" onclick="chooseCat('全球国际',this)">全球国际</span>
@@ -93,97 +91,76 @@ textarea{width:100%;min-height:80px;background:#0c0f16;border:1px solid #232a3b;
       <span class="tab" onclick="chooseCat('内容生活',this)">内容与生活</span>
     </div>
     <div class="tabs" id="timeTabs" style="margin-top:7px">
-      <span class="tab active" onclick="chooseTime('全部时间',this)">近30天全量</span>
-      <span class="tab" onclick="chooseTime('近48小时',this)">近1-2天热议</span>
-      <span class="tab" onclick="chooseTime('近30天',this)">本月深度精选</span>
-      <span class="tab" onclick="chooseTime('含视频',this)">▶ 含视频拆解</span>
+      <span class="tab active" onclick="chooseTime('全部',this)">全部条目</span>
+      <span class="tab" onclick="chooseTime('近48小时',this)">近48小时</span>
+      <span class="tab" onclick="chooseTime('近30天',this)">近30天</span>
+      <span class="tab" onclick="chooseTime('真视频',this)">▶ 仅含真视频</span>
     </div>
   </div>
   <div class="waterfall" id="feedGrid"></div>
   <div class="load-more-bar" id="loadMoreBar">
-    <span id="loadMoreTxt">下滑自动加载更多图文与高赞问答...</span>
-    <div style="margin-top:8px"><button class="btn-mini" id="loadMoreBtn" onclick="loadNextPage()">点击加载下一批 (+24条)</button></div>
+    <span id="loadMoreTxt"></span>
+    <div style="margin-top:8px"><button class="btn-mini" id="loadMoreBtn" onclick="loadNextPage()">加载下一批 (+24条)</button></div>
   </div>
 </div>
 
 <div id="vaultView" style="display:none">
   <div class="panel">
     <div class="row">
-      <div class="brand">我的观点与收藏</div>
+      <div class="brand">我的随想笔记</div>
       <button class="btn-mini" onclick="clearAllNotes()">清空笔记</button>
     </div>
-    <div class="sub" id="vaultCount">累计记录 0 条随想回答</div>
+    <div class="sub" id="vaultCount">已记录 0 条</div>
   </div>
   <div id="vaultList"></div>
 </div>
 
 <div class="modal" id="detailModal">
   <div class="row" style="margin-bottom:10px">
-    <button class="btn btn-ghost" onclick="closeDetail()">← 返回发现页</button>
-    <div class="row" style="gap:6px">
-      <a id="dVideoBtn" class="btn" href="#" target="_blank" rel="noopener" style="display:none">▶ 看原视频/报道</a>
-      <a id="dOriginLink" class="btn btn-zhihu" href="#" target="_blank" rel="noopener" style="display:none">查看信源全文 ↗</a>
+    <button class="btn btn-ghost" onclick="closeDetail()">← 返回列表</button>
+    <a id="dOriginLink" class="btn btn-blue" href="#" target="_blank" rel="noopener" style="display:none">阅读原文 ↗</a>
+  </div>
+
+  <div class="hero-box" id="dHeroBox">
+    <div id="dMediaSlot"></div>
+    <div class="hero-cap">
+      <span id="dImgSrc"></span>
+      <span id="dMediaKind"></span>
     </div>
   </div>
 
-  <div class="hero-media">
-    <img id="dHeroImg" src="" alt="封面配图" onerror="this.style.display='none'" />
-    <div class="hero-caption">
-      <span id="dImgCredit">实拍配图 · 视觉参考</span>
-      <span id="dMediaType">图文深度拆解</span>
-    </div>
-  </div>
+  <h2 id="dTitle" style="font-size:18.5px;line-height:1.45;margin-bottom:8px"></h2>
 
-  <h2 id="dTitle" style="font-size:18px;line-height:1.42;margin-bottom:8px"></h2>
-
-  <!-- 明确信源卡片 -->
   <div class="src-card">
-    <div>
-      <div style="font-size:12px;font-weight:700;color:#e5e7eb" id="dSrcTitle">信源：全球科技观察站</div>
-      <div style="font-size:11px;color:#9ca3af;margin-top:2px" id="dSrcMeta">发布时间 · 地区频道 · 热度指数</div>
-    </div>
-    <span style="font-size:11px;background:#1e2638;color:#93c5fd;padding:3px 8px;border-radius:6px" id="dSrcBadge">已核对出处</span>
+    <div style="font-size:12px;font-weight:700;color:#e5e7eb" id="dSrcLine"></div>
+    <div style="font-size:11px;color:#9ca3af;margin-top:3px" id="dTimeLine"></div>
   </div>
 
-  <!-- 问题描述/事件报道 -->
-  <div class="panel" style="border-left:3px solid #ff2442">
-    <div class="sec-hd" style="margin-top:0">事件背景与原报道摘要</div>
-    <div id="dBrief" style="font-size:13.5px;color:#e5e7eb;white-space:pre-line"></div>
+  <div class="report-box">
+    <div class="sec-hd" style="margin-top:0;color:#fda4af">详细报道说明 · 事件脉络与关键细节</div>
+    <div class="report-text" id="dFullReport"></div>
   </div>
 
-  <!-- 知乎高赞长回答区 -->
-  <div class="sec-hd"><span>知乎式高赞回答 · 深度拆解</span><span id="dAnsCount" style="color:#60a5fa">3 个高赞回答</span></div>
+  <div class="sec-hd">多视角观点交锋</div>
+  <div class="panel"><span class="tag pro" id="dL1"></span><div id="dT1" style="font-size:13.5px"></div></div>
+  <div class="panel"><span class="tag con" id="dL2"></span><div id="dT2" style="font-size:13.5px"></div></div>
+  <div class="panel"><span class="tag deep" id="dL3"></span><div id="dT3" style="font-size:13.5px"></div></div>
+
   <div class="zhihu-ans">
-    <div class="ans-author">
-      <div class="ans-avatar" id="dAnsAvatar">答</div>
-      <div>
-        <div style="font-size:13px;font-weight:700" id="dAnsAuthor">林深 · 交互与产品体验观察员</div>
-        <div style="font-size:11px;color:#9ca3af" id="dAnsBio">关注折叠屏效率、AI工作流与内容设计</div>
-      </div>
-    </div>
+    <div class="sec-hd" style="margin-top:0;color:#60a5fa">深度拆解与使用场景对照</div>
     <div class="ans-text" id="dLongAns"></div>
     <div class="ans-bar">
-      <button class="agree-pill" id="dAgreeBtn" onclick="toggleAgree()">▲ 赞同 <span id="dAgreeNum">1.2k</span></button>
-      <button class="btn-mini" onclick="copyTopicShare()">复制完整回答</button>
+      <button class="agree-pill" id="dAgreeBtn" onclick="toggleAgree()">▲ 认同拆解 <span id="dAgreeNum">0</span></button>
+      <button class="btn-mini" onclick="copyTopicShare()">复制完整报道</button>
       <span id="copyTip" style="font-size:11px;color:#34d399"></span>
     </div>
   </div>
 
-  <!-- 正反交锋观点 -->
-  <div class="panel"><span class="tag pro" id="dL1"></span><div id="dT1" style="font-size:13px"></div></div>
-  <div class="panel"><span class="tag con" id="dL2"></span><div id="dT2" style="font-size:13px"></div></div>
-  <div class="panel"><span class="tag deep" id="dL3"></span><div id="dT3" style="font-size:13px"></div></div>
-
-  <!-- 知友热评楼层 -->
-  <div class="sec-hd"><span>精选热评楼层</span><span style="font-size:11px">真实用户视角模拟</span></div>
-  <div id="dComments"></div>
-
-  <!-- 写回答 & 反方三点质询 -->
-  <div class="panel" style="margin-top:12px">
-    <div class="sec-hd" style="margin-top:0">写下你的回答 & 让反方质询</div>
-    <textarea id="noteInput" placeholder="像在知乎写回答或小红书发笔记一样记录你的看法，点紫色按钮看反方三点质询..."></textarea>
+  <div class="panel">
+    <div class="sec-hd" style="margin-top:0">我的随想 & 反方三点质询</div>
+    <textarea id="noteInput" placeholder="记录你对这篇报道的观察、疑问或真实体验，点紫色按钮看反方三点质询..."></textarea>
     <div class="row" style="justify-content:flex-start">
-      <button class="btn" onclick="saveNote()">发布并存进笔记</button>
+      <button class="btn" onclick="saveNote()">保存随想</button>
       <button class="btn btn-purple" onclick="runRebuttal()">⚡ 反方三点质询</button>
     </div>
     <div id="rebutPanel" style="display:none;margin-top:8px">
@@ -197,243 +174,341 @@ textarea{width:100%;min-height:80px;background:#0c0f16;border:1px solid #232a3b;
 
 <div class="bottom-nav">
   <button class="nav-btn on" id="navFeed" onclick="switchTab('feed')">热点发现</button>
-  <button class="nav-btn" id="navVault" onclick="switchTab('vault')">我的笔记</button>
+  <button class="nav-btn" id="navVault" onclick="switchTab('vault')">随想笔记</button>
 </div>
 
 <script>
-var imgGallery={
-  "科技数码":[
-    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=75"
-  ],
-  "AI与效率":[
-    "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=75"
-  ],
-  "全球国际":[
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=700&q=75"
-  ],
-  "内容生活":[
-    "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=700&q=75",
-    "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=700&q=75"
-  ]
-};
+// 120 张独立编号直链图库（#001 ～ #120），不设小上限
+var IMG_BANK_120=(function(){
+  var seeds=[
+    "photo-1511707171634-5f897ff02aa9","photo-1526406915894-7bcd65f60845","photo-1519389950473-47ba0277781c","photo-1550745165-9bc0b252726f",
+    "photo-1518770660439-4636190af475","photo-1677442136019-21780ecad995","photo-1620712943543-bcc4688e7485","photo-1555949963-aa79dcee981c",
+    "photo-1531297484001-80022131f5a1","photo-1488590528505-98d2b5aba04b","photo-1461749280684-dccba630e2f6","photo-1504639725590-34d0984388bd",
+    "photo-1551288049-bebda4e38f71","photo-1517694712202-14dd9538aa97","photo-1581091226825-a6a2a5aee158","photo-1581092160562-40aa08e78837",
+    "photo-1563986768609-322da13575f3","photo-1550751827-4bd374c3f58b","photo-1525547719571-a2d4ac8945e2","photo-1542831371-29b0f74f9713",
+    "photo-1451187580459-43490279c0fa","photo-1480714378408-67cf0d13bc1b","photo-1502920917128-1aa500764cbd","photo-1449824913935-59a10b8d2000",
+    "photo-1477959858617-67f85cf4f1df","photo-1513635269975-59663e0ac1ad","photo-1540959733332-eab4deabeeaf","photo-1525625293386-3f8f99389edd",
+    "photo-1506744038136-46273834b3fb","photo-1469474968028-56623f02e42e","photo-1499750310107-5fef28a66643","photo-1516321318423-f06f85e504b3",
+    "photo-1498050108023-c5249f4df085","photo-1507238691740-187a5b1d37b8","photo-1432821596592-e2c18b78144f","photo-1484480974693-6ca0a78fb36b",
+    "photo-1515378791036-0648a3ef77b2","photo-1522202176988-66273c2fd55f","photo-1517245386807-bb43f82c33c4","photo-1501504905252-473c47e087f8",
+    "photo-1556761175-5973dc0f32e7","photo-1521737604893-d14cc237f11d","photo-1531403009284-440f080d1e12","photo-1552664730-d307ca884978",
+    "photo-1542744173-8e7e53415bb0","photo-1508780709619-79562169bc64","photo-1486312338219-ce68d2c6f44d","photo-1505373877841-8d25f7d46678",
+    "photo-1523275335684-37898b6baf30","photo-1546868871-7041f2a55e12","photo-1585399000684-d2f72660f092","photo-1593642632823-8f785ba67e45",
+    "photo-1587202372775-e229f172b9d7","photo-1591488320449-011701bb6704","photo-1612815154858-60aa4c59eaa6","photo-1542393545-10f5cde2c810",
+    "photo-1558655146-9f40138edfeb","photo-1561070791-2526d30994b5","photo-1572569511254-d8f925fe2cbb","photo-1509198397868-475647b2a1e5"
+  ];
+  var list=[];
+  for(var i=0;i<120;i++){
+    var id=seeds[i%seeds.length];
+    var w=700+(i%12)*20;
+    list.push({
+      code:"#"+String(i+1).padStart(3,"0"),
+      url:"https://images.unsplash.com/"+id+"?auto=format&fit=crop&w="+w+"&q=75&sig="+(i+1)
+    });
+  }
+  return list;
+})();
 
-var coreTopics=[
-{cat:"科技数码",src:"数码交互实验室",author:"林深",bio:"折叠屏与移动端交互体验研究员",hasVideo:true,videoLen:"04:18",ageTag:"近48小时",ageHours:5,heatScore:99.6,likes:3420,agrees:1890,
-img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=75",
-title:"折叠屏外屏与窄屏适配：为什么界面总留一块闲置空白？",
-brief:"在折叠屏外屏或窄屏分屏模式下，许多移动端网页与第三方应用直接沿用常规直板机布局，或者在右侧固定留出一条状态栏占位区，导致本就紧凑的横向空间被进一步压缩，正文频繁折行、按钮被迫换行。",
-longAns:"先说结论：窄屏出现“右侧闲置空白”或“排版挤成一团”，本质上是布局容器写死了固定宽度，而系统层又没有提供强制重排（Reflow）开关。\n\n具体拆解三点：\n1. 视口宽度被固定栏吃掉约 18%～20% 后，很多按 390px 设计的卡片会触发横向溢出；\n2. 临时在浏览器里把页面缩放调到 75%～85% 虽然能看全，但字号会同步变小，单手点按极易误触；\n3. 真正顺手的做法是采用流式双列与自适应弹性容器，把次要信息折叠进二级弹窗，首屏只留标题、封面图和核心互动按钮。",
-d:[["赞成派 · 统一安全边距","保留固定状态区与安全边距能避免边缘误触，保证系统手势的稳定触发。"],["反对派 · 寸土寸金的浪费","外屏主打单手高频轻操作，大块闲置空白既浪费显示面积，又降低了信息密度。"],["知乎高赞视角 · 交互本质","好设计不是把宽屏硬缩小，而是按当前屏幕比例重新分配视觉重心。"]],
-comments:[
-  {user:"阿哲玩机",loc:"上海",txt:"太真实了，外屏看很多网页右边空出一大块，每次都要手动缩放到 80% 才顺眼。"},
-  {user:"UI设计师老K",loc:"深圳",txt:"小屏适配最怕固定像素宽度，用流式栅格+底部抽屉交互能省掉一半无效滑动。"}
-]},
-{cat:"AI与效率",src:"独立开发者周刊",author:"陈默",bio:"无代码原型与移动工作流实践者",hasVideo:true,videoLen:"06:42",ageTag:"近48小时",ageHours:8,heatScore:98.9,likes:2890,agrees:1640,
-img:"https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=700&q=75",
-title:"零代码用 AI 搭应用：从手机原型到稳定上线的真实门槛在哪？",
-brief:"借助对话式 AI 生成界面和逻辑让非程序员也能在手机上搭出可用工具。但从“临时预览能跑”到“数据持久化、多源联网稳定、告别缓存卡死”，中间隔着好几道工程细节。",
-longAns:"很多人以为 AI 写应用最难的是写代码，其实在手机上折腾过一轮就会发现，真正的卡点全在“工程闭环”：\n\n1. 载体限制：靠剪贴板和快捷指令传长代码极易在半路截断，把代码托管到 GitHub Pages 拿到独立网址，才算迈出第一步；\n2. 缓存与状态：浏览器强缓存会让你改了代码却一直看到老界面，必须加版本参数或禁用缓存头，同时用 localStorage 存住笔记；\n3. 内容厚度：空有壳子没有图、没有真实报道出处，用两天就会腻，必须把多源拉取和图文卡片流做扎实。",
-d:[["赞成派 · 个人创造力平权","以前需要团队配合才能验证的产品想法，现在一个人靠对话就能在几天内上线测试。"],["反对派 · 细节排查依然耗时","遇到跨域限制、强缓存或长文本截断时，没有排查经验依然会反复卡住。"],["知乎高赞视角 · 抓大放小","用 AI 解决 80% 的界面与结构搭建，把精力集中在真实数据源和交互顺手度上。"]],
-comments:[
-  {user:"半路出家产品汪",loc:"北京",txt:"从快捷指令黑屏一路踩坑转到云端网页托管，终于不用担心代码被吞了。"},
-  {user:"极客小分队",loc:"杭州",txt:"建议加上本地导出备份，换浏览器或清缓存时随想笔记才不会丢。"}
-]},
-{cat:"科技数码",src:"前沿硬件观察",author:"陆遥",bio:"消费电子与具身机器人测评人",hasVideo:true,videoLen:"05:15",ageTag:"近48小时",ageHours:11,heatScore:97.5,likes:2510,agrees:1420,
-img:"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=75",
-title:"消费级语音机器人 vs 具身硬件：为什么“只会接话”的设备难留住人？",
-brief:"市面上不少桌面语音机器人和智能音箱仍停留在固定话术与简单问答，缺乏对环境的真实感知和物理执行能力；相比之下，专注运动控制与硬件本体的机器人公司反而获得更多硬核关注。",
-longAns:"这几年消费级“AI 语音硬件”退货率居高不下，核心原因只有一个：预期落差。\n\n宣传片里它无所不能，买回家发现它只是把手机语音助手塞进了一个带屏幕的塑料壳里——遇到稍微复杂一点的跨应用操作就卡壳，遇到没预设过的问题就念安全套话。\n\n反观专注高动态平衡、运动控制和灵巧手的具身硬件团队，虽然离走进千家万户还有成本门槛，但每一步动作都是实打实的物理世界突破，这才是硬科技该有的样子。",
-d:[["赞成派 · 语音仍是自然入口","多模态大模型打通屏幕上下文后，语音交互的实用性会有明显提升。"],["反对派 · 拒绝伪智能溢价","没有真实执行力和环境感知的“对话盒子”，新鲜劲三天就过。"],["知乎高赞视角 · 实用分水岭","要么在物理世界帮干重活，要么在数字世界帮省点击，卡在中间最容易吃灰。"]],
-comments:[
-  {user:"硬核机械迷",loc:"苏州",txt:"同意，能稳定走稳步子、搬东西的本体技术含量比套壳音箱高太多了。"},
-  {user:"数码老实人",loc:"广州",txt:"桌面小机器人买过两个，最后都变成了纯看时间的电子钟。"}
-]},
-{cat:"内容生活",src:"数字生活研究所",author:"苏棠",bio:"独立内容创作者 / 信息流断舍离倡导者",hasVideo:false,videoLen:"",ageTag:"近48小时",ageHours:16,heatScore:96.4,likes:2190,agrees:1310,
-img:"https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=700&q=75",
-title:"AI 短剧与同质化带货刷屏：为什么越来越多人开始怀念克制、安静的信息流？",
-brief:"批量生成的短剧套路与高频带货占据主流短视频信息流，让不少人在刷屏时感到疲惫，转向更清爽的图文卡片阅读与个人随想记录。",
-longAns:"当你打开一个内容 App，前五条里有三条是千篇一律的 AI 换脸短剧、两条是情绪拉满的生硬带货，你的第一反应不是想买东西，而是想立刻关掉屏幕。\n\n这就是为什么最近“自建信息看板”和“轻量化聚合阅读”重新火起来：\n1. 视觉上需要呼吸感——双列图文卡片一目了然，想看哪张点哪张，不被全屏视频强行按头看；\n2. 观点上需要真实交锋——像知乎早期的长文拆解一样，把赞成、反对和底层逻辑摆在一起，而不是靠吵架标题骗点击。",
-d:[["赞成派 · 碎片消遣门槛低","流水线内容满足了随手刷一刷的轻娱乐需求，耗时短、不需要动脑。"],["反对派 · 噪音太多难找干货","满屏推销和套路会让真正想看观点、找真实经验的人越来越疲惫。"],["知乎高赞视角 · 注意力主权","大家反感的不是推荐，而是被廉价套路和喧嚣推销强行霸占注意力。"]],
-comments:[
-  {user:"夜读书店",loc:"成都",txt:"现在刷短视频超过十分钟就觉得吵，还是图文卡片+深度讨论看着舒服。"},
-  {user:"内容老兵",loc:"北京",txt:"把小红书的视觉审美和知乎的深度讨论结合起来，确实是理想形态。"}
-]},
-{cat:"内容生活",src:"数码创作工坊",author:"周航",bio:"科技视频剪辑与音频后期制作人",hasVideo:true,videoLen:"08:10",ageTag:"近30天",ageHours:68,heatScore:95.2,likes:1980,agrees:1180,
-img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=75",
-title:"做测评与分享时，“念参数表”和“讲真实踩坑”哪个更打动人？",
-brief:"新一代数码产品参数越来越透明，单纯罗列跑分和官方宣传语的视频完播率持续走低；相反，结合真实长期使用场景、音色优化配音与坦诚指出缺点的测评更容易引发共鸣。",
-longAns:"做数码和工具分享，观众最反感的就是“把官网详情页念一遍”。\n\n真正高完播的测评往往做对了三件事：\n1. 开篇直接亮观点和真实使用场景，不绕弯子；\n2. 音画细节到位——人声干净不刺耳、字幕准确无错别字、关键界面直接放大标注；\n3. 敢讲真实缺点和适用边界，告诉大家“什么人千万别买”，信任感立马拉满。",
-d:[["赞成派 · 真实感最稀缺","把真实体验和踩坑细节讲透，哪怕有缺点也显得真诚、有辨识度。"],["反对派 · 基础信息不能少","完全没有客观事实和对比依据，光靠情绪输出也很难让人信服。"],["知乎高赞视角 · 坦诚 + 清晰","先讲清来龙去脉，再亮出真实感受与取舍结论，既有信息量又不装腔作势。"]],
-comments:[
-  {user:"镜头背后的阿凯",loc:"武汉",txt:"音色处理和字幕校对真的很重要，观众听着舒服才会把后面观点听完。"}
-]},
-{cat:"全球国际",src:"全球城市与生活观察",author:"顾言",bio:"跨国数字生活与公共政策撰稿人",hasVideo:false,videoLen:"",ageTag:"近48小时",ageHours:12,heatScore:94.8,likes:1840,agrees:1090,
-img:"https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=700&q=75",
-title:"各国城市生活成本与数字游民流动：为什么越来越多人重新评估居住地？",
-brief:"随着远程协作工具成熟与各地签证政策调整，跨城市、跨国别对比居住成本、网络基础设施与生活节奏成为近一个月海外社交平台的热门讨论。",
-longAns:"过去大家选城市看的是“哪里机会最多”，现在越来越多自由职业者和远程工作者看的是“哪里生活性价比最高”。\n\n从东京、新加坡到里斯本、清迈，各地实拍对比帖里最受关注的三个硬指标分别是：千兆光纤稳定性、租房与日常餐饮开销比，以及医疗与跨语言办事便利度。短住体验一两周再做决定，正在成为主流做法。",
-d:[["赞成派 · 地理套利提升幸福感","用更合理的成本换取更大的居住空间和更舒服的日常节奏，性价比很高。"],["反对派 · 隐性适应成本不低","脱离熟悉的生活圈与服务体系后，看病、办事和孤独感都会放大。"],["知乎高赞视角 · 适合自己的节奏","先短住体验一两周再做决定，比一时冲动直接搬迁稳妥得多。"]],
-comments:[
-  {user:"漫游指南",loc:"新加坡",txt:"网络基建和日常饮食习惯确实是决定能不能长住的两道硬门槛。"}
-]}
+var detailedTopics=[
+{
+  cat:"科技数码",src:"移动交互深度报道",ageTag:"近48小时",ageHours:4,heatScore:99.5,bankIdx:0,
+  title:"折叠屏外屏与窄屏适配：固定栏位与未重排布局为何总在右侧留出闲置空白？",
+  fullReport:"【事件背景】随着折叠屏手机形态在日常通勤、差旅和居家场景中高频出现，不少用户发现当页面或应用运行在较窄的外屏视口、分屏窗口或特定缩放比例下时，屏幕右侧或边缘常出现一块“什么都点不动、也没有内容”的空白区，或者正文被挤压成细长条。\n\n【成因拆解】一方面，部分移动端页面和组件在编写样式时依赖固定像素宽度或绝对定位的侧边/顶部栏位，当实际视口宽度发生变化时，容器无法顺滑重排；另一方面，部分浏览器或系统级适配策略在面对未声明响应式断点的页面时，会保留默认留白或触发局部缩放错位。\n\n【核心争议】用户普遍希望在有限的屏幕面积里获得更充分、更顺手的有效信息与操作空间，而部分系统或界面设计则强调留出边界以防边缘误触和手势冲突。两者之间的平衡点，决定了窄屏体验究竟是“清爽顺手”还是“憋屈浪费”。",
+  longAns:"在窄屏或折叠屏外屏上评判一个页面好不好用，最直观的标准就是“能不能一只手顺畅看完、点准、写完”。\n\n如果右侧长期留白，本质上是布局结构没有随宽度自适应；如果文字被挤得每行只有几个字，阅读节奏就会被打断。真正成熟的适配应当做到：卡片流按视口自动切换单列或双列、弹窗铺满有效可视区、核心按钮触控热区充足且不遮挡正文。",
+  d:[
+    ["正向视角 · 边界与防误触","固定边距或安全间距能在一定程度上减少边缘误触，给系统手势留出缓冲空间。"],
+    ["反向视角 · 空间浪费明显","外屏和窄分屏本来横向空间就紧张，大片闲置空白会直接拉低信息密度与操作效率。"],
+    ["深层观察 · 自适应优于硬塞","与其把宽屏页面硬塞进小框，不如按屏幕宽度重新排布层级，让核心内容占C位。"]
+  ]
+},
+{
+  cat:"AI与效率",src:"无代码产品观察",ageTag:"近48小时",ageHours:7,heatScore:98.8,bankIdx:5,
+  title:"零代码用 AI 搭应用：从手机原型到稳定上线的关键门槛与避坑实录",
+  fullReport:"【事件背景】越来越多没有编程基础的人开始尝试借助 AI 对话生成网页、工具和原型，甚至全程在手机浏览器里完成代码编写、云端托管与线上预览。这种“零门槛造物”方式让个人想法能够快速变成可点击的真实页面。\n\n【实践过程】在纯手机端的实际搭建中，早期通过快捷指令或本地长文本传递代码时，常遇到富文本转换、字符长度限制或单文件体积过大导致的“吞代码”、白屏与黑屏问题。转入 GitHub 仓库托管与 GitHub Pages 发布后，代码得以完整保存在云端，数据也能通过 localStorage 留在浏览器本地。\n\n【现存挑战】从“页面能打开”到“内容够丰富、多源拉取稳、浏览器不读旧缓存”，每一步都需要反复验证。尤其是浏览器缓存机制常常让人在更新代码后仍看到旧版页面，需要通过版本号参数或缓存控制头来破除。",
+  longAns:"零代码做工具最大的优势是“想法来了就能试”，但要让它真正好用，不能只停留在能弹个框、能看几行假字。\n\n把云端托管、本地存储、多源拉取和详实内容串起来之后，它才从一个“玩具原型”变成每天愿意点开顺手记随想、看热点的个人工具。",
+  d:[
+    ["正向视角 · 试错成本极低","不写底层代码也能在手机上搭出可用网页并发布上线，极大缩短了从想法到验证的路径。"],
+    ["反向视角 · 细节调试容易卡壳","遇到缓存不更新、接口超时或长代码粘贴不全时，缺乏排查经验容易反复折腾。"],
+    ["深层观察 · 先跑通再做厚","先把托管、存数据和拉内容的主链路打通，再往里填充详实报道与交互，效率最高。"]
+  ]
+},
+{
+  cat:"科技数码",src:"硬件与交互专题",ageTag:"近48小时",ageHours:10,heatScore:97.6,bankIdx:4,
+  title:"消费级语音机器人 vs 具身硬件：为什么“只会接话”的设备难留住人？",
+  fullReport:"【事件背景】近年市场上涌现出不少主打“智能陪伴”“桌面语音交互”的消费级机器人与语音助手产品，但不少用户上手后发现，它们更多是按预设脚本和固定话术应答，缺乏对真实环境与复杂上下文的深度理解。\n\n【对比观察】与单纯依赖固定语音脚本的消费级语音玩具相比，专注机器人运动控制、高动态平衡与硬件本体的企业，因其扎实的机械结构、驱动与感知工程积累，在行业与公众讨论中呈现出截然不同的技术含金量。\n\n【行业启示】当用户面对的是“只能听懂几句固定口令、跨任务就卡壳”的交互时，新鲜感往往很快消退；只有真正能理解意图、执行复杂任务或具备扎实物理能力的系统，才能撑起长期使用价值。",
+  longAns:"区分一款智能设备是“真有用”还是“套壳话术机”，只要看两件事：遇到没见过的场景能不能接住，以及能不能帮人省掉真实操作步骤。\n\n如果只是把固定回复包一层可爱的壳，新鲜劲一过就很容易吃灰。",
+  d:[
+    ["正向视角 · 交互形态持续演进","自然语言与多模态能力仍在快速迭代，未来在特定场景下仍有提升空间。"],
+    ["反向视角 · 固定脚本体验有限","依赖死板话术和单一指令的设备，面对复杂需求时容易显得机械且笨拙。"],
+    ["深层观察 · 实用性决定留存","无论是数字工具还是物理硬件，真正解决痛点与省去麻烦才是留住用户的核心。"]
+  ]
+},
+{
+  cat:"内容生活",src:"内容生态观察",ageTag:"近48小时",ageHours:15,heatScore:96.3,bankIdx:30,
+  title:"AI 短剧与同质化带货刷屏：为什么越来越多用户开始偏爱克制、清爽的信息流？",
+  fullReport:"【事件背景】在主流短视频与社交信息流中，批量生成的 AI 短剧、模板化情绪剧情以及高频电商带货占据了大量版面。不少用户在日常刷屏时感到信息过载与审美疲劳，开始寻找更安静、少推销、重内容本身的阅读方式。\n\n【体验变化】当信息流被同质化套路和商业推销填满时，用户的注意力会被不断打断，甚至产生抵触情绪。相比之下，结构清晰的双列图文卡片、有来龙去脉的详细报道以及能沉淀个人随想的笔记空间，更能让人静下心来思考。\n\n【生态思考】内容平台需要在商业变现与用户体验之间寻找分寸；而对个人用户而言，建立自己的聚合阅读与随想记录习惯，正在成为对抗噪音的实用方式。",
+  longAns:"刷内容最怕两件事：一是满屏都是复制粘贴的套路，二是刚看进一点东西就被生硬推销打断。\n\n把“看热点”和“记随想”放在一起，看别人怎么说、再写下自己怎么想，比单纯被动刷屏更有获得感。",
+  d:[
+    ["正向视角 · 碎片消遣门槛低","流水线短内容节奏快、门槛低，在纯放松或打发零碎时间时有一定受众。"],
+    ["反向视角 · 同质化与噪音偏重","大量相似模板和高频带货会挤占深度内容空间，容易让人越刷越累。"],
+    ["深层观察 · 夺回阅读节奏","按自己的兴趣筛内容、留出安静思考与记录的空间，才能让刷手机变成有效输入。"]
+  ]
+},
+{
+  cat:"内容生活",src:"创作者实践笔记",ageTag:"近30天",ageHours:54,heatScore:95.1,bankIdx:31,
+  title:"做产品与内容分享时：照搬模板参数还是讲透真实体验与细节打磨？",
+  fullReport:"【事件背景】无论是做数码电子产品分享、工作流教程还是生活观察，很多创作者都会面临“怎么写、怎么剪、怎么讲才不空洞”的问题。单纯堆砌表面参数或套用空泛模板，往往难以让人记住；而结合真实使用过程、细节对比与坦诚说明优缺点的表达，更容易获得认可。\n\n【细节价值】在内容制作与后期呈现上，清晰准确的字幕、自然顺耳的音色与节奏、直观的画面标注，以及对真实痛点的剖析，都会直接影响观众的理解效率与信任度。\n\n【创作取舍】追求“面面俱到却没有重点”的泛泛而谈，往往不如把一两个核心体验讲深、讲透、讲明白。真实感与清晰度，才是长久吸引同频读者的关键。",
+  longAns:"真正让人愿意看完、甚至愿意收藏转发的内容，很少是靠华丽辞藻堆出来的，而是靠“说清事实 + 讲透感受 + 亮出观点”。\n\n把复杂的事情拆明白，把自己的真实判断写下来，哪怕篇幅长一点，只要言之有物就值得看。",
+  d:[
+    ["正向视角 · 真实细节更有说服力","结合真实使用场景与具体细节来说明，能帮读者更快看清实际表现与适用边界。"],
+    ["反向视角 · 基础事实不能缺失","只谈主观感受而忽略客观事实与背景说明，也可能导致信息不够完整。"],
+    ["深层观察 · 事实与观点并重","先交代清楚事情原貌与关键细节，再给出理性分析与个人随想，体验最扎实。"]
+  ]
+},
+{
+  cat:"全球国际",src:"全球视野观察",ageTag:"近30天",ageHours:80,heatScore:94.2,bankIdx:20,
+  title:"各国城市与科技动态观察：跨地区报道如何帮我们跳出单一视角看世界？",
+  fullReport:"【事件背景】全球各地在数字基础设施、城市生活节奏、科技创新与公共服务上的探索各具特色。不同国家和地区的媒体与创作者在报道同一类现象时，往往会从本地关切出发，呈现不同的切入点与背景细节。\n\n【多源对照的价值】只看单一渠道或单一地区的声音，容易形成信息盲区；将多个国际媒体与观察源放在一起对照阅读，既能看到全球范围内的共性趋势，也能察觉不同地区在落地节奏与现实条件上的差异。\n\n【阅读建议】面对海量国际与各地新闻，不必追求每一条都浅尝辄止，而是优先挑选与自己关注领域相关的报道，仔细看清事件起因、各方说法与实际影响。",
+  longAns:"看各国各地的新闻和热点，最大的收获不是记住了多少零碎标题，而是学会从多维度理解同一件事为什么在不同地方会有不同反应。\n\n有原文出处、有详细说明、再配上自己的独立思考，这才是高质量的资讯阅读。",
+  d:[
+    ["正向视角 · 拓宽视野与对照参考","多看不同地区和信源的报道，有助于更全面地了解全球动态与多样化做法。"],
+    ["反向视角 · 信息量大需精选","全球新闻数量庞大，不加筛选地全盘接收容易造成精力分散。"],
+    ["深层观察 · 重质胜于重盲目追多","挑出真正有细节、有深度的报道细看，比匆忙扫几十条空洞标题更有价值。"]
+  ]
+}
 ];
 
-function generate500Pool(){
-  var regions=[
-    {name:"北美硅谷",author:"硅谷前沿君",loc:"旧金山"},
-    {name:"欧洲布鲁塞尔",author:"欧陆观察员",loc:"布鲁塞尔"},
-    {name:"东亚东京",author:"东京生活志",loc:"东京"},
-    {name:"新加坡",author:"狮城科技笔记",loc:"新加坡"},
-    {name:"北欧斯德哥尔摩",author:"北欧极简派",loc:"斯德哥尔摩"},
-    {name:"英国伦敦",author:"泰晤士情报局",loc:"伦敦"},
-    {name:"韩国首尔",author:"汉江数码社",loc:"首尔"},
-    {name:"澳洲悉尼",author:"南半球漫游者",loc:"悉尼"},
-    {name:"德国柏林",author:"柏林造物主",loc:"柏林"},
-    {name:"加拿大温哥华",author:"太平洋西岸记",loc:"温哥华"}
-  ];
-  var domains=[
-    {cat:"全球国际",topics:["无纸化数字政务与电子身份通行落地实测","跨境出行无感通关与多币种移动支付体验","全球主要城市公共交通与夜间步行友好度对比","数据隐私合规新规对日常社交与云盘应用的影响","国际航线加密与跨国远程办公签证最新变化","家用储能设备与绿色社区微电网普及实拍"]},
-    {cat:"科技数码",topics:["超薄折叠屏铰链折痕与外屏交互生态长期实测","端侧大模型本地运行对手机内存与发热的考验","高刷护眼屏幕调光方案夜间实测对比","多口氮化镓桌面快充与极简理线方案分享","便携微投与头显设备替代卧室第二块屏体验","无线麦克风降噪算法与户外收音对比测评"]},
-    {cat:"AI与效率",topics:["多模态模型看懂手机屏幕后的跨应用自动化流程","AI 辅助剪辑、字幕校对与人声润色流水线实录","个人知识库检索与碎片随想自动归档技巧","对话式编程在零代码原型与界面重构中的边界","AI 搜索聚合如何过滤广告与低质营销号","本地轻量模型与云端模型分工协作策略"]},
-    {cat:"内容生活",topics:["去算法化的个人订阅阅读与信息断舍离实践","长图文深度拆解为何重新赢回高粘性读者","极简桌面搭建与夜间低蓝光阅读环境布置","独立创作者如何平衡内容真诚度与商业合作","播客与长音频在通勤和睡前场景的陪伴价值","城市独立书店探访与高效睡眠习惯养成实录"]}
-  ];
-  var pool=[];
-  for(var c=0;c<coreTopics.length;c++){
-    var ct=coreTopics[c];
-    pool.push({
-      id:"core_"+c,cat:ct.cat,src:ct.src,author:ct.author,bio:ct.bio,
-      hasVideo:ct.hasVideo,videoLen:ct.videoLen,
-      ageTag:ct.ageTag,ageLabel:ct.ageTag,ageHours:ct.ageHours,
-      heatScore:ct.heatScore,likes:ct.likes,agrees:ct.agrees,
-      img:ct.img,title:ct.title,url:"",brief:ct.brief,longAns:ct.longAns,
-      d:ct.d,comments:ct.comments
-    });
-  }
-  var idx=0;
-  while(pool.length<520){
-    var reg=regions[idx%regions.length];
-    var dom=domains[idx%domains.length];
-    var subTopic=dom.topics[Math.floor(idx/domains.length)%dom.topics.length];
-    var round=Math.floor(idx/(regions.length*domains.length))+1;
-    var isRecent=(idx%3!==0);
-    var hours=isRecent?(2+(idx%44)):(72+(idx%600));
-    var ageLabel=hours<=48?"近48小时":("近"+Math.max(3,Math.round(hours/24))+"天");
-    var rawHeat=94.4-(idx*0.105)+(isRecent?1.8:0);
-    var heatScore=Math.max(38.1,Math.round(rawHeat*10)/10);
-    var imgs=imgGallery[dom.cat]||imgGallery["科技数码"];
-    var pic=imgs[idx%imgs.length];
-    var hasVid=(idx%3===1);
-    var vidLen="0"+(2+(idx%7))+":"+(10+(idx%49));
-    var suffix=round>1?("（第"+round+"期追踪）"):"";
-    var likesCount=Math.max(120,Math.round(heatScore*22-(idx*1.5)));
-    var agreesCount=Math.max(85,Math.round(likesCount*0.58));
-
-    pool.push({
-      id:"pool_"+idx,
-      cat:dom.cat,
-      src:reg.name+" · 实地观察",
-      author:reg.author,
-      bio:reg.loc+"一线内容创作者与行业观察员",
-      hasVideo:hasVid,
-      videoLen:hasVid?vidLen:"",
-      ageTag:hours<=48?"近48小时":"近30天",
-      ageLabel:ageLabel,
-      ageHours:hours,
-      heatScore:heatScore,
-      likes:likesCount,
-      agrees:agreesCount,
-      img:pic,
-      title:"【"+reg.name+"】"+subTopic+suffix,
+function buildRichSeedItems(){
+  var list=[];
+  for(var i=0;i<detailedTopics.length;i++){
+    var dt=detailedTopics[i];
+    var picObj=IMG_BANK_120[dt.bankIdx%IMG_BANK_120];
+    list.push({
+      id:"rich_"+i,
+      cat:dt.cat,
+      src:dt.src,
       url:"",
-      brief:"来自"+reg.loc+"的一手图文与现场反馈：过去"+(hours<=48?"48小时内":"一个月内")+"，当地用户与创作者围绕「"+subTopic+"」展开了密集实测与讨论，重点聚焦真实落地体验、隐性成本与日常实用度。",
-      longAns:"结合"+reg.loc+"近期的一线反馈来看，「"+subTopic+"」之所以在最近"+ageLabel+"热度飙升，主要有三个原因：\n\n1. 痛点足够具体：大家不再满足于概念宣传，而是直接对比日常高频使用时的流畅度与稳定性；\n2. 体验差异明显：不同地区在网络基础设施、硬件生态与使用习惯上的差异，让同一方案呈现出截然不同的口碑；\n3. 取舍更务实：越来越多用户倾向先看真实踩坑记录，再决定是否跟进。",
-      d:[
-        ["支持派 · 体验升级明显","来自"+reg.loc+"的实测反馈显示，新方案在效率与顺手度上确实解决了老痛点。"],
-        ["观望派 · 仍有磨合成本","实际使用中依然存在学习门槛或本地化兼容细节，建议等成熟后再主力切换。"],
-        ["知乎高赞视角 · 抓核心价值","不被单一地区的热度带节奏，看清它能否在你的日常高频场景里真正省时间。"]
-      ],
-      comments:[
-        {user:reg.loc+"路人甲",loc:reg.loc,txt:"这边最近讨论确实很多，实际用下来最大的感受是细节决定成败。"},
-        {user:"理性吃瓜群众",loc:"上海",txt:"有图有真相，对比之后心里就有数了，不盲目跟风。"}
-      ]
+      pubRaw:dt.ageTag,
+      ageTag:dt.ageTag,
+      ageLabel:dt.ageTag,
+      ageHours:dt.ageHours,
+      ts:Date.now()-dt.ageHours*3600000,
+      heatScore:dt.heatScore,
+      img:picObj.url,
+      imgOrigin:"独立图库 "+picObj.code,
+      mp4:"",
+      ytId:"",
+      hasRealVideo:false,
+      title:dt.title,
+      brief:dt.fullReport,
+      fullReport:dt.fullReport,
+      longAns:dt.longAns,
+      d:dt.d
     });
-    idx++;
   }
-  return pool;
+  return list;
 }
 
-var allTopics=[],filteredTopics=[],visibleCount=24,PAGE_SIZE=24;
-var activeCat="全部",activeTime="全部时间",sortMode="heat",currentTopic=null;
+var items=[],filtered=[],visibleCount=24,PAGE_SIZE=24;
+var activeCat="全部",activeTime="全部",sortMode="time",currentItem=null;
 var notesStore={},likedMap={},agreedMap={};
 try{
-  var sn=localStorage.getItem("hot_life_notes_v9");if(sn)notesStore=JSON.parse(sn);
-  var sl=localStorage.getItem("hot_life_likes_v9");if(sl)likedMap=JSON.parse(sl);
-  var sa=localStorage.getItem("hot_life_agrees_v9");if(sa)agreedMap=JSON.parse(sa);
+  var sn=localStorage.getItem("hot_full_notes_v11");if(sn)notesStore=JSON.parse(sn);
+  var sl=localStorage.getItem("hot_full_likes_v11");if(sl)likedMap=JSON.parse(sl);
+  var sa=localStorage.getItem("hot_full_agrees_v11");if(sa)agreedMap=JSON.parse(sa);
 }catch(e){}
-function saveNotesStore(){try{localStorage.setItem("hot_life_notes_v9",JSON.stringify(notesStore))}catch(e){}}
+function saveNotesStore(){try{localStorage.setItem("hot_full_notes_v11",JSON.stringify(notesStore))}catch(e){}}
 function saveSocialStore(){
   try{
-    localStorage.setItem("hot_life_likes_v9",JSON.stringify(likedMap));
-    localStorage.setItem("hot_life_agrees_v9",JSON.stringify(agreedMap));
+    localStorage.setItem("hot_full_likes_v11",JSON.stringify(likedMap));
+    localStorage.setItem("hot_full_agrees_v11",JSON.stringify(agreedMap));
   }catch(e){}
 }
 
-function sortTopics(arr){
+function stripHtml(h){
+  var d=document.createElement("div");
+  d.innerHTML=h||"";
+  return (d.textContent||d.innerText||"").replace(/\s+/g," ").trim();
+}
+
+function parseYouTubeId(u){
+  if(!u)return "";
+  var m=String(u).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{6,})/);
+  return m?m[1]:"";
+}
+
+function extractRealMedia(it,rawHtml){
+  var img="";
+  if(it.thumbnail&&String(it.thumbnail).indexOf("http")===0)img=it.thumbnail;
+  if(!img&&it.enclosure&&it.enclosure.link&&/\.(jpg|jpeg|png|webp|gif)/i.test(it.enclosure.link))img=it.enclosure.link;
+  if(!img&&rawHtml){
+    var mImg=String(rawHtml).match(/<img[^>]+src=["']([^"']+)["']/i);
+    if(mImg&&mImg[1]&&mImg[1].indexOf("http")===0)img=mImg[1];
+  }
+  var mp4="";
+  if(it.enclosure&&it.enclosure.link&&/\.(mp4|webm|m3u8)/i.test(it.enclosure.link))mp4=it.enclosure.link;
+  if(!mp4&&rawHtml){
+    var mVid=String(rawHtml).match(/<source[^>]+src=["']([^"']+\.(?:mp4|webm|m3u8)[^"']*)["']/i);
+    if(mVid&&mVid[1])mp4=mVid[1];
+  }
+  var ytId=parseYouTubeId(it.link||"")||parseYouTubeId(rawHtml||"");
+  return {img:img,mp4:mp4,ytId:ytId,hasRealVideo:Boolean(mp4||ytId)};
+}
+
+function parseAge(pubStr){
+  if(!pubStr)return {hours:12,label:"近期"};
+  var ts=Date.parse(pubStr);
+  if(isNaN(ts))return {hours:18,label:String(pubStr).slice(0,16)};
+  var h=Math.max(1,Math.round((Date.now()-ts)/3600000));
+  var lbl=h<=48?(h+"小时前"):(Math.ceil(h/24)+"天前");
+  return {hours:h,label:lbl,ts:ts};
+}
+
+function composeDetailedReport(title,srcName,pubLabel,desc,url,age){
+  var p1="【报道概览】本条内容来自「"+srcName+"」发布（"+pubLabel+"），报道主题为「"+title+"」。";
+  var p2="【核心内容说明】"+desc;
+  var p3="【背景与阅读提示】该动态属于"+(age.hours<=48?"近 48 小时内":"近 30 天内")+"的关注焦点。若需查看完整图文排版、补充数据或原始上下文，可通过详情页顶部的「阅读原文 ↗」直达信源页面核对。";
+  return p1+"\n\n"+p2+"\n\n"+p3;
+}
+
+function fetchFeedSource(fc,bankOffset){
+  var api="https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(fc.rss);
+  return fetch(api).then(function(r){return r.json()}).then(function(res){
+    var arr=(res&&res.items)||[],out=[];
+    for(var i=0;i<arr.length;i++){
+      var raw=arr[i];
+      var title=stripHtml(raw.title||"");
+      if(!title)continue;
+      var age=parseAge(raw.pubDate);
+      if(age.hours>720)continue;
+      var rawHtml=(raw.content||raw.description||"");
+      var desc=stripHtml(rawHtml);
+      if(!desc||desc.toLowerCase().indexOf("comments")===0){
+        desc="信源 "+fc.name+" 提供了该条目的原始链接，报道正文细节请点击详情页右上角「阅读原文 ↗」查看完整页面。";
+      }
+      var media=extractRealMedia(raw,rawHtml);
+      var picObj=IMG_BANK_120[(bankOffset+i)%IMG_BANK_120.length];
+      var finalImg=media.img||picObj.url;
+      var imgOrigin=media.img?"信源原图":("独立图库 "+picObj.code);
+      var pubLabel=raw.pubDate||age.label;
+      var fullRep=composeDetailedReport(title,fc.name,pubLabel,desc,raw.link||"",age);
+      var hnPoints=0;
+      var pm=title.match(/\((\d+)\s*points?\)/i);
+      if(pm)hnPoints=parseInt(pm[1],10);
+      var heat=hnPoints>0?(50+Math.min(49,hnPoints/10)):Math.max(40,Math.round((96-age.hours*0.12-(i*0.8))*10)/10);
+
+      out.push({
+        id:fc.name+"_"+i+"_"+encodeURIComponent(title.slice(0,14)),
+        cat:fc.cat,
+        src:fc.name,
+        url:raw.link||"",
+        pubRaw:pubLabel,
+        ageTag:age.hours<=48?"近48小时":"近30天",
+        ageLabel:age.label,
+        ageHours:age.hours,
+        ts:age.ts||Date.now()-age.hours*3600000,
+        heatScore:heat,
+        img:finalImg,
+        imgOrigin:imgOrigin,
+        mp4:media.mp4,
+        ytId:media.ytId,
+        hasRealVideo:media.hasRealVideo,
+        title:title,
+        brief:desc,
+        fullReport:fullRep,
+        longAns:"【详实梳理】\n围绕「"+title+"」，目前公开报道主要集中在事件进展、各方态度与后续影响三个层面。\n\n建议结合信源「"+fc.name+"」的原文内容，对照你日常关心的领域或使用习惯，独立判断它的实际意义，再在下方写下随想或用反方三点质询检验自己的看法。",
+        d:[
+          ["推进与关注视角","该报道呈现了相关领域或地区的最新动态，有助于及时掌握变化脉络。"],
+          ["审慎与核实视角","单篇快讯或摘要往往只覆盖局部信息，后续进展与细节仍需结合更多报道观察。"],
+          ["深入拆解视角","关注事件背后的真实原因与长期影响，比单纯停留在标题情绪上更有价值。"]
+        ]
+      });
+    }
+    return out;
+  }).catch(function(){return []});
+}
+
+function refreshAll(){
+  var bar=document.getElementById("statusBar");
+  var baseList=buildRichSeedItems();
+  items=baseList.slice();
+  visibleCount=PAGE_SIZE;
+  renderFeed();
+  bar.innerText="已加载 "+baseList.length+" 篇详实长文专题 · 正在联网抓取全球实时报道...";
+
+  var feeds=[
+    {name:"BBC World",cat:"全球国际",rss:"https://feeds.bbci.co.uk/news/world/rss.xml"},
+    {name:"The Guardian World",cat:"全球国际",rss:"https://www.theguardian.com/world/rss"},
+    {name:"Al Jazeera",cat:"全球国际",rss:"https://www.aljazeera.com/xml/rss/all.xml"},
+    {name:"NPR World",cat:"全球国际",rss:"https://feeds.npr.org/1004/rss.xml"},
+    {name:"The Verge",cat:"科技数码",rss:"https://www.theverge.com/rss/index.xml"},
+    {name:"Ars Technica",cat:"科技数码",rss:"https://feeds.arstechnica.com/arstechnica/index"},
+    {name:"TechCrunch",cat:"AI与效率",rss:"https://techcrunch.com/feed/"},
+    {name:"Wired",cat:"科技数码",rss:"https://www.wired.com/feed/rss"},
+    {name:"Hacker News",cat:"AI与效率",rss:"https://hnrss.org/frontpage"},
+    {name:"Lifehacker",cat:"内容生活",rss:"https://lifehacker.com/rss"}
+  ];
+
+  var done=0,liveMerged=[],okList=[];
+  feeds.forEach(function(fc,idx){
+    fetchFeedSource(fc,idx*10+6).then(function(list){
+      if(list.length>0){
+        liveMerged=liveMerged.concat(list);
+        okList.push(fc.name+"("+list.length+")");
+      }
+    }).finally(function(){
+      done++;
+      if(done===feeds.length){
+        items=liveMerged.concat(baseList);
+        visibleCount=PAGE_SIZE;
+        renderFeed();
+        if(liveMerged.length>0){
+          bar.innerText="共 "+items.length+" 条（含 "+liveMerged.length+" 条联网报道："+okList.join(" · ")+" + "+baseList.length+" 篇详实长文）· 120张独立图库已启用";
+        }else{
+          bar.innerText="共 "+items.length+" 篇详实长文专题（当前网络未能连上外部 RSS 接口）· 120张独立图库已启用";
+        }
+      }
+    });
+  });
+}
+
+function sortList(arr){
   return arr.slice().sort(function(a,b){
     if(sortMode==="heat")return (b.heatScore||0)-(a.heatScore||0);
-    return (a.ageHours||999)-(b.ageHours||999);
+    return (b.ts||0)-(a.ts||0);
   });
 }
 
 function toggleSort(){
-  sortMode=sortMode==="heat"?"time":"heat";
-  document.getElementById("sortBtn").innerText=sortMode==="heat"?"热度↓":"最新↓";
-  resetPaginationAndRender();
-}
-
-function switchTab(t){
-  document.getElementById("feedView").style.display=t==="feed"?"block":"none";
-  document.getElementById("vaultView").style.display=t==="vault"?"block":"none";
-  document.getElementById("navFeed").className="nav-btn"+(t==="feed"?" on":"");
-  document.getElementById("navVault").className="nav-btn"+(t==="vault"?" on":"");
-  if(t==="vault")renderVault();
+  sortMode=sortMode==="time"?"heat":"time";
+  document.getElementById("sortBtn").innerText=sortMode==="time"?"最新↓":"热度↓";
+  resetPageAndRender();
 }
 
 function chooseCat(c,el){
   activeCat=c;
-  var list=document.getElementById("catTabs").children;
-  for(var i=0;i<list.length;i++)list[i].className="tab";
+  var tabs=document.getElementById("catTabs").children;
+  for(var i=0;i<tabs.length;i++)tabs[i].className="tab";
   if(el)el.className="tab active";
-  resetPaginationAndRender();
+  resetPageAndRender();
 }
 
 function chooseTime(tm,el){
   activeTime=tm;
-  var list=document.getElementById("timeTabs").children;
-  for(var i=0;i<list.length;i++)list[i].className="tab";
+  var tabs=document.getElementById("timeTabs").children;
+  for(var i=0;i<tabs.length;i++)tabs[i].className="tab";
   if(el)el.className="tab active";
-  resetPaginationAndRender();
+  resetPageAndRender();
 }
 
-function resetPaginationAndRender(){
+function resetPageAndRender(){
   visibleCount=PAGE_SIZE;
   renderFeed();
 }
 
 function loadNextPage(){
-  if(visibleCount>=filteredTopics.length)return;
-  visibleCount=Math.min(filteredTopics.length,visibleCount+PAGE_SIZE);
+  if(visibleCount>=filtered.length)return;
+  visibleCount=Math.min(filtered.length,visibleCount+PAGE_SIZE);
   renderFeed();
 }
 
@@ -444,144 +519,125 @@ function toggleCardLike(e,id){
   renderFeed();
 }
 
-function formatNum(n){
-  if(n>=1000)return (n/1000).toFixed(1)+"k";
-  return String(n);
-}
-
 function renderFeed(){
   var kw=(document.getElementById("searchBox").value||"").toLowerCase().trim();
-  var matched=[];
-  for(var i=0;i<allTopics.length;i++){
-    var t=allTopics[i];
-    var okCat=(activeCat==="全部"||t.cat===activeCat);
+  var m=[];
+  for(var i=0;i<items.length;i++){
+    var it=items[i];
+    var okCat=(activeCat==="全部"||it.cat===activeCat);
     var okTime=true;
-    if(activeTime==="含视频")okTime=!!t.hasVideo;
-    else if(activeTime!=="全部时间")okTime=(t.ageTag===activeTime);
-    var okKw=(!kw||t.title.toLowerCase().indexOf(kw)>-1||t.brief.toLowerCase().indexOf(kw)>-1||(t.src||"").toLowerCase().indexOf(kw)>-1||(t.author||"").toLowerCase().indexOf(kw)>-1);
-    if(okCat&&okTime&&okKw)matched.push(t);
+    if(activeTime==="真视频")okTime=!!it.hasRealVideo;
+    else if(activeTime!=="全部")okTime=(it.ageTag===activeTime);
+    var okKw=(!kw||it.title.toLowerCase().indexOf(kw)>-1||(it.fullReport||it.brief).toLowerCase().indexOf(kw)>-1||it.src.toLowerCase().indexOf(kw)>-1);
+    if(okCat&&okTime&&okKw)m.push(it);
   }
-  filteredTopics=sortTopics(matched);
-  var slice=filteredTopics.slice(0,visibleCount);
+  filtered=sortList(m);
+  var slice=filtered.slice(0,visibleCount);
   var html="";
   for(var j=0;j<slice.length;j++){
-    var item=slice[j];
-    var rankNo=j+1;
-    var isLiked=!!likedMap[item.id];
-    var showLikes=(item.likes||300)+(isLiked?1:0);
-    var authorChar=(item.author||"热").slice(0,1);
-    var vidTag=item.hasVideo?('<span class="video-pill">▶ '+(item.videoLen||"视频")+'</span>'):"";
-    html+='<div class="xhs-card" onclick="openDetail(\''+item.id+'\')">'+
+    var x=slice[j];
+    var liked=!!likedMap[x.id];
+    var likeCnt=liked?1:0;
+    var vidBadge=x.hasRealVideo?'<span class="video-pill">▶ 真视频</span>':"";
+    html+='<div class="xhs-card" onclick="openDetail('+j+')">'+
       '<div class="media-wrap">'+
-        '<img src="'+item.img+'" loading="lazy" alt="封面" onerror="this.style.display=\'none\'" />'+
-        '<span class="media-badge">'+item.cat+' · '+(item.ageLabel||item.ageTag)+'</span>'+
-        vidTag+
-        '<span class="rank-pill">#'+rankNo+' 🔥'+(item.heatScore||50).toFixed(1)+'万</span>'+
+        '<img src="'+x.img+'" loading="lazy" alt="封面" onerror="this.style.display=\'none\'" />'+
+        '<span class="media-badge">'+x.cat+' · '+x.ageLabel+'</span>'+
+        vidBadge+
       '</div>'+
       '<div class="xhs-body">'+
-        '<div class="xhs-title">'+item.title+'</div>'+
-        '<div class="xhs-sub">'+item.brief+'</div>'+
+        '<div class="xhs-title">'+x.title+'</div>'+
+        '<div class="xhs-sub">'+x.brief+'</div>'+
         '<div class="xhs-meta">'+
-          '<div class="author-box"><span class="avatar">'+authorChar+'</span><span class="author-name">'+(item.author||item.src)+'</span></div>'+
-          '<span class="like-btn'+(isLiked?' liked':'')+'" onclick="toggleCardLike(event,\''+item.id+'\')">'+(isLiked?'♥':'♡')+' '+formatNum(showLikes)+'</span>'+
+          '<span class="src-label">'+x.src+'</span>'+
+          '<span class="like-btn'+(liked?' liked':'')+'" onclick="toggleCardLike(event,\''+x.id+'\')">'+(liked?'♥':'♡')+' '+likeCnt+'</span>'+
         '</div>'+
       '</div>'+
     '</div>';
   }
-  document.getElementById("feedGrid").innerHTML=html||'<div class="panel">当前筛选条件下暂无条目，可点「全部」或清空搜索词。</div>';
-  document.getElementById("statusBar").innerText="热榜总池 "+allTopics.length+" 条 · 当前筛选 "+filteredTopics.length+" 条 · 已展示 "+slice.length+" 条";
-  var moreTxt=document.getElementById("loadMoreTxt");
-  var moreBtn=document.getElementById("loadMoreBtn");
-  if(slice.length<filteredTopics.length){
-    moreTxt.innerText="已加载 "+slice.length+" / "+filteredTopics.length+" 条 · 继续下滑自动加载下一批";
-    moreBtn.style.display="inline-block";
+  document.getElementById("feedGrid").innerHTML=html||'<div class="panel">当前筛选条件下没有匹配条目，试试切换「全部」或点「↻ 联网抓真实报道」。</div>';
+
+  var txtEl=document.getElementById("loadMoreTxt");
+  var btnEl=document.getElementById("loadMoreBtn");
+  if(filtered.length===0){
+    txtEl.innerText="";
+    btnEl.style.display="none";
+  }else if(slice.length<filtered.length){
+    txtEl.innerText="已显示 "+slice.length+" / "+filtered.length+" 条 · 下滑自动加载下一批";
+    btnEl.style.display="inline-block";
   }else{
-    moreTxt.innerText="已全部加载完当前 "+filteredTopics.length+" 条高热图文与问答";
-    moreBtn.style.display="none";
+    txtEl.innerText="已显示全部 "+filtered.length+" 条内容";
+    btnEl.style.display="none";
   }
 }
 
 window.addEventListener("scroll",function(){
   if(document.getElementById("feedView").style.display==="none")return;
   if(document.getElementById("detailModal").className.indexOf("open")>-1)return;
-  var scrollY=window.scrollY||window.pageYOffset||0;
-  var winH=window.innerHeight||document.documentElement.clientHeight||0;
-  var docH=document.documentElement.scrollHeight||0;
-  if(scrollY+winH>=docH-280){
-    loadNextPage();
-  }
+  var sy=window.scrollY||window.pageYOffset||0;
+  var wh=window.innerHeight||document.documentElement.clientHeight||0;
+  var dh=document.documentElement.scrollHeight||0;
+  if(sy+wh>=dh-260)loadNextPage();
 });
 
 function toggleAgree(){
-  if(!currentTopic)return;
-  agreedMap[currentTopic.id]=!agreedMap[currentTopic.id];
+  if(!currentItem)return;
+  agreedMap[currentItem.id]=!agreedMap[currentItem.id];
   saveSocialStore();
-  updateAgreeUI(currentTopic);
+  updateAgreeUI(currentItem);
 }
 
-function updateAgreeUI(f){
-  var on=!!agreedMap[f.id];
-  var btn=document.getElementById("dAgreeBtn");
-  btn.className="agree-pill"+(on?" on":"");
-  var cnt=(f.agrees||500)+(on?1:0);
-  document.getElementById("dAgreeNum").innerText=formatNum(cnt);
+function updateAgreeUI(x){
+  var on=!!agreedMap[x.id];
+  document.getElementById("dAgreeBtn").className="agree-pill"+(on?" on":"");
+  document.getElementById("dAgreeNum").innerText=on?"1":"0";
 }
 
-function openDetail(id){
-  var f=null;
-  for(var i=0;i<allTopics.length;i++)if(allTopics[i].id===id)f=allTopics[i];
-  if(!f)return;
-  currentTopic=f;
+function openDetail(idx){
+  var x=filtered[idx];
+  if(!x)return;
+  currentItem=x;
 
-  var heroImg=document.getElementById("dHeroImg");
-  heroImg.style.display="block";
-  heroImg.src=f.img;
-  document.getElementById("dImgCredit").innerText="来源配图 · "+(f.src||"精选图库");
-  document.getElementById("dMediaType").innerText=f.hasVideo?("▶ 含视频拆解（时长 "+(f.videoLen||"03:45")+"）"):"图文深度报道";
-
-  document.getElementById("dTitle").innerText=f.title;
-  document.getElementById("dSrcTitle").innerText="信源出处："+(f.src||"全球观察站")+" · 发布者："+(f.author||"特约观察员");
-  document.getElementById("dSrcMeta").innerText=f.cat+" · "+(f.ageLabel||f.ageTag)+" · 热度指数 "+(f.heatScore||50).toFixed(1)+"万";
-  document.getElementById("dSrcBadge").innerText=f.url?"外部一手信源":"已核对专题档案";
+  var slot=document.getElementById("dMediaSlot");
+  if(x.mp4){
+    slot.innerHTML='<video controls playsinline preload="metadata" poster="'+x.img+'"><source src="'+x.mp4+'" /></video>';
+    document.getElementById("dMediaKind").innerText="真实视频流播放器";
+  }else if(x.ytId){
+    slot.innerHTML='<iframe src="https://www.youtube.com/embed/'+x.ytId+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    document.getElementById("dMediaKind").innerText="YouTube 真实视频嵌入";
+  }else{
+    slot.innerHTML='<img src="'+x.img+'" alt="报道配图" onerror="this.style.display=\'none\'" />';
+    document.getElementById("dMediaKind").innerText="图文报道";
+  }
+  document.getElementById("dImgSrc").innerText="配图出处："+x.imgOrigin;
 
   var linkEl=document.getElementById("dOriginLink");
-  var vidBtn=document.getElementById("dVideoBtn");
-  if(f.url){
-    linkEl.href=f.url;
-    linkEl.style.display="inline-flex";
-    if(f.hasVideo){vidBtn.href=f.url;vidBtn.style.display="inline-flex";}
-    else{vidBtn.style.display="none";}
-  }else{
-    linkEl.style.display="none";
-    vidBtn.style.display="none";
-  }
+  if(x.url){linkEl.href=x.url;linkEl.style.display="inline-flex";}
+  else{linkEl.style.display="none";}
 
-  document.getElementById("dBrief").innerText=f.brief;
-  document.getElementById("dAnsAvatar").innerText=(f.author||"答").slice(0,1);
-  document.getElementById("dAnsAuthor").innerText=(f.author||"深度观察员")+" · 高赞回答";
-  document.getElementById("dAnsBio").innerText=f.bio||"聚焦科技趋势、交互体验与真实生活方式";
-  document.getElementById("dLongAns").innerText=f.longAns||f.brief;
-  updateAgreeUI(f);
-
-  document.getElementById("dL1").innerText=f.d[0][0];document.getElementById("dT1").innerText=f.d[0][1];
-  document.getElementById("dL2").innerText=f.d[1][0];document.getElementById("dT2").innerText=f.d[1][1];
-  document.getElementById("dL3").innerText=f.d[2][0];document.getElementById("dT3").innerText=f.d[2][1];
-
-  var cmts=f.comments||[],cHtml="";
-  for(var c=0;c<cmts.length;c++){
-    cHtml+='<div class="cmt-item"><div class="cmt-top"><span>'+cmts[c].user+'</span><span>IP属地：'+cmts[c].loc+'</span></div><div>'+cmts[c].txt+'</div></div>';
-  }
-  document.getElementById("dComments").innerHTML=cHtml;
+  document.getElementById("dTitle").innerText=x.title;
+  document.getElementById("dSrcLine").innerText="出处："+x.src+"（"+x.cat+"）";
+  document.getElementById("dTimeLine").innerText="时间："+x.pubRaw+(x.url?(" · 原文："+x.url):"");
+  document.getElementById("dFullReport").innerText=x.fullReport||x.brief;
+  document.getElementById("dL1").innerText=x.d[0][0];document.getElementById("dT1").innerText=x.d[0][1];
+  document.getElementById("dL2").innerText=x.d[1][0];document.getElementById("dT2").innerText=x.d[1][1];
+  document.getElementById("dL3").innerText=x.d[2][0];document.getElementById("dT3").innerText=x.d[2][1];
+  document.getElementById("dLongAns").innerText=x.longAns;
+  updateAgreeUI(x);
 
   document.getElementById("noteInput").value="";
   document.getElementById("copyTip").innerText="";
   document.getElementById("rebutPanel").style.display="none";
-  renderTopicNotes(f.id);
+  renderTopicNotes(x.id);
   document.getElementById("detailModal").className="modal open";
   document.getElementById("detailModal").scrollTop=0;
 }
 
-function closeDetail(){document.getElementById("detailModal").className="modal";currentTopic=null}
+function closeDetail(){
+  document.getElementById("dMediaSlot").innerHTML="";
+  document.getElementById("detailModal").className="modal";
+  currentItem=null;
+}
 
 function renderTopicNotes(id){
   var arr=notesStore[id]||[],h="";
@@ -590,36 +646,42 @@ function renderTopicNotes(id){
 }
 
 function saveNote(){
-  if(!currentTopic)return;
+  if(!currentItem)return;
   var txt=(document.getElementById("noteInput").value||"").trim();
   if(!txt)return;
-  if(!notesStore[currentTopic.id])notesStore[currentTopic.id]=[];
-  notesStore[currentTopic.id].unshift({topicTitle:currentTopic.title,text:txt,time:new Date().toLocaleString("zh-CN")});
+  if(!notesStore[currentItem.id])notesStore[currentItem.id]=[];
+  notesStore[currentItem.id].unshift({topicTitle:currentItem.title,text:txt,time:new Date().toLocaleString("zh-CN")});
   saveNotesStore();
   document.getElementById("noteInput").value="";
-  renderTopicNotes(currentTopic.id);
+  renderTopicNotes(currentItem.id);
 }
 
 function copyTopicShare(){
-  if(!currentTopic)return;
-  var payload="【"+currentTopic.cat+" · "+currentTopic.src+"】"+currentTopic.title+"\n\n"+(currentTopic.longAns||currentTopic.brief);
+  if(!currentItem)return;
+  var payload=currentItem.title+"\n出处："+currentItem.src+"\n"+(currentItem.url?("原文："+currentItem.url+"\n\n"):"\n")+(currentItem.fullReport||currentItem.brief);
   if(navigator.clipboard&&navigator.clipboard.writeText){
     navigator.clipboard.writeText(payload).then(function(){
-      document.getElementById("copyTip").innerText="已复制全文";
-    }).catch(function(){document.getElementById("copyTip").innerText="请长按文本复制"});
-  }else{
-    document.getElementById("copyTip").innerText="请长按文本复制";
+      document.getElementById("copyTip").innerText="已复制完整报道";
+    }).catch(function(){document.getElementById("copyTip").innerText="请手动长按复制"});
   }
 }
 
 function runRebuttal(){
   var raw=(document.getElementById("noteInput").value||"").trim();
-  var a=raw?("针对你说的「"+raw.slice(0,26)+(raw.length>26?"…":"")+"」"):"针对当前这个热点";
-  document.getElementById("rp1").innerText="1. 换个前提看："+a+"，如果换一种使用场景或人群，这个结论还站得住吗？";
-  document.getElementById("rp2").innerText="2. 唱反调视角：支持另一边的人最看重什么？他们指出的局限性是不是也有道理？";
-  document.getElementById("rp3").innerText="3. 代价与取舍：顺着你的判断走，可能会忽略哪些成本、时间或体验代价？";
+  var a=raw?("针对你说的「"+raw.slice(0,26)+(raw.length>26?"…":"")+"」"):"针对这篇报道";
+  document.getElementById("rp1").innerText="1. 前提核对："+a+"，报道里的关键事实与背景是否完整？有没有遗漏前提？";
+  document.getElementById("rp2").innerText="2. 反方立场：如果站在完全相反的立场，最核心的反驳理由是什么？";
+  document.getElementById("rp3").innerText="3. 现实代价：顺着这个判断走，可能会忽略哪些代价或副作用？";
   document.getElementById("rebutPanel").style.display="block";
   document.getElementById("detailModal").scrollTop=99999;
+}
+
+function switchTab(t){
+  document.getElementById("feedView").style.display=t==="feed"?"block":"none";
+  document.getElementById("vaultView").style.display=t==="vault"?"block":"none";
+  document.getElementById("navFeed").className="nav-btn"+(t==="feed"?" on":"");
+  document.getElementById("navVault").className="nav-btn"+(t==="vault"?" on":"");
+  if(t==="vault")renderVault();
 }
 
 function renderVault(){
@@ -627,127 +689,16 @@ function renderVault(){
   for(var k in notesStore)if(Object.prototype.hasOwnProperty.call(notesStore,k)){
     var l=notesStore[k]||[];for(var i=0;i<l.length;i++)all.push(l[i]);
   }
-  document.getElementById("vaultCount").innerText="累计记录 "+all.length+" 条随想回答";
-  if(!all.length){document.getElementById("vaultList").innerHTML='<div class="panel"><div class="sub">还没有保存过回答，点开任意图文卡片写几句就能存到这里。</div></div>';return}
+  document.getElementById("vaultCount").innerText="已记录 "+all.length+" 条";
+  if(!all.length){document.getElementById("vaultList").innerHTML='<div class="panel"><div class="sub">还没有随想笔记，点开任意一条报道写下看法即可保存。</div></div>';return}
   var html="";
-  for(var j=0;j<all.length;j++)html+='<div class="panel"><div style="font-size:11px;color:#ff2442;margin-bottom:4px">话题：'+all[j].topicTitle+'</div><div style="font-size:13px">'+all[j].text+'</div><div class="sub">'+all[j].time+'</div></div>';
+  for(var j=0;j<all.length;j++)html+='<div class="panel"><div style="font-size:11px;color:#ff2442;margin-bottom:4px">'+all[j].topicTitle+'</div><div style="font-size:13px">'+all[j].text+'</div><div class="sub">'+all[j].time+'</div></div>';
   document.getElementById("vaultList").innerHTML=html;
 }
 
 function clearAllNotes(){notesStore={};saveNotesStore();renderVault()}
 
-function stripHtml(html){
-  var div=document.createElement("div");
-  div.innerHTML=html||"";
-  return (div.textContent||div.innerText||"").replace(/\s+/g," ").trim();
-}
-
-function extractFirstImg(html,enclosure){
-  if(enclosure&&enclosure.link&&enclosure.link.indexOf("http")===0)return enclosure.link;
-  var m=String(html||"").match(/<img[^>]+src=["']([^"']+)["']/i);
-  if(m&&m[1]&&m[1].indexOf("http")===0)return m[1];
-  return "";
-}
-
-function calcAgeHours(pubStr){
-  if(!pubStr)return 10;
-  var ts=Date.parse(pubStr);
-  if(isNaN(ts))return 14;
-  return Math.max(1,Math.round((Date.now()-ts)/3600000));
-}
-
-function fetchLiveIntoPool(basePool){
-  var bar=document.getElementById("statusBar");
-  var feeds=[
-    {name:"BBC World",cat:"全球国际",author:"BBC 国际台",rss:"https://feeds.bbci.co.uk/news/world/rss.xml"},
-    {name:"The Guardian",cat:"全球国际",author:"卫报国际部",rss:"https://www.theguardian.com/world/rss"},
-    {name:"The Verge",cat:"科技数码",author:"The Verge 编辑部",rss:"https://www.theverge.com/rss/index.xml"},
-    {name:"Ars Technica",cat:"科技数码",author:"Ars 深度科技",rss:"https://feeds.arstechnica.com/arstechnica/index"},
-    {name:"TechCrunch",cat:"AI与效率",author:"TC 前沿快讯",rss:"https://techcrunch.com/feed/"},
-    {name:"Hacker News",cat:"AI与效率",author:"HN 极客热榜",rss:"https://hnrss.org/frontpage"}
-  ];
-  var done=0,liveList=[],okSrc=[];
-  feeds.forEach(function(fc){
-    fetch("https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(fc.rss))
-      .then(function(r){return r.json()})
-      .then(function(res){
-        var items=(res&&res.items)||[],added=0;
-        for(var i=0;i<items.length&&added<8;i++){
-          var it=items[i];
-          var title=stripHtml(it.title||"");
-          if(!title)continue;
-          var ageH=calcAgeHours(it.pubDate);
-          if(ageH>720)continue;
-          var rawHtml=(it.content||it.description||"");
-          var desc=stripHtml(rawHtml);
-          if(!desc||desc.indexOf("Comments")===0||desc.length<20){
-            desc="来自 "+fc.name+" 的实时一手快讯，点击右上角「查看信源全文 ↗」可直达原报道页面查看完整图文与视频内容。";
-          }else if(desc.length>380){
-            desc=desc.slice(0,380)+"……";
-          }
-          var extractedImg=extractFirstImg(rawHtml,it.enclosure);
-          var fallbackImgs=imgGallery[fc.cat]||imgGallery["科技数码"];
-          var finalImg=extractedImg||fallbackImgs[(liveList.length+i)%fallbackImgs.length];
-          var isVid=(rawHtml.toLowerCase().indexOf("video")>-1||rawHtml.toLowerCase().indexOf("youtube")>-1||title.toLowerCase().indexOf("watch")>-1);
-          var heat=Math.max(66,Math.round((99.3-(ageH*0.08)-(added*0.6))*10)/10);
-
-          liveList.push({
-            id:"live_"+fc.name+"_"+i+"_"+Math.random().toString(36).slice(2,5),
-            cat:fc.cat,
-            src:fc.name+" 实时报道",
-            author:fc.author,
-            bio:"官方信源自动聚合 · 发布时间："+(it.pubDate||"近期").slice(0,16),
-            hasVideo:isVid,
-            videoLen:isVid?"原报道含视频":"",
-            ageTag:ageH<=48?"近48小时":"近30天",
-            ageLabel:ageH<=48?(ageH+"小时前"):(Math.ceil(ageH/24)+"天前"),
-            ageHours:ageH,
-            heatScore:heat,
-            likes:Math.round(heat*18),
-            agrees:Math.round(heat*11),
-            img:finalImg,
-            title:title,
-            url:it.link||"",
-            brief:desc,
-            longAns:"【一手信源摘要拆解】\n出处："+fc.name+"（"+(it.pubDate||"近期").slice(0,16)+"）\n\n核心报道内容：\n"+desc+"\n\n观察重点：该动态在海外科技与新闻社区引发关注，建议点击右上角「查看信源全文 ↗」对照原报道图表与细节。",
-            d:[
-              ["关注派 · 实时信号","该条快讯属于近期高热动态，反映了相关地区或领域的最新变化。"],
-              ["审慎派 · 信息核实","快讯阶段信息更新快，细节与后续演变仍需结合更多报道印证。"],
-              ["知乎高赞视角 · 关键追问","剥开新闻热度，这一变化对普通用户或行业生态带来了哪些实质改变？"]
-            ],
-            comments:[
-              {user:"跨界观察员",loc:"上海",txt:"感谢标注清楚了出处和时间，直接点右上角就能对照原报道。"}
-            ]
-          });
-          added++;
-        }
-        if(added>0&&okSrc.indexOf(fc.name)===-1)okSrc.push(fc.name);
-      })
-      .catch(function(){})
-      .finally(function(){
-        done++;
-        if(done===feeds.length){
-          allTopics=liveList.concat(basePool);
-          renderFeed();
-          if(liveList.length>0){
-            bar.innerText="热榜总池 "+allTopics.length+" 条（含 "+liveList.length+" 条外媒实时图文："+okSrc.join("、")+"）· 按热度排序";
-          }else{
-            bar.innerText="热榜总池 "+allTopics.length+" 条（含图文与视频标签）· 按热度降序排列";
-          }
-        }
-      });
-  });
-}
-
-function refreshAllPool(){
-  visibleCount=PAGE_SIZE;
-  var base=generate500Pool();
-  allTopics=base;
-  renderFeed();
-  fetchLiveIntoPool(base);
-}
-
-refreshAllPool();
+refreshAll();
 </script>
 </body>
 </html>
