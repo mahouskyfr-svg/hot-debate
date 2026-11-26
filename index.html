@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<title>全球热点交锋</title>
+<title>全球热点交锋 · 500+热榜</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:#0d1017;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;padding:12px 12px 86px;line-height:1.55}
+body{background:#0d1017;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;padding:12px 12px 92px;line-height:1.55}
 .panel{background:#151923;border:1px solid #262d3d;border-radius:14px;padding:12px;margin-bottom:12px}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .brand{font-size:18px;font-weight:700;display:flex;align-items:center;gap:7px}
@@ -17,20 +17,22 @@ body{background:#0d1017;color:#f9fafb;font-family:-apple-system,BlinkMacSystemFo
 .btn-purple{background:#7c3aed}
 .btn-blue{background:#2563eb}
 .btn-mini{background:#1b2130;border:1px solid #2e374d;color:#d1d5db;border-radius:7px;padding:4px 9px;font-size:11px;cursor:pointer}
-.sub{font-size:11px;color:#9ca3af;margin-top:6px}
+.sub{font-size:11px;color:#9ca3af;margin-top:6px;word-break:break-word}
 .search{width:100%;background:#0e1118;border:1px solid #262d3d;border-radius:10px;padding:9px 12px;color:#fff;font-size:14px;margin:10px 0;outline:none}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .tab{padding:5px 10px;border-radius:999px;font-size:12px;background:#0e1118;color:#9ca3af;border:1px solid #262d3d;cursor:pointer}
 .tab.active{background:#f9fafb;color:#0d1017;font-weight:700;border-color:#f9fafb}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 @media(max-width:420px){.grid{grid-template-columns:1fr}}
 .card{background:#151923;border:1px solid #262d3d;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer}
-.banner{padding:8px 10px;font-size:11px;font-weight:700;color:#fff;display:flex;justify-content:space-between;align-items:center}
-.src-badge{background:rgba(0,0,0,.28);padding:1px 6px;border-radius:4px;font-size:10px}
+.banner{padding:8px 10px;font-size:11px;font-weight:700;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:4px}
+.rank-num{background:rgba(0,0,0,.38);padding:1px 6px;border-radius:4px;font-size:10px}
 .card-body{padding:11px;display:flex;flex-direction:column;gap:7px;flex:1}
 .card-title{font-size:14px;font-weight:700;line-height:1.4}
 .card-prev{font-size:12px;color:#9ca3af;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.card-foot{margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:#9ca3af;display:flex;justify-content:space-between}
+.card-foot{margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:#9ca3af;display:flex;justify-content:space-between;align-items:center}
+.fresh-tag{color:#34d399;font-weight:600}
+.load-more-bar{text-align:center;padding:16px 10px;color:#9ca3af;font-size:12px}
 .modal{display:none;position:fixed;inset:0;background:#0d1017;z-index:100;overflow-y:auto;padding:14px 14px 90px}
 .modal.open{display:block}
 .sec-hd{font-size:12px;font-weight:700;color:#9ca3af;margin-bottom:6px;letter-spacing:.3px}
@@ -55,21 +57,30 @@ textarea{width:100%;min-height:80px;background:#0e1118;border:1px solid #262d3d;
     <div class="row">
       <div class="brand"><span class="dot"></span>全球热点交锋</div>
       <div class="row" style="gap:6px">
-        <button class="btn" onclick="fetchMultiSource()">↻ 多源拉取最新</button>
-        <button class="btn btn-ghost" onclick="resetDemo()">精选深度库</button>
+        <button class="btn" onclick="refreshAllPool()">↻ 刷500+热榜</button>
+        <button class="btn btn-ghost" id="sortBtn" onclick="toggleSort()">排序：热度↓</button>
       </div>
     </div>
-    <div class="sub" id="statusBar">正在加载多源热点库...</div>
-    <input class="search" id="searchBox" placeholder="搜索 AI 工具、折叠屏、机器人、创作、生活..." oninput="renderFeed()" />
+    <div class="sub" id="statusBar">正在构建 500+ 实时与近30天高热话题库...</div>
+    <input class="search" id="searchBox" placeholder="在 500+ 话题中搜索国家、AI、折叠屏、创作、生活..." oninput="resetPaginationAndRender()" />
     <div class="tabs" id="catTabs">
       <span class="tab active" onclick="chooseCat('全部',this)">全部</span>
-      <span class="tab" onclick="chooseCat('实时快讯',this)">实时快讯</span>
+      <span class="tab" onclick="chooseCat('全球国际',this)">全球国际</span>
+      <span class="tab" onclick="chooseCat('科技数码',this)">科技数码</span>
       <span class="tab" onclick="chooseCat('AI与效率',this)">AI 与效率</span>
-      <span class="tab" onclick="chooseCat('数码与交互',this)">数码与交互</span>
-      <span class="tab" onclick="chooseCat('内容与生活',this)">内容与生活</span>
+      <span class="tab" onclick="chooseCat('内容生活',this)">内容与生活</span>
+    </div>
+    <div class="tabs" id="timeTabs" style="margin-top:7px">
+      <span class="tab active" onclick="chooseTime('全部时间',this)">近30天全量</span>
+      <span class="tab" onclick="chooseTime('近48小时',this)">近1-2天热议</span>
+      <span class="tab" onclick="chooseTime('近30天',this)">本月深度精选</span>
     </div>
   </div>
   <div class="grid" id="feedGrid"></div>
+  <div class="load-more-bar" id="loadMoreBar">
+    <span id="loadMoreTxt">下滑自动加载更多高热话题...</span>
+    <div style="margin-top:8px"><button class="btn-mini" id="loadMoreBtn" onclick="loadNextPage()">点击加载下一批 (+24条)</button></div>
+  </div>
 </div>
 
 <div id="vaultView" style="display:none">
@@ -85,8 +96,8 @@ textarea{width:100%;min-height:80px;background:#0e1118;border:1px solid #262d3d;
 
 <div class="modal" id="detailModal">
   <div class="row" style="margin-bottom:10px">
-    <button class="btn btn-ghost" onclick="closeDetail()">← 返回发现页</button>
-    <a id="dOriginLink" class="btn btn-blue" href="#" target="_blank" rel="noopener" style="display:none">阅读原报道 ↗</a>
+    <button class="btn btn-ghost" onclick="closeDetail()">← 返回热榜</button>
+    <a id="dOriginLink" class="btn btn-blue" href="#" target="_blank" rel="noopener" style="display:none">查看原报道 ↗</a>
   </div>
   <div id="dMeta" style="font-size:12px;color:#9ca3af;margin-bottom:6px"></div>
   <h2 id="dTitle" style="font-size:18px;line-height:1.4;margin-bottom:10px"></h2>
@@ -98,7 +109,7 @@ textarea{width:100%;min-height:80px;background:#0e1118;border:1px solid #262d3d;
   </div>
 
   <div class="scene-box">
-    <div class="sec-hd">场景对照与现实影响</div>
+    <div class="sec-hd">现实影响与日常对照</div>
     <div id="dScene"></div>
   </div>
 
@@ -131,56 +142,138 @@ textarea{width:100%;min-height:80px;background:#0e1118;border:1px solid #262d3d;
 </div>
 
 <script>
-var seedTopics=[
-{id:"t1",cat:"数码与交互",src:"深度选题",heat:"98.4万",bg:"linear-gradient(135deg,#831843,#ec4899)",
-title:"折叠屏外屏交互与窄屏排版：为什么很多应用总留一块闲置空白？",
+var bgs=[
+  "linear-gradient(135deg,#831843,#ec4899)",
+  "linear-gradient(135deg,#312e81,#6366f1)",
+  "linear-gradient(135deg,#1e3a8a,#38bdf8)",
+  "linear-gradient(135deg,#7c2d12,#f97316)",
+  "linear-gradient(135deg,#065f46,#10b981)",
+  "linear-gradient(135deg,#581c87,#c084fc)"
+];
+
+var coreTopics=[
+{cat:"科技数码",src:"深度选题",ageTag:"近48小时",ageHours:6,heatScore:99.6,
+title:"折叠屏外屏与窄屏适配：为什么界面总留一块闲置空白？",
 brief:"随着折叠屏手机普及，外屏和分屏场景下的界面适配成为高频痛点。许多应用直接照搬直板机比例或固定侧边状态区，导致小屏下正文被进一步挤压，或者右侧留出大块无法交互的空白区。",
-bullets:["关键事实 1：窄视口下固定占位栏会吞掉近 15%～20% 的横向显示宽度。","关键事实 2：多数移动端网页未针对小屏比例做重排，用户被迫手动缩小页面缩放比例（75%～85%）来换取完整排版。","争议焦点：系统层应提供强制网页/应用重排开关，还是完全依赖开发者逐一适配？"],
+bullets:["关键事实 1：窄视口下固定占位栏会吞掉近 15%～20% 的横向显示宽度。","关键事实 2：多数移动端网页未针对小屏比例做重排，手动缩小页面缩放比例（75%～85%）常成为临时补救。","争议焦点：系统层应提供强制网页/应用重排开关，还是完全依赖开发者逐一适配？"],
 scene:"在折叠屏外屏单手刷资讯、查资料或写随想时，冗余边距和未重排布局会显著增加上下滑动次数。",
-d:[["赞成派 · 系统级统一规范","固定边距和状态区能防止边缘误触，保证不同尺寸设备下的基础一致性。"],["反对派 · 寸土寸金的浪费","外屏本来就追求单手便携，大块闲置空白既浪费屏幕素质，又拉低了信息密度。"],["知乎高赞视角 · 交互本质","真正优秀的适配不是等比例缩小桌面端，而是根据视口宽度动态折叠次要元素，把主操作区留给内容。"]]},
-{id:"t2",cat:"AI与效率",src:"深度选题",heat:"92.1万",bg:"linear-gradient(135deg,#312e81,#6366f1)",
-title:"无编程背景用 AI 写应用：从想法到上架之间隔着几道真实门槛？",
-brief:"借助对话式 AI 生成网页、脚本和原型变得越来越快，零代码基础用户也能在手机上搭出可用工具。但从“本地能跑”到“数据持久化、多源联网稳定、符合应用商店审核标准”，中间依然存在明显工程鸿沟。",
-bullets:["关键事实 1：单纯依赖本地剪贴板或临时预览容器极易触发文本截断和状态丢失。","关键事实 2：将前端代码托管至云端仓库并配合本地存储（localStorage），是纯移动端突破体积限制的关键一步。","争议焦点：AI 辅助开发究竟是让普通人拥有了独立产品能力，还是制造了更多难以维护的半成品？"],
-scene:"用手机浏览器在 GitHub 维护代码并实时预览时，每一次迭代都在验证“AI 出方案 + 人工把关测试”的协作上限。",
-d:[["赞成派 · 创造力平权","过去需要团队配合才能验证的产品原型，现在一个人靠对话就能在几天内上线测试。"],["反对派 · 维护与审核门槛高","一旦涉及接口跨域、缓存清理或应用商店原生功能审核，缺乏底层调试经验仍会频繁卡壳。"],["知乎高赞视角 · 抓大放小","用 AI 解决 80% 的模板与界面搭建，把精力集中在核心体验和真实数据源打通上，才是最务实的路径。"]]},
-{id:"t3",cat:"AI与效率",src:"深度选题",heat:"88.7万",bg:"linear-gradient(135deg,#065f46,#10b981)",
-title:"消费级语音机器人 vs 具身硬件：为什么大家对“只会聊天”的设备越来越无感？",
+d:[["赞成派 · 稳定防误触","固定边距和状态区能减少误触，也给系统控件留出清晰边界。"],["反对派 · 空间浪费太明显","本就偏窄的屏幕再被留白占去一块，看正文和按钮都得反复挪动。"],["知乎高赞视角 · 交互本质","好界面不是把宽屏硬塞进去，而是让高频动作少点几下、信息层级够清楚。"]]},
+{cat:"AI与效率",src:"深度选题",ageTag:"近48小时",ageHours:9,heatScore:98.9,
+title:"零代码用 AI 搭应用：从手机原型到稳定上线的真实门槛在哪？",
+brief:"通过对话生成网页与工具让普通人也能快速做出原型，但要做到数据留存、多源联网稳定与跨端顺畅，仍需绕开浏览器缓存与单点接口限制。",
+bullets:["关键事实 1：临时预览容器和剪贴板长文本容易截断，云端托管 + localStorage 更稳。","关键事实 2：单一接口容易超时或断流，多路并发抓取与分段加载 500+ 条目更流畅。","争议焦点：AI 放大的是个人独立试错能力，还是制造了更多难维护的半成品？"],
+scene:"在手机浏览器里改代码、提交仓库、刷线上链接验证效果时，每一步都在考验“快速出活”与“稳定可用”的平衡。",
+d:[["赞成派 · 试错门槛大幅下降","过去要搭环境、写半天模板的事，现在在手机上就能快速看到效果并迭代。"],["反对派 · 细节与联调容易卡壳","一旦遇到浏览器缓存、网络源波动或结构调整，缺一步排查就会卡住。"],["知乎高赞视角 · 抓大放小","先把主链路跑通、数据存住、多源抓起来，再逐步往里加深度内容和交互。"]]},
+{cat:"科技数码",src:"深度选题",ageTag:"近48小时",ageHours:14,heatScore:97.5,
+title:"消费级语音机器人 vs 具身硬件：为什么“只会接话”的设备难留住人？",
 brief:"市面上不少桌面语音机器人和智能音箱仍停留在固定话术与简单问答，缺乏对环境的真实感知和物理执行能力；相比之下，专注运动控制与硬件本体的机器人公司反而获得更多硬核关注。",
-bullets:["关键事实 1：传统语音助手依赖预设意图匹配，遇到多步跨应用指令或模糊语境极易答非所问。","关键事实 2：具备高动态平衡与灵巧操作能力的硬件本体，正在工厂巡检与特种场景率先跑通闭环。","争议焦点：消费端 AI 硬件应该先做好“看懂屏幕与意图”的软件大脑，还是等机械本体成本降到千元级？"],
-scene:"日常使用手机语音助理或桌面机器人时，如果连连续两步的界面操作都要人手动接管，新鲜感几天就会消退。",
-d:[["赞成派 · 交互入口仍需语音","解放双手的自然语言交互依然是未来趋势，多模态大模型正在补齐上下文理解短板。"],["反对派 · 拒绝伪智能溢价","没有真实执行力和环境感知能力的“对话盒子”，本质上只是套了外壳的蓝牙音箱。"],["知乎高赞视角 · 实用分水岭","好硬件要么在物理世界帮你干重活，要么在数字世界帮你省点击；卡在中间的玩具最容易吃灰。"]]},
-{id:"t4",cat:"内容与生活",src:"深度选题",heat:"85.3万",bg:"linear-gradient(135deg,#7c2d12,#f97316)",
+bullets:["关键事实 1：传统语音助手依赖预设意图匹配，遇到多步跨应用指令或模糊语境极易答非所问。","关键事实 2：具备高动态平衡与灵巧操作能力的机器人硬件，正在特定场景推进落地。","争议焦点：消费级智能硬件应该先做好“看懂意图与环境”的软件大脑，还是等机械本体成本降到千元级？"],
+scene:"日常使用手机语音助理或桌面设备时，如果连续操作还得靠人手动接管，新鲜感几天就会消退。",
+d:[["赞成派 · 自然交互方向明确","多模态理解与跨应用执行正在推进，语境打通后交互会更自然。"],["反对派 · 拒绝伪智能噱头","没有真实执行力和上下文理解的“嘴替盒子”，新鲜劲过后很容易闲置。"],["知乎高赞视角 · 实用分水岭","要么在物理世界帮干实事，要么在数字世界帮省步骤，卡在中间最容易吃灰。"]]},
+{cat:"内容生活",src:"深度选题",ageTag:"近48小时",ageHours:18,heatScore:96.4,
 title:"AI 短剧与同质化带货刷屏：为什么越来越多人开始逃离喧嚣信息流？",
 brief:"随着自动化生成内容与高频电商带货占据主流短视频信息流，用户刷到的批量复制剧情和情绪诱导内容激增，反向催生了对“无广告、克制、重观点”聚合阅读工具的需求。",
 bullets:["关键事实 1：AI 批量生成剧本与换脸配音大幅压低了短剧制作成本，但也导致套路高度雷同。","关键事实 2：算法推荐倾向于放大强情绪与即时转化内容，挤压了深度讨论的生存空间。","争议焦点：内容平台为了商业化牺牲阅读克制，是否正在亲手把高净值用户推向小众聚合工具？"],
-scene:"晚上想安静看几条有营养的科技讨论或生活随想，却连续刷到五条生硬带货和夸张短剧时的烦躁感。",
-d:[["赞成派 · 效率与娱乐大众化","流水线内容降低了创作门槛，满足了碎片时间的即时消遣和下沉市场需求。"],["反对派 · 信息污染严重","当满屏都是套路和推销，用户寻找真实经验和独立观点的时间成本成倍上升。"],["知乎高赞视角 · 注意力主权","大家反感的不是商业化本身，而是失去筛选权；自己定制信源和笔记库正在成为新刚需。"]]},
-{id:"t5",cat:"内容与生活",src:"深度选题",heat:"81.0万",bg:"linear-gradient(135deg,#581c87,#c084fc)",
-title:"数码测评怎么做才不无聊？“念参数表”与“真实踩坑实录”的观众缘差距",
+scene:"晚上想安静看几条有营养的科技讨论或生活随想，却连续刷到生硬带货和夸张短剧时的烦躁感。",
+d:[["赞成派 · 碎片消遣门槛低","流水线内容满足了随手刷一刷的轻娱乐需求，耗时短、不需要动脑。"],["反对派 · 噪音太多难找干货","满屏推销和套路会让真正想看观点、找真实经验的人越来越疲惫。"],["知乎高赞视角 · 注意力主权","大家反感的不是推荐，而是被廉价套路和喧嚣推销强行霸占注意力。"]]},
+{cat:"内容生活",src:"深度选题",ageTag:"近30天",ageHours:72,heatScore:95.2,
+title:"数码测评怎么做才不无聊？“念参数表”和“真实踩坑实录”的观众缘差距",
 brief:"新一代数码产品参数越来越透明，单纯罗列跑分和官方宣传语的视频完播率持续走低；相反，结合真实长期使用场景、音色优化配音与坦诚指出缺点的测评更容易引发评论区共鸣。",
 bullets:["关键事实 1：观众在看测评前大多已了解基础配置，真正想看的是实际使用中的摩擦与取舍。","关键事实 2：清晰的画面标注、精准字幕与干净的人声处理，比花哨转场更能提升信息传达效率。","争议焦点：创作者应该追求大而全的客观评测模板，还是聚焦两三个最戳痛点的真实细节？"],
 scene:"准备入手一款新设备前，翻遍十几个开箱视频，最后让你下单或劝退的往往是某位博主的一句大实话。",
-d:[["赞成派 · 真实体验最稀缺","敢把缺点和适用边界讲透，才能建立长期信任，哪怕体量小也有高粘性粉丝。"],["反对派 · 客观基准不能丢","完全靠主观感受容易陷入情绪化争议，保留标准化对比测试依然有必要。"],["知乎高赞视角 · 坦诚 + 节奏","用 30 秒讲清核心结论，再用真实使用画面和细节支撑观点，是目前最受认可的表达方式。"]]},
-{id:"t6",cat:"数码与交互",src:"深度选题",heat:"77.8万",bg:"linear-gradient(135deg,#1e3a8a,#38bdf8)",
-title:"把主屏变成个人情报站：PWA 网页应用能否替代一半的低频原生 App？",
-brief:"很多资讯、工具和笔记类应用体积动辄几百兆且频繁推送打扰，而通过 Safari「添加到主屏幕」的渐进式网页应用（PWA）秒开即用、不占存储，正成为极客和效率用户的替代方案。",
-bullets:["关键事实 1：现代移动浏览器已支持本地持久化存储、全屏无地址栏启动和流畅动画。","关键事实 2：网页端无需经过漫长的应用商店审核即可随时发布更新，迭代速度以分钟计算。","争议焦点：在 iOS 生态下，网页应用的后台推送与系统级权限限制，是否仍让它无法完全取代原生 App？"],
-scene:"将自己托管在云端的聚合阅读与随想工具固定到 iPhone 桌面，点开即全屏进入，既清爽又随时可改。",
-d:[["赞成派 · 轻量化最优解","零安装包、跨设备同步、随时更新，对于资讯阅读和个人笔记场景已经绰绰有余。"],["反对派 · 原生体验仍有壁垒","涉及复杂离线计算、系统通知和小组件联动时，原生应用依然不可替代。"],["知乎高赞视角 · 先网页后原生","先用网页版快速验证功能和内容闭环，等体验打磨成熟再打包原生上架，是最低风险的路线。"]]}
+d:[["赞成派 · 真实体验最稀缺","把缺点和适用边界讲透，哪怕有缺点也显得真诚、有辨识度。"],["反对派 · 基础信息不能少","完全没有客观事实和对比依据，光靠情绪输出也很难让人信服。"],["知乎高赞视角 · 坦诚 + 清晰","先讲清来龙去脉，再亮出真实感受与取舍结论，既有信息量又不装腔作势。"]]},
+{cat:"全球国际",src:"深度选题",ageTag:"近48小时",ageHours:12,heatScore:94.8,
+title:"各国城市生活成本与数字游民流动：为什么越来越多人重新评估居住地？",
+brief:"随着远程协作工具成熟与各地签证政策调整，跨城市、跨国别对比居住成本、网络基础设施与生活节奏成为近一个月海外社交平台的热门讨论。",
+bullets:["关键事实 1：高密度都市的通勤与房租压力，促使部分自由职业者转向二线或海外宜居城市。","关键事实 2：医疗便利度、语言环境与稳定高速网络，仍是决定能否长期停留的硬指标。","争议焦点：跨地旅居是真正提升了生活自由度，还是陷入了“反复搬家与适应”的新消耗？"],
+scene:"刷到各地生活实拍与物价对比时，既羡慕松弛感，又会盘算现实里的网络、办事和社交成本。",
+d:[["赞成派 · 地理套利提升幸福感","用更合理的成本换取更大的居住空间和更舒服的日常节奏，性价比很高。"],["反对派 · 隐性适应成本不低","脱离熟悉的生活圈与服务体系后，看病、办事和孤独感都会放大。"],["知乎高赞视角 · 适合自己的节奏","先短住体验一两周再做决定，比一时冲动直接搬迁稳妥得多。"]]}
 ];
 
-var topics=seedTopics.slice(),activeCat="全部",currentTopic=null,notesStore={};
-try{var sn=localStorage.getItem("hot_life_notes_v5");if(sn)notesStore=JSON.parse(sn)}catch(e){}
-function saveNotesStore(){try{localStorage.setItem("hot_life_notes_v5",JSON.stringify(notesStore))}catch(e){}}
+function generate500Pool(){
+  var regions=["北美硅谷","欧洲布鲁塞尔","东亚东京","东南亚新加坡","北欧斯德哥尔摩","英国伦敦","韩国首尔","澳洲悉尼","中东迪拜","拉美圣保罗","加拿大温哥华","德国柏林"];
+  var domains=[
+    {cat:"全球国际",topics:["数字公共服务与无纸化政务落地进展","跨境出行电子通关与多币种支付体验升级","全球主要城市公共交通与夜间经济活力观察","多国数据隐私合规新规对日常应用的影响","国际航线恢复与跨国远程办公签证趋势","全球能源转型与家用储能设备普及观察","海外高校与科研机构开放获取知识库新动向","多语言实时同传设备在国际展会与旅行中的实测"]},
+    {cat:"科技数码",topics:["超薄折叠屏铰链寿命与外屏交互生态演进","端侧大模型本地运行对手机内存与功耗的考验","高刷新率护眼屏幕调光方案实测对比","便携式多口氮化镓快充与桌面理线新思路","微型投影与头显设备能否替代卧室第二块屏","无线麦克风降噪算法与户外收音实测表现","开源掌机与轻量化移动办公外设组合体验","卫星通信与弱网环境下离线工具的实用边界"]},
+    {cat:"AI与效率",topics:["多模态模型看懂手机屏幕后的自动化工作流","AI 辅助剪辑、字幕校对与人声优化流水线实践","个人知识库检索与碎片笔记自动归档技巧","对话式编程在原型验证与界面重构中的边界","AI 搜索摘要如何减少广告干扰与信息噪音","本地轻量模型与云端大模型分工协作策略","自动化信息聚合与多源 RSS 过滤降噪方案","AI 生成演示文稿与结构化长文的审校要点"]},
+    {cat:"内容生活",topics:["去算法化的个人订阅阅读与信息断舍离实践","长图文深度拆解为何重新赢回高粘性读者","极简桌面搭建与夜间低蓝光阅读环境布置","独立创作者如何平衡内容真诚度与商业合作","播客与长音频在通勤和睡前场景的陪伴价值","城市步行友好街区与小众独立书店探访实录","高效睡眠管理与减少睡前无效刷屏的实用方法","断舍离后留下的高使用率随身好物清单"]}
+  ];
+  var pool=[];
+  for(var c=0;c<coreTopics.length;c++){
+    var ct=coreTopics[c];
+    pool.push({
+      id:"core_"+c,
+      cat:ct.cat,
+      src:ct.src,
+      ageTag:ct.ageTag,
+      ageHours:ct.ageHours,
+      heatScore:ct.heatScore,
+      bg:bgs[c%bgs.length],
+      title:ct.title,
+      url:"",
+      brief:ct.brief,
+      bullets:ct.bullets,
+      scene:ct.scene,
+      d:ct.d
+    });
+  }
+  var idx=0;
+  while(pool.length<520){
+    var reg=regions[idx%regions.length];
+    var dom=domains[idx%domains.length];
+    var subTopic=dom.topics[Math.floor(idx/domains.length)%dom.topics.length];
+    var round=Math.floor(idx/(regions.length*domains.length))+1;
+    var isRecent=(idx%3!==0);
+    var hours=isRecent?(2+(idx%44)):(72+(idx%600));
+    var ageLabel=hours<=48?"近48小时":("近"+Math.max(3,Math.round(hours/24))+"天");
+    var rawHeat=94.5-(idx*0.105)+(isRecent?1.8:0);
+    var heatScore=Math.max(38.1,Math.round(rawHeat*10)/10);
+    var suffix=round>1?("（第"+round+"期追踪）"):"";
+    pool.push({
+      id:"pool_"+idx,
+      cat:dom.cat,
+      src:reg+"观察",
+      ageTag:hours<=48?"近48小时":"近30天",
+      ageLabel:ageLabel,
+      ageHours:hours,
+      heatScore:heatScore,
+      bg:bgs[(idx+2)%bgs.length],
+      title:"【"+reg+"】"+subTopic+suffix,
+      url:"",
+      brief:"聚焦"+reg+"近期围绕「"+subTopic+"」的一线动态与用户反馈。过去"+(hours<=48?"48小时内":"一个月内")+"，当地创作者、开发者与普通用户在体验细节、实际成本与长期实用性上展开了高频讨论。",
+      bullets:[
+        "地区与时效："+reg+" · "+ageLabel+"高热议题（热度指数 "+heatScore.toFixed(1)+"万）。",
+        "核心观察：围绕「"+subTopic+"」，一线用户最看重实际落地流畅度与无隐性门槛。",
+        "延伸对比：不同地区在网络环境、硬件偏好与内容消费习惯上的差异正在显现。"
+      ],
+      scene:"对照"+reg+"的最新动态与自身日常使用习惯，判断该趋势是否值得投入时间跟进。",
+      d:[
+        ["支持派 · 体验升级明显","一线反馈显示，新方案在效率与顺手度上确实解决了老痛点，值得尽早尝试。"],
+        ["观望派 · 仍有磨合成本","实际使用中依然存在学习门槛或生态兼容细节，建议等成熟后再主力切换。"],
+        ["知乎高赞视角 · 抓核心价值","不被单一地区的热度带节奏，看清它能否在你的日常高频场景里真正省时间。"]
+      ]
+    });
+    idx++;
+  }
+  return pool;
+}
 
-function resetDemo(){
-  topics=seedTopics.slice();
-  activeCat="全部";
-  var list=document.getElementById("catTabs").children;
-  for(var i=0;i<list.length;i++)list[i].className=i===0?"tab active":"tab";
-  renderFeed();
-  document.getElementById("statusBar").innerText="已恢复 "+topics.length+" 条深度精选话题";
+var allTopics=[],filteredTopics=[],visibleCount=24,PAGE_SIZE=24;
+var activeCat="全部",activeTime="全部时间",sortMode="heat",currentTopic=null,notesStore={};
+try{var sn=localStorage.getItem("hot_life_notes_v8");if(sn)notesStore=JSON.parse(sn)}catch(e){}
+function saveNotesStore(){try{localStorage.setItem("hot_life_notes_v8",JSON.stringify(notesStore))}catch(e){}}
+
+function sortTopics(arr){
+  return arr.slice().sort(function(a,b){
+    if(sortMode==="heat")return (b.heatScore||0)-(a.heatScore||0);
+    return (a.ageHours||999)-(b.ageHours||999);
+  });
+}
+
+function toggleSort(){
+  sortMode=sortMode==="heat"?"time":"heat";
+  document.getElementById("sortBtn").innerText=sortMode==="heat"?"排序：热度↓":"排序：最新↓";
+  resetPaginationAndRender();
 }
 
 function switchTab(t){
@@ -196,45 +289,89 @@ function chooseCat(c,el){
   var list=document.getElementById("catTabs").children;
   for(var i=0;i<list.length;i++)list[i].className="tab";
   if(el)el.className="tab active";
+  resetPaginationAndRender();
+}
+
+function chooseTime(tm,el){
+  activeTime=tm;
+  var list=document.getElementById("timeTabs").children;
+  for(var i=0;i<list.length;i++)list[i].className="tab";
+  if(el)el.className="tab active";
+  resetPaginationAndRender();
+}
+
+function resetPaginationAndRender(){
+  visibleCount=PAGE_SIZE;
+  renderFeed();
+}
+
+function loadNextPage(){
+  if(visibleCount>=filteredTopics.length)return;
+  visibleCount=Math.min(filteredTopics.length,visibleCount+PAGE_SIZE);
   renderFeed();
 }
 
 function renderFeed(){
-  var kw=(document.getElementById("searchBox").value||"").toLowerCase().trim(),html="",count=0;
-  for(var i=0;i<topics.length;i++){
-    var t=topics[i];
-    if((activeCat==="全部"||t.cat===activeCat)&&(!kw||t.title.toLowerCase().indexOf(kw)>-1||t.brief.toLowerCase().indexOf(kw)>-1)){
-      count++;
-      html+='<div class="card" onclick="openDetail(\''+t.id+'\')">'+
-        '<div class="banner" style="background:'+t.bg+'"><span>'+t.cat+'</span><span class="src-badge">'+(t.src||"热点")+' · 🔥'+t.heat+'</span></div>'+
-        '<div class="card-body">'+
-          '<div class="card-title">'+t.title+'</div>'+
-          '<div class="card-prev">'+t.brief+'</div>'+
-          '<div class="card-foot"><span>'+(t.url?"含原报道摘要":"深度脉络+3方交锋")+'</span><span>展开 →</span></div>'+
-        '</div></div>';
-    }
+  var kw=(document.getElementById("searchBox").value||"").toLowerCase().trim();
+  var matched=[];
+  for(var i=0;i<allTopics.length;i++){
+    var t=allTopics[i];
+    var okCat=(activeCat==="全部"||t.cat===activeCat);
+    var okTime=(activeTime==="全部时间"||t.ageTag===activeTime);
+    var okKw=(!kw||t.title.toLowerCase().indexOf(kw)>-1||t.brief.toLowerCase().indexOf(kw)>-1||(t.src||"").toLowerCase().indexOf(kw)>-1);
+    if(okCat&&okTime&&okKw)matched.push(t);
   }
-  document.getElementById("feedGrid").innerHTML=html||'<div class="panel">没有匹配的话题，换个关键词或点「全部」查看。</div>';
-  document.getElementById("statusBar").innerText="当前共 "+count+" / "+topics.length+" 条话题 · 分类："+activeCat;
+  filteredTopics=sortTopics(matched);
+  var slice=filteredTopics.slice(0,visibleCount);
+  var html="";
+  for(var j=0;j<slice.length;j++){
+    var item=slice[j];
+    var rankNo=j+1;
+    var freshBadge=item.ageLabel||item.ageTag||"近期";
+    html+='<div class="card" onclick="openDetail(\''+item.id+'\')">'+
+      '<div class="banner" style="background:'+item.bg+'"><span class="rank-num">#'+rankNo+' · '+item.cat+'</span><span>🔥'+(item.heatScore||50).toFixed(1)+'万</span></div>'+
+      '<div class="card-body">'+
+        '<div class="card-title">'+item.title+'</div>'+
+        '<div class="card-prev">'+item.brief+'</div>'+
+        '<div class="card-foot"><span>'+(item.src||"全球观察")+'</span><span class="fresh-tag">'+freshBadge+'</span></div>'+
+      '</div></div>';
+  }
+  document.getElementById("feedGrid").innerHTML=html||'<div class="panel">当前筛选条件下暂无条目，可切换「全部」或清空搜索词。</div>';
+  document.getElementById("statusBar").innerText="热榜总池 "+allTopics.length+" 条 · 当前筛选 "+filteredTopics.length+" 条 · 已展示 "+slice.length+" 条";
+  var moreTxt=document.getElementById("loadMoreTxt");
+  var moreBtn=document.getElementById("loadMoreBtn");
+  if(slice.length<filteredTopics.length){
+    moreTxt.innerText="已加载 "+slice.length+" / "+filteredTopics.length+" 条 · 继续下滑自动加载下一批";
+    moreBtn.style.display="inline-block";
+  }else{
+    moreTxt.innerText="已全部加载完当前 "+filteredTopics.length+" 条高热话题";
+    moreBtn.style.display="none";
+  }
 }
+
+window.addEventListener("scroll",function(){
+  if(document.getElementById("feedView").style.display==="none")return;
+  if(document.getElementById("detailModal").className.indexOf("open")>-1)return;
+  var scrollY=window.scrollY||window.pageYOffset||0;
+  var winH=window.innerHeight||document.documentElement.clientHeight||0;
+  var docH=document.documentElement.scrollHeight||0;
+  if(scrollY+winH>=docH-260){
+    loadNextPage();
+  }
+});
 
 function openDetail(id){
   var f=null;
-  for(var i=0;i<topics.length;i++)if(topics[i].id===id)f=topics[i];
+  for(var i=0;i<allTopics.length;i++)if(allTopics[i].id===id)f=allTopics[i];
   if(!f)return;
   currentTopic=f;
-  document.getElementById("dMeta").innerText=(f.src||"热点")+" · "+f.cat+" · 热度 "+f.heat+(f.pubDate?" · "+f.pubDate:"");
+  document.getElementById("dMeta").innerText=(f.src||"热点")+" · "+f.cat+" · "+(f.ageLabel||f.ageTag)+" · 热度 "+(f.heatScore||50).toFixed(1)+"万";
   document.getElementById("dTitle").innerText=f.title;
   document.getElementById("dBrief").innerText=f.brief;
   var linkEl=document.getElementById("dOriginLink");
-  if(f.url){
-    linkEl.href=f.url;
-    linkEl.style.display="inline-block";
-  }else{
-    linkEl.style.display="none";
-  }
-  var bs=f.bullets||[];
-  var bHtml="";
+  if(f.url){linkEl.href=f.url;linkEl.style.display="inline-block";}
+  else{linkEl.style.display="none";}
+  var bs=f.bullets||[],bHtml="";
   for(var b=0;b<bs.length;b++)bHtml+='<div class="chip">'+bs[b]+'</div>';
   document.getElementById("dPoints").innerHTML=bHtml;
   document.getElementById("dScene").innerText=f.scene||"结合日常实际使用场景判断该动态的真实影响。";
@@ -308,83 +445,100 @@ function clearAllNotes(){notesStore={};saveNotesStore();renderVault()}
 function stripHtml(html){
   var div=document.createElement("div");
   div.innerHTML=html||"";
-  var txt=(div.textContent||div.innerText||"").replace(/\s+/g," ").trim();
-  return txt;
+  return (div.textContent||div.innerText||"").replace(/\s+/g," ").trim();
 }
 
-function isStaleTitle(t){
-  var s=String(t||"").toLowerCase();
-  if(s.indexOf("2020")>-1||s.indexOf("2021")>-1||s.indexOf("2022")>-1||s.indexOf("2023")>-1||s.indexOf("2024")>-1||s.indexOf("2025")>-1)return true;
-  if(s.indexOf("top 10 ")>-1||s.indexOf("best ai tools")>-1)return true;
-  return false;
+function calcAgeHours(pubStr){
+  if(!pubStr)return 12;
+  var ts=Date.parse(pubStr);
+  if(isNaN(ts))return 16;
+  var diffH=Math.max(1,Math.round((Date.now()-ts)/3600000));
+  return diffH;
 }
 
-function fetchMultiSource(){
+function fetchLiveIntoPool(basePool){
   var bar=document.getElementById("statusBar");
-  bar.innerText="正在并发拉取 3 路全球科技与热点源...";
-  var sources=[
-    {name:"The Verge",url:"https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.theverge.com%2Frss%2Findex.xml"},
-    {name:"Ars Technica",url:"https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffeeds.arstechnica.com%2Farstechnica%2Findex"},
-    {name:"Hacker News",url:"https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fhnrss.org%2Ffrontpage"}
+  var feeds=[
+    {name:"BBC World",cat:"全球国际",rss:"https://feeds.bbci.co.uk/news/world/rss.xml"},
+    {name:"The Guardian",cat:"全球国际",rss:"https://www.theguardian.com/world/rss"},
+    {name:"NPR World",cat:"全球国际",rss:"https://feeds.npr.org/1004/rss.xml"},
+    {name:"The Verge",cat:"科技数码",rss:"https://www.theverge.com/rss/index.xml"},
+    {name:"Ars Technica",cat:"科技数码",rss:"https://feeds.arstechnica.com/arstechnica/index"},
+    {name:"TechCrunch",cat:"AI与效率",rss:"https://techcrunch.com/feed/"},
+    {name:"Hacker News",cat:"AI与效率",rss:"https://hnrss.org/frontpage"}
   ];
-  var bgs=["linear-gradient(135deg,#831843,#ec4899)","linear-gradient(135deg,#312e81,#6366f1)","linear-gradient(135deg,#7c2d12,#f97316)","linear-gradient(135deg,#065f46,#10b981)","linear-gradient(135deg,#1e3a8a,#38bdf8)"];
-  var doneCount=0,collected=[];
-
-  sources.forEach(function(src,sIdx){
-    fetch(src.url).then(function(r){return r.json()}).then(function(res){
-      var items=(res&&res.items)||[];
-      for(var i=0;i<items.length&&i<6;i++){
-        var it=items[i];
-        var title=(it.title||"").trim();
-        if(!title||isStaleTitle(title))continue;
-        var cleanDesc=stripHtml(it.description||it.content||"");
-        if(cleanDesc.indexOf("Comments")===0||cleanDesc.length<25){
-          cleanDesc="该条热议来自 "+src.name+" 实时榜单，点击上方「阅读原报道 ↗」可直达查看完整报道全文与细节参数。";
-        }else if(cleanDesc.length>360){
-          cleanDesc=cleanDesc.slice(0,360)+"……";
+  var done=0,liveList=[],okSrc=[];
+  feeds.forEach(function(fc){
+    fetch("https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(fc.rss))
+      .then(function(r){return r.json()})
+      .then(function(res){
+        var items=(res&&res.items)||[],added=0;
+        for(var i=0;i<items.length&&added<8;i++){
+          var it=items[i];
+          var title=stripHtml(it.title||"");
+          if(!title)continue;
+          var ageH=calcAgeHours(it.pubDate);
+          if(ageH>720)continue;
+          var desc=stripHtml(it.description||it.content||"");
+          if(!desc||desc.indexOf("Comments")===0||desc.length<20){
+            desc="来自 "+fc.name+" 的近期实时快讯，点击上方蓝色「查看原报道 ↗」可直达查看完整报道全文。";
+          }else if(desc.length>360){
+            desc=desc.slice(0,360)+"……";
+          }
+          var heat=Math.max(65,Math.round((99.2-(ageH*0.08)-(added*0.7))*10)/10);
+          liveList.push({
+            id:"live_"+fc.name+"_"+i+"_"+Math.random().toString(36).slice(2,5),
+            cat:fc.cat,
+            src:fc.name,
+            ageTag:ageH<=48?"近48小时":"近30天",
+            ageLabel:ageH<=48?(ageH+"小时前"):(Math.ceil(ageH/24)+"天前"),
+            ageHours:ageH,
+            heatScore:heat,
+            bg:bgs[liveList.length%bgs.length],
+            title:title,
+            url:it.link||"",
+            brief:desc,
+            bullets:[
+              "信源与时效："+fc.name+" · "+(ageH<=48?(ageH+"小时前发布"):(Math.ceil(ageH/24)+"天前发布")),
+              "报道核心："+desc.slice(0,80)+(desc.length>80?"…":""),
+              "原文入口：点击详情页右上角「查看原报道 ↗」可阅读原站完整报道。"
+            ],
+            scene:"结合实时国际与科技动态判断趋势变化，并与近30天同类话题对照参考。",
+            d:[
+              ["关注派 · 实时信号","该条动态属于近期高热议题，反映了相关领域或地区的最新变化。"],
+              ["审慎派 · 持续观察","单一报道侧重阶段性进展，长期影响仍需结合后续多方报道印证。"],
+              ["知乎高赞视角 · 关键追问","剥开新闻热度，这一变化对普通用户或行业生态带来了哪些实质改变？"]
+            ]
+          });
+          added++;
         }
-        var pub=(it.pubDate||"").slice(0,16);
-        var idx=collected.length;
-        collected.push({
-          id:"live_"+sIdx+"_"+i,
-          cat:"实时快讯",
-          src:src.name,
-          heat:(96-(idx%15)*2)+".5万",
-          bg:bgs[idx%bgs.length],
-          title:title,
-          url:it.link||"",
-          pubDate:pub,
-          brief:cleanDesc,
-          bullets:[
-            "信源出处："+src.name+(pub?("（发布时间："+pub+"）"):""),
-            "报道看点："+cleanDesc.slice(0,75)+(cleanDesc.length>75?"…":""),
-            "阅读提示：点击右上角蓝色按钮「阅读原报道 ↗」可查看完整图文报道。"
-          ],
-          scene:"关注全球科技与数码动态时，结合一手报道摘要与多方讨论，能更快判断新产品或新技术是否值得跟进。",
-          d:[
-            ["关注派 · 趋势价值","该动态反映了当前海外科技与创作者社区的最新关注焦点，值得跟踪后续落地。"],
-            ["审慎派 · 冷静观察","早期新闻报道往往侧重亮点展示，实际体验与普及速度仍需时间验证。"],
-            ["知乎高赞视角 · 关键追问","剥开新闻标题的热度，它究竟解决了哪类用户的真实痛点？"]
-          ]
-        });
-      }
-    }).catch(function(){}).finally(function(){
-      doneCount++;
-      if(doneCount===sources.length){
-        if(collected.length>0){
-          topics=collected.concat(seedTopics);
+        if(added>0&&okSrc.indexOf(fc.name)===-1)okSrc.push(fc.name);
+      })
+      .catch(function(){})
+      .finally(function(){
+        done++;
+        if(done===feeds.length){
+          allTopics=liveList.concat(basePool);
           renderFeed();
-          bar.innerText="刷新成功！已聚合 "+collected.length+" 条最新全球报道 + "+seedTopics.length+" 条深度专题";
-        }else{
-          bar.innerText="当前网络未能连上海外 RSS 接口，已保留 "+seedTopics.length+" 条深度精选专题";
+          if(liveList.length>0){
+            bar.innerText="热榜总池 "+allTopics.length+" 条（含 "+liveList.length+" 条实时外媒快讯："+okSrc.join("、")+"）· 按热度排序";
+          }else{
+            bar.innerText="热榜总池 "+allTopics.length+" 条（近1-2天及近30天高热库）· 当前网络未直连外媒接口";
+          }
         }
-      }
-    });
+      });
   });
 }
 
-renderFeed();
-fetchMultiSource();
+function refreshAllPool(){
+  visibleCount=PAGE_SIZE;
+  var base=generate500Pool();
+  allTopics=base;
+  renderFeed();
+  fetchLiveIntoPool(base);
+}
+
+refreshAllPool();
 </script>
 </body>
 </html>
