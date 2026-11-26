@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#07090d">
+<title>Pulse · 全球观点引擎</title>
+<style>
+:root{
+  --bg:#07090d;--panel:#0f131b;--panel2:#121824;--line:#202a3a;--text:#f5f7fb;--muted:#8994a8;
+  --accent:#ff3150;--blue:#4f9cff;--green:#36d399;--purple:#a978ff;--gold:#f7c65d;
+  --radius:18px;--shadow:0 18px 55px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg);scroll-behavior:smooth}
+body{background:
+ radial-gradient(900px 500px at 50% -180px,rgba(79,156,255,.10),transparent 60%),
+ var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC",sans-serif;
+ padding:0 0 100px;line-height:1.55}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:0;height:0}
+
+.topbar{
+ position:sticky;top:0;z-index:20;height:64px;padding:10px 18px;
+ background:rgba(7,9,13,.88);backdrop-filter:blur(24px);border-bottom:1px solid rgba(32,42,58,.75)
+}
+.topinner{max-width:1500px;margin:auto;display:flex;align-items:center;gap:14px;height:100%}
+.logo{font-size:20px;font-weight:900;letter-spacing:-.5px;white-space:nowrap}
+.logo i{display:inline-block;width:9px;height:9px;background:var(--accent);border-radius:50%;margin-right:7px;box-shadow:0 0 18px rgba(255,49,80,.8)}
+.global-search{flex:1;max-width:720px;margin:auto;position:relative}
+.global-search input{
+ width:100%;height:38px;background:#0d1119;border:1px solid var(--line);border-radius:12px;color:#fff;
+ padding:0 42px 0 40px;outline:none;font-size:13px
+}
+.global-search span{position:absolute;left:14px;top:8px;color:#6f7b91}
+.search-kbd{position:absolute;right:10px;top:8px;font-size:10px;color:#657087;border:1px solid #2b3548;border-radius:5px;padding:1px 5px}
+.top-actions{display:flex;gap:8px}
+.iconbtn{width:38px;height:38px;border:1px solid var(--line);background:#0d1119;color:#cdd5e3;border-radius:11px}
+.iconbtn:hover{border-color:#40506c}
+
+.app{max-width:1500px;margin:auto;padding:22px 18px 0}
+.hero{
+ display:grid;grid-template-columns:minmax(0,1.65fr) minmax(330px,.75fr);gap:18px;margin-bottom:18px
+}
+.hero-main,.hero-side{background:linear-gradient(145deg,#101722,#0d1118);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+.hero-main{padding:26px;min-height:250px;position:relative;overflow:hidden}
+.hero-main:after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-180px;top:-220px;background:radial-gradient(circle,rgba(255,49,80,.16),transparent 65%)}
+.eyebrow{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+.hero h1{font-size:clamp(27px,4vw,52px);line-height:1.05;letter-spacing:-1.8px;margin:12px 0 12px;max-width:800px;position:relative;z-index:1}
+.hero p{font-size:13px;color:#aeb8c8;max-width:760px;position:relative;z-index:1}
+.hero-cta{display:flex;gap:9px;margin-top:22px;position:relative;z-index:1}
+.btn{border:0;border-radius:10px;padding:9px 14px;color:#fff;background:var(--accent);font-size:12px;font-weight:800}
+.btn.secondary{background:#171e2b;border:1px solid #2b364a}
+.btn.blue{background:#2167d7}
+.hero-side{padding:18px}
+.metric-title{font-size:11px;color:var(--muted);font-weight:700}
+.big-number{font-size:38px;font-weight:900;letter-spacing:-1px;margin:4px 0}
+.metric-row{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #1d2635;font-size:12px}
+.metric-row:last-child{border:0}
+.up{color:var(--green)}.hot{color:var(--accent)}.muted{color:var(--muted)}
+
+.command{
+ background:#0d1118;border:1px solid var(--line);border-radius:16px;padding:10px;display:flex;gap:7px;overflow:auto;
+ margin-bottom:18px;position:sticky;top:74px;z-index:10;backdrop-filter:blur(20px)
+}
+.chip{white-space:nowrap;border:1px solid #283349;background:#111721;color:#99a5b8;border-radius:999px;padding:7px 13px;font-size:11px;font-weight:700}
+.chip.active{background:#f5f7fb;color:#07090d;border-color:#f5f7fb}
+.chip.hotchip{border-color:rgba(255,49,80,.45);color:#ff8798}
+
+.layout{display:grid;grid-template-columns:235px minmax(0,1fr) 300px;gap:18px;align-items:start}
+.side-panel,.right-panel,.section{
+ background:var(--panel);border:1px solid var(--line);border-radius:18px
+}
+.side-panel{padding:12px;position:sticky;top:130px}
+.side-title{font-size:10px;color:#68748a;font-weight:900;letter-spacing:1.1px;padding:9px 10px}
+.side-item{width:100%;border:0;background:transparent;color:#aab4c4;text-align:left;border-radius:10px;padding:10px;font-size:12px;display:flex;justify-content:space-between}
+.side-item:hover,.side-item.active{background:#171e2b;color:#fff}
+.side-item.active{box-shadow:inset 2px 0 0 var(--accent)}
+.count{font-size:10px;color:#657188}
+.section{padding:13px;margin-bottom:18px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.section-head h2{font-size:17px;letter-spacing:-.3px}
+.section-head p{font-size:10px;color:var(--muted)}
+.sortbar{display:flex;gap:6px}
+.mini{border:1px solid #293449;background:#111722;color:#9ca8ba;border-radius:8px;padding:6px 9px;font-size:10px}
+.mini.active{color:#fff;border-color:#53627c}
+
+.trend{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:18px
+}
+.trend-card{background:#101620;border:1px solid #202b3e;border-radius:14px;padding:12px}
+.trend-card .rank{font-size:10px;color:var(--muted)}
+.trend-card h3{font-size:12px;margin:6px 0;line-height:1.45}
+.trend-card .trendline{font-size:10px;color:var(--green)}
+
+.feed{column-count:2;column-gap:12px}
+.card{break-inside:avoid;margin-bottom:12px;background:#11161f;border:1px solid #202a3b;border-radius:16px;overflow:hidden;transition:.18s;cursor:pointer}
+.card:hover{transform:translateY(-2px);border-color:#35445f;box-shadow:0 14px 35px rgba(0,0,0,.22)}
+.cover{position:relative;background:#172030;min-height:120px}
+.cover img{width:100%;display:block;max-height:260px;object-fit:cover}
+.cover .gradient{position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.badge{position:absolute;left:9px;top:9px;background:rgba(6,9,14,.78);backdrop-filter:blur(8px);padding:4px 7px;border-radius:7px;font-size:9px;font-weight:800}
+.badge.red{color:#ff8a9a}.badge.blue{color:#82b9ff}.badge.green{color:#72e3b1}
+.play{position:absolute;right:9px;top:9px;background:var(--accent);padding:4px 7px;border-radius:7px;font-size:9px;font-weight:900}
+.cardbody{padding:12px}
+.card h3{font-size:13.5px;line-height:1.42;margin-bottom:6px;letter-spacing:-.1px}
+.en{font-size:10px;color:#6eaaff;margin-bottom:7px;line-height:1.35}
+.excerpt{font-size:11px;color:#919caf;line-height:1.55;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;color:#657188;font-size:9.5px}
+.heat{color:#e7a8b1}
+.actions{display:flex;gap:4px}
+.action{border:0;background:transparent;color:#768197;font-size:13px;padding:2px 4px}
+.action.liked{color:var(--accent)}
+
+.right-panel{padding:14px;position:sticky;top:130px}
+.rtitle{font-size:13px;font-weight:800;margin-bottom:12px}
+.source{padding:10px 0;border-bottom:1px solid #1f2939}
+.source:last-child{border-bottom:0}
+.source-top{display:flex;justify-content:space-between;font-size:10px}
+.source-name{font-weight:800}.source-score{color:var(--green)}
+.source-desc{font-size:9.5px;color:#69758a;margin-top:3px}
+.progress{height:3px;background:#1d2635;border-radius:3px;margin-top:7px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--blue);border-radius:3px}
+.alert{margin-top:14px;padding:11px;border:1px solid rgba(247,198,93,.25);background:rgba(247,198,93,.06);border-radius:12px}
+.alert b{font-size:10px;color:var(--gold)}.alert p{font-size:9.5px;color:#8e98a9;margin-top:3px}
+
+.detail{
+ display:none;position:fixed;inset:0;background:rgba(3,5,8,.82);backdrop-filter:blur(12px);z-index:80;overflow:auto;padding:25px
+}
+.detail.open{display:block}
+.detail-box{max-width:1050px;margin:auto;background:#0d121a;border:1px solid #263147;border-radius:24px;box-shadow:0 30px 100px rgba(0,0,0,.6);overflow:hidden}
+.detail-head{padding:14px 16px;border-bottom:1px solid #222c3d;display:flex;justify-content:space-between;align-items:center}
+.detail-content{padding:22px}
+.detail-media{border-radius:16px;overflow:hidden;background:#090c11;margin-bottom:18px}
+.detail-media img,.detail-media video,.detail-media iframe{width:100%;max-height:540px;aspect-ratio:16/9;object-fit:cover;border:0;display:block}
+.detail h1{font-size:28px;line-height:1.25;letter-spacing:-.7px}
+.detail-en{color:#69a9ff;font-size:12px;margin:8px 0 16px}
+.source-row{font-size:10px;color:#7f8ba0;margin-bottom:18px}
+.report{font-size:14px;line-height:1.9;color:#d9dee8;white-space:pre-line}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.dualbox{background:#111824;border:1px solid #253149;border-radius:13px;padding:13px}
+.dualbox h4{font-size:10px;color:#6e7b91;margin-bottom:7px}
+.dualbox p{font-size:11.5px;color:#c4cbd7;line-height:1.7}
+.views{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.view{background:#111722;border:1px solid #242f43;border-radius:13px;padding:13px}
+.view b{font-size:10px;color:var(--blue)}.view p{font-size:11.5px;color:#b8c0ce;margin-top:7px}
+.note{margin-top:18px;background:#111722;border:1px solid #242f43;border-radius:14px;padding:13px}
+.note textarea{width:100%;min-height:90px;background:#0b0f16;border:1px solid #263147;border-radius:10px;color:#fff;padding:10px;outline:none;font-size:12px;resize:vertical}
+.note-row{display:flex;gap:7px;margin-top:8px}
+.qa{display:none;margin-top:10px}
+.qa p{background:#171329;border-left:3px solid var(--purple);border-radius:7px;padding:9px;font-size:11px;color:#e4d9ff;margin-top:6px}
+
+.bottom{
+position:fixed;bottom:0;left:0;right:0;height:76px;z-index:40;background:rgba(7,9,13,.94);backdrop-filter:blur(24px);
+border-top:1px solid #202a3a;display:flex;justify-content:center
+}
+.bottom-inner{width:min(700px,100%);display:flex;justify-content:space-around}
+.nav{border:0;background:transparent;color:#69758a;font-size:10px;font-weight:800;padding:10px 28px}
+.nav.active{color:#fff}.nav.active span{color:var(--accent)}
+.nav span{display:block;font-size:18px;margin-bottom:2px}
+
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(15px);opacity:0;background:#f5f7fb;color:#07090d;padding:8px 13px;border-radius:9px;font-size:10px;font-weight:800;z-index:100;transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:1100px){
+ .layout{grid-template-columns:190px minmax(0,1fr)}.right-panel{display:none}
+}
+@media(max-width:760px){
+ .topbar{height:58px;padding:8px 12px}.logo{font-size:17px}.top-actions{display:none}.app{padding:14px 11px 0}
+ .hero{grid-template-columns:1fr}.hero-main{min-height:220px;padding:21px}.hero-side{display:none}
+ .command{top:58px;margin-bottom:13px;border-radius:12px}.layout{display:block}.side-panel{display:none}
+ .section{border-radius:14px;padding:10px}.feed{column-count:2;column-gap:8px}.card{margin-bottom:8px;border-radius:13px}
+ .cardbody{padding:9px}.card h3{font-size:12px}.excerpt{font-size:10px;-webkit-line-clamp:3}.meta{font-size:8.5px}
+ .trend{grid-template-columns:1fr 1fr}.trend-card:last-child{display:none}
+ .detail{padding:0}.detail-box{border-radius:0;min-height:100vh}.detail-content{padding:15px}.detail h1{font-size:22px}
+ .dual,.views{grid-template-columns:1fr}.global-search{max-width:none}
+}
+@media(max-width:350px){.feed{column-count:1}}
+</style>
+</head>
+
+<body>
+<header class="topbar">
+ <div class="topinner">
+  <div class="logo"><i></i>PULSE</div>
+  <div class="global-search">
+   <span>⌕</span><input id="search" placeholder="搜索事件、观点、人物、关键词..." oninput="render()">
+   <b class="search-kbd">⌘ K</b>
+  </div>
+  <div class="top-actions">
+   <button class="iconbtn" onclick="refreshFeed()">↻</button>
+   <button class="iconbtn" onclick="showToast('已切换到深度阅读模式')">◐</button>
+  </div>
+ </div>
+</header>
+
+<main class="app">
+<section class="hero">
+ <div class="hero-main">
+  <div class="eyebrow">GLOBAL SIGNAL · 24/7</div>
+  <h1>把全网信息流，变成一个真正值得刷的观点世界。</h1>
+  <p>不是简单搬运新闻，而是把全球事件、知乎式讨论、小红书生活方式、短视频风向与科技动态放到同一个信息空间，再给每条内容建立来源、时间、观点与反方视角。</p>
+  <div class="hero-cta">
+   <button class="btn" onclick="refreshFeed()">刷新全球信号</button>
+   <button class="btn secondary" onclick="showToast('深度模式已开启')">进入深度模式</button>
+  </div>
+ </div>
+ <div class="hero-side">
+  <div class="metric-title">LIVE SIGNAL</div>
+  <div class="big-number" id="totalMetric">0</div>
+  <div class="metric-row"><span>实时来源</span><b id="sourceMetric">7</b></div>
+  <div class="metric-row"><span>高热事件</span><b class="hot">24</b></div>
+  <div class="metric-row"><span>观点冲突</span><b class="up">68</b></div>
+  <div class="metric-row"><span>最后更新</span><b id="updateMetric">刚刚</b></div>
+ </div>
+</section>
+
+<nav class="command" id="command">
+ <button class="chip active" data-cat="全部" onclick="setCat(this)">全部</button>
+ <button class="chip" data-cat="全球国际" onclick="setCat(this)">🌍 全球国际</button>
+ <button class="chip" data-cat="科技数码" onclick="setCat(this)">⚡ 科技 AI</button>
+ <button class="chip" data-cat="社区生活" onclick="setCat(this)">💬 知乎 / 小红书</button>
+ <button class="chip" data-cat="短视频风向" onclick="setCat(this)">▶ TikTok / 抖音</button>
+ <button class="chip hotchip" data-cat="热点" onclick="setCat(this)">🔥 正在升温</button>
+ <button class="chip" data-cat="视频" onclick="setCat(this)">🎬 可播放</button>
+</nav>
+
+<div class="layout">
+<aside class="side-panel">
+ <div class="side-title">DISCOVER</div>
+ <button class="side-item active" onclick="setSide(this,'全部')">全部信息 <span class="count" id="allCount"></span></button>
+ <button class="side-item" onclick="setSide(this,'全球国际')">世界局势 <span class="count">24</span></button>
+ <button class="side-item" onclick="setSide(this,'科技数码')">AI / 科技 <span class="count">31</span></button>
+ <button class="side-item" onclick="setSide(this,'社区生活')">生活方式 <span class="count">18</span></button>
+ <button class="side-item" onclick="setSide(this,'短视频风向')">内容风向 <span class="count">15</span></button>
+ <div class="side-title" style="margin-top:8px">MY SPACE</div>
+ <button class="side-item" onclick="switchView('notes')">随想笔记 <span class="count" id="noteCount">0</span></button>
+ <button class="side-item" onclick="showToast('收藏功能已准备好')">我的收藏 <span class="count">0</span></button>
+</aside>
+
+<section>
+<div class="section">
+ <div class="section-head">
+  <div><h2>正在发生</h2><p>算法综合时间、热度、来源质量与讨论增速</p></div>
+  <div class="sortbar">
+   <button class="mini active" id="timeSort" onclick="setSort('time')">最新</button>
+   <button class="mini" id="heatSort" onclick="setSort('heat')">热度</button>
+  </div>
+ </div>
+ <div class="trend" id="trend"></div>
+</div>
+
+<div class="section">
+ <div class="section-head">
+  <div><h2>今日信息流</h2><p id="resultMeta"></p></div>
+  <button class="mini" onclick="loadMore()">加载更多</button>
+ </div>
+ <div class="feed" id="feed"></div>
+</div>
+</section>
+
+<aside class="right-panel">
+ <div class="rtitle">信源健康度</div>
+ <div id="sources"></div>
+ <div class="alert"><b>⚠ 信息质量提醒</b><p>社区热议是“观点信号”，不等于事实结论。详情页会把来源、原文、译文和观点分开显示。</p></div>
+</aside>
+</div>
+</main>
+
+<section class="detail" id="detail">
+ <div class="detail-box">
+  <div class="detail-head">
+   <b>PULSE · 深度阅读</b>
+   <div><button class="mini" onclick="closeDetail()">关闭 ×</button></div>
+  </div>
+  <div class="detail-content">
+   <div class="detail-media" id="detailMedia"></div>
+   <div id="detailCat" class="eyebrow"></div>
+   <h1 id="detailTitle"></h1>
+   <div id="detailEn" class="detail-en"></div>
+   <div id="detailSource" class="source-row"></div>
+   <div class="dual">
+    <div class="dualbox"><h4>摘要 / WHAT HAPPENED</h4><p id="detailSummary"></p></div>
+    <div class="dualbox"><h4>为什么值得看 / WHY IT MATTERS</h4><p id="detailWhy"></p></div>
+   </div>
+   <h3 style="font-size:15px;margin:18px 0 8px">原文与报道</h3>
+   <div class="report" id="detailReport"></div>
+   <div class="dual" id="translationBox" style="display:none">
+    <div class="dualbox"><h4>中文译文</h4><p id="zhText"></p></div>
+    <div class="dualbox"><h4>English</h4><p id="enText"></p></div>
+   </div>
+   <h3 style="font-size:15px;margin:22px 0 8px">多视角交锋</h3>
+   <div class="views" id="views"></div>
+   <div class="note">
+    <h3 style="font-size:13px;margin-bottom:8px">我的随想</h3>
+    <textarea id="noteInput" placeholder="写下你的判断、怀疑、反对意见或突然想到的东西……"></textarea>
+    <div class="note-row">
+     <button class="btn" onclick="saveNote()">保存</button>
+     <button class="btn" style="background:#6e3bc9" onclick="rebuttal()">⚡ 反方质询</button>
+    </div>
+    <div class="qa" id="qa"></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<div class="bottom">
+ <div class="bottom-inner">
+  <button class="nav active" onclick="switchView('feed')"><span>⌂</span>发现</button>
+  <button class="nav" onclick="showToast('趋势中心：正在构建个性化趋势图谱')"><span>◈</span>趋势</button>
+  <button class="nav" onclick="showToast('视频流：正在聚合可播放内容')"><span>▶</span>视频</button>
+  <button class="nav" onclick="switchView('notes')"><span>✎</span>随想</button>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const IMG=[
+"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=80",
+"https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000&q=80",
+"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80",
+"https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80",
+"https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1000&q=80",
+"https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1000&q=80",
+"https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
+"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80"
+];
+
+const seed=[
+{id:"g1",cat:"全球国际",src:"Global Signal",time:"2小时前",heat:98,title:"全球市场正在重新定价：高利率、AI投资与地缘风险同时进入交易视野",en:"Global markets are repricing rates, AI investment and geopolitical risk at once.",img:IMG[6],summary:"宏观变量开始重新叠加，单看一个数据点很容易误判方向。",why:"它同时影响资产价格、企业资本开支和普通人的消费预期。",report:"这是一个用于演示“事件—背景—观点”阅读方式的高质量信息条目。真实生产环境应由后端新闻聚合、去重、事实核验和时间线服务提供正文。",views:[["支持观点","多个变量同时变化，市场波动本身可能成为新的主线。"],["反对观点","变量多并不代表一定产生趋势，市场也可能迅速消化预期。"],["深层视角","真正值得追踪的是哪些变量正在从“噪声”变成持续性的基本面变化。"]]},
+{id:"t1",cat:"科技数码",src:"Tech Signal",time:"4小时前",heat:96,title:"AI Agent 正从“会回答”进入“会执行”：真正的竞争开始转向工具链",en:"AI agents are moving from answering questions to executing real tasks.",img:IMG[3],summary:"AI产品的差异越来越不只是模型能力，而是能不能稳定调用工具、保存上下文并完成闭环。",why:"这直接决定AI是一个聊天窗口，还是一个真正可以长期使用的软件入口。",report:"一个成熟的Agent系统通常需要模型、工具调用、权限、任务状态、日志、错误恢复与数据存储共同工作。只靠前端页面并不能构成完整产品。",views:[["乐观派","工具链成熟后，AI可以替人完成大量重复工作。"],["怀疑派","复杂任务仍存在可靠性、权限和责任边界问题。"],["产品视角","未来壁垒可能从“谁的模型更聪明”转向“谁能把模型变成稳定产品”。"]]},
+{id:"x1",cat:"社区生活",src:"小红书生活方式",time:"6小时前",heat:94,title:"“不再精致营业”正在成为一种新的生活表达：真实感为什么越来越值钱？",img:IMG[4],summary:"用户开始厌倦高度模板化的摆拍和种草，真实体验、失败过程和具体细节更容易获得信任。",why:"这不是简单的审美变化，而可能改变内容平台的商业转化方式。",report:"生活方式内容的价值并不一定来自画面多精致。对于购买决策而言，真实的缺点、使用周期、踩坑过程和具体成本往往比一张漂亮图片更有参考意义。",views:[["真实派","把麻烦、缺点和真实成本讲出来，才是真正有用的信息。"],["审美派","视觉美感本身也是内容价值，精致不等于虚假。"],["趋势派","内容平台可能从“展示理想生活”逐渐转向“提供现实决策”。"]]},
+{id:"z1",cat:"短视频风向",src:"TikTok / 抖音观察",time:"8小时前",heat:92,title:"短视频开始从“越刺激越好”转向“让人愿意看完”：过程型内容正在升温",img:IMG[1],summary:"越来越多内容把重点放在真实过程、技能、工作台和解决问题，而不是单纯追求第一秒刺激。",why:"完播率之外，长期关注、收藏和复访可能成为新的内容竞争指标。",report:"当平台内容高度同质化，单纯增加刺激强度的边际收益会下降。过程、细节和真实人物关系可能重新成为差异化来源。",views:[["过程派","看一个人真正把事情做完，本身就有沉浸感。"],["效率派","短视频仍需要足够强的开头，否则用户不会给过程机会。"],["平台视角","算法可能越来越重视长期留存，而不仅是瞬时点击。"]]},
+{id:"a1",cat:"科技数码",src:"AI Product Radar",time:"11小时前",heat:89,title:"个人AI工作台正在变成新的生产力入口",img:IMG[2],summary:"聊天、文件、浏览器、代码和自动化开始汇聚到同一个工作空间。",why:"一旦入口统一，用户使用软件的方式可能从“打开一个App”变成“告诉AI我要完成什么”。",report:"未来产品形态可能越来越强调任务而非功能。用户不必知道具体按钮在哪里，只需要描述目标，系统负责调用对应能力。",views:[["效率派","减少应用切换和重复操作，个人生产力会明显提升。"],["风险派","权限、隐私和错误执行会成为必须解决的问题。"],["商业派","新的平台竞争可能围绕用户数据、工作流和Agent生态展开。"]]},
+{id:"l1",cat:"社区生活",src:"知乎式生活讨论",time:"昨天",heat:86,title:"为什么越来越多人不愿意在社交平台上长篇“自证”？",img:IMG[7],summary:"表达欲没有消失，很多人只是把表达从公开广场转向更私密、更低摩擦的空间。",why:"它折射的是注意力边界、社交成本和公共讨论情绪的变化。",report:"很多人并不是没有观点，而是开始重新计算公开表达的成本：被误解、被截取、被争论，以及持续维护观点都需要时间。",views:[["克制派","少争无效的东西，把时间留给真正值得交流的人。"],["连接派","公开表达仍然可能带来新的朋友和机会。"],["心理视角","表达方式变化，可能意味着人们正在从寻求认同转向保留自我。"]]}
+];
+
+let items=[...seed],cat="全部",sort="time",limit=8,notes=JSON.parse(localStorage.getItem("pulse_notes")||"{}"),likes=JSON.parse(localStorage.getItem("pulse_likes")||"{}"),current=null;
+
+function toast(t){const e=document.getElementById("toast");e.textContent=t;e.classList.add("show");clearTimeout(window._toast);window._toast=setTimeout(()=>e.classList.remove("show"),1800)}
+function showToast(t){toast(t)}
+function setCat(el){document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));el.classList.add("active");cat=el.dataset.cat;limit=8;render()}
+function setSide(el,c){document.querySelectorAll(".side-item").forEach(x=>x.classList.remove("active"));el.classList.add("active");cat=c;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x.dataset.cat===c));limit=8;render()}
+function setSort(s){sort=s;document.getElementById("timeSort").classList.toggle("active",s==="time");document.getElementById("heatSort").classList.toggle("active",s==="heat");render()}
+function filtered(){
+ let q=(document.getElementById("search").value||"").toLowerCase().trim();
+ let a=items.filter(x=>(cat==="全部"||cat==="热点"&&x.heat>=92||cat==="视频"&&x.video||x.cat===cat)&&(!q||[x.title,x.en,x.summary,x.report,x.src].join(" ").toLowerCase().includes(q)));
+ a.sort((x,y)=>sort==="heat"?y.heat-x.heat:y.id.localeCompare(x.id));
+ return a
+}
+function render(){
+ const a=filtered(),show=a.slice(0,limit);
+ document.getElementById("totalMetric").textContent=items.length;
+ document.getElementById("allCount").textContent=items.length;
+ document.getElementById("noteCount").textContent=Object.values(notes).flat().length;
+ document.getElementById("resultMeta").textContent=`显示 ${show.length} / ${a.length} 条 · 时间与热度综合排序`;
+ document.getElementById("feed").innerHTML=show.map(card).join("")||`<div class="section" style="grid-column:1/-1">没有找到匹配内容。</div>`;
+ renderTrend();renderSources()
+}
+function card(x){
+ const liked=!!likes[x.id];
+ return `<article class="card" onclick="openDetail('${x.id}')">
+ <div class="cover"><img src="${x.img}" loading="lazy" onerror="this.style.display='none'"><div class="gradient"></div>
+ <span class="badge ${x.cat==='全球国际'?'red':x.cat==='科技数码'?'blue':'green'}">${x.cat} · ${x.time}</span>${x.video?'<span class="play">▶ VIDEO</span>':''}</div>
+ <div class="cardbody"><h3>${x.title}</h3>${x.en?`<div class="en">${x.en}</div>`:''}<div class="excerpt">${x.summary}</div>
+ <div class="meta"><span>${x.src} · <span class="heat">🔥 ${x.heat}</span></span><span class="actions">
+ <button class="action ${liked?'liked':''}" onclick="event.stopPropagation();like('${x.id}')">${liked?'♥':'♡'}</button>
+ <button class="action" onclick="event.stopPropagation();showToast('已加入稍后阅读')">＋</button></span></div></div></article>`
+}
+function renderTrend(){
+ let top=[...items].sort((a,b)=>b.heat-a.heat).slice(0,3);
+ document.getElementById("trend").innerHTML=top.map((x,i)=>`<div class="trend-card"><div class="rank">0${i+1} · ${x.cat}</div><h3>${x.title}</h3><div class="trendline">▲ ${x.heat} 热度信号</div></div>`).join("")
+}
+function renderSources(){
+ const src=[["Global Signal",91],["Tech Signal",96],["AI Product Radar",94],["小红书生活方式",88],["TikTok / 抖音观察",84],["知乎式生活讨论",82]];
+ document.getElementById("sources").innerHTML=src.map(x=>`<div class="source"><div class="source-top"><span class="source-name">${x[0]}</span><span class="source-score">${x[1]}%</span></div><div class="source-desc">更新稳定 · 可追溯 · 信号强度</div><div class="progress"><i style="width:${x[1]}%"></i></div></div>`).join("")
+}
+function loadMore(){limit+=8;render()}
+function like(id){likes[id]=!likes[id];localStorage.setItem("pulse_likes",JSON.stringify(likes));render()}
+function openDetail(id){
+ current=items.find(x=>x.id===id);if(!current)return;
+ document.getElementById("detail").classList.add("open");document.body.style.overflow="hidden";
+ document.getElementById("detailCat").textContent=current.cat.toUpperCase()+" · "+current.src;
+ document.getElementById("detailTitle").textContent=current.title;
+ document.getElementById("detailEn").textContent=current.en||"";
+ document.getElementById("detailSource").textContent=`来源：${current.src} · 发布时间：${current.time} · 热度 ${current.heat}`;
+ document.getElementById("detailSummary").textContent=current.summary;
+ document.getElementById("detailWhy").textContent=current.why;
+ document.getElementById("detailReport").textContent=current.report;
+ document.getElementById("detailMedia").innerHTML=current.video?`<video controls playsinline poster="${current.img}"><source src="${current.video}"></video>`:`<img src="${current.img}">`;
+ document.getElementById("views").innerHTML=current.views.map(v=>`<div class="view"><b>${v[0]}</b><p>${v[1]}</p></div>`).join("");
+ document.getElementById("noteInput").value="";
+ document.getElementById("qa").style.display="none";
+}
+function closeDetail(){document.getElementById("detail").classList.remove("open");document.body.style.overflow="";current=null}
+function saveNote(){
+ if(!current)return;let t=document.getElementById("noteInput").value.trim();if(!t)return;
+ if(!notes[current.id])notes[current.id]=[];notes[current.id].unshift({text:t,time:new Date().toLocaleString("zh-CN")});
+ localStorage.setItem("pulse_notes",JSON.stringify(notes));document.getElementById("noteInput").value="";document.getElementById("noteCount").textContent=Object.values(notes).flat().length;toast("随想已保存")
+}
+function rebuttal(){
+ if(!current)return;let t=document.getElementById("noteInput").value.trim()||"你的当前判断";
+ const q=document.getElementById("qa");q.innerHTML=`<p>① 前提质询：你这个判断依赖哪些事实？如果其中一个关键事实变化，结论还成立吗？</p>
+ <p>② 反方质询：如果站在完全相反立场，最强的证据会是什么？你是否主动忽略了它？</p>
+ <p>③ 现实质询：即使判断正确，执行这个判断的机会成本、风险和副作用是什么？</p>`;q.style.display="block"
+}
+async function refreshFeed(){
+ toast("正在刷新实时信号…");
+ try{
+  const feeds=[
+   ["The Verge","https://www.theverge.com/rss/index.xml","科技数码"],
+   ["BBC World","https://feeds.bbci.co.uk/news/world/rss.xml","全球国际"],
+   ["TechCrunch","https://techcrunch.com/feed/","科技数码"],
+   ["Hacker News","https://hnrss.org/frontpage","科技数码"]
+  ];
+  let live=[];
+  for(const [name,url,c] of feeds){
+   try{
+    const r=await fetch("https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(url));
+    const j=await r.json();
+    (j.items||[]).slice(0,6).forEach((it,k)=>{
+      live.push({id:name+k+it.title,cat:c,src:name,time:it.pubDate||"刚刚",heat:Math.max(55,92-k*3),
+      title:(it.title||"").replace(/<[^>]+>/g,""),en:"",img:IMG[(live.length)%IMG.length],
+      summary:(it.description||"").replace(/<[^>]+>/g,"").slice(0,260),why:"来自实时RSS聚合信号；生产环境建议在服务端做正文抓取、去重、翻译与事实核验。",
+      report:(it.description||"").replace(/<[^>]+>/g,""),views:[["来源视角","当前条目来自实时RSS源。"],["审慎视角","聚合内容需要进一步核验原始报道。"],["深层视角","重点观察事件后续是否形成持续性趋势。"]],url:it.link||""});
+    })
+   }catch(e){}
+  }
+  if(live.length){items=[...seed,...live];document.getElementById("sourceMetric").textContent=feeds.length;document.getElementById("updateMetric").textContent="刚刚";render();toast(`已接入 ${live.length} 条实时信号`)}
+  else toast("实时源暂时不可用，已保留演示数据")
+ }catch(e){toast("刷新失败，已保留本地内容")}
+}
+function switchView(v){if(v==="notes"){toast("随想中心已打开：你的笔记保存在本机浏览器");}else toast("已回到发现")}
+document.addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();document.getElementById("search").focus()}if(e.key==="Escape")closeDetail()});
+render();
+</script>
+</body>
+</html>
