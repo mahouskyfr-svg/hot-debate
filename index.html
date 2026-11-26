@@ -4,15 +4,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
-<title>全球热点交锋 · 深度报道与多视角辩论</title>
+<title>全球热点交锋</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:#0b0e14;color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",sans-serif;padding:10px 10px 96px;line-height:1.6}
+body{background:#0b0e14;color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;padding:10px 10px 96px;line-height:1.6}
 .panel{background:#141822;border:1px solid #232a3b;border-radius:14px;padding:12px;margin-bottom:10px}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.brand{font-size:18px;font-weight:800;display:flex;align-items:center;gap:7px;letter-spacing:-.2px}
+.brand{font-size:18px;font-weight:800;display:flex;align-items:center;gap:7px}
 .dot{width:9px;height:9px;border-radius:50%;background:#ff2442}
 .btn{background:#ff2442;color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
 .btn-ghost{background:#1c2230;border:1px solid #2f384d;color:#e5e7eb}
@@ -24,14 +22,12 @@ body{background:#0b0e14;color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFo
 .tabs{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .tab{padding:5px 10px;border-radius:999px;font-size:12px;background:#0c0f16;color:#9ca3af;border:1px solid #232a3b;cursor:pointer}
 .tab.active{background:#f9fafb;color:#0b0e14;font-weight:700;border-color:#f9fafb}
-
-/* 小红书双列卡片流 */
 .waterfall{column-count:2;column-gap:9px}
 @media(max-width:340px){.waterfall{column-count:1}}
 .xhs-card{break-inside:avoid;background:#141822;border:1px solid #232a3b;border-radius:13px;overflow:hidden;margin-bottom:9px;display:flex;flex-direction:column;cursor:pointer}
-.media-wrap{position:relative;width:100%;background:#111622;overflow:hidden}
+.media-wrap{position:relative;width:100%;background:#182032;min-height:110px;overflow:hidden}
 .media-wrap img{width:100%;display:block;object-fit:cover;max-height:215px}
-.media-badge{position:absolute;top:7px;left:7px;background:rgba(11,14,20,.76);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:999px}
+.media-badge{position:absolute;top:7px;left:7px;background:rgba(11,14,20,.78);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:999px}
 .video-pill{position:absolute;top:7px;right:7px;background:#ff2442;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
 .xhs-body{padding:9px 10px 10px}
 .xhs-title{font-size:13.5px;font-weight:700;line-height:1.42;color:#f9fafb;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -40,10 +36,7 @@ body{background:#0b0e14;color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFo
 .src-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:108px;font-size:10.5px}
 .like-btn{display:flex;align-items:center;gap:3px;font-size:11px;color:#9ca3af;padding:2px 5px;border-radius:6px;flex-shrink:0}
 .like-btn.liked{color:#ff2442;font-weight:700}
-
 .load-more-bar{text-align:center;padding:16px 10px;color:#9ca3af;font-size:12px}
-
-/* 知乎风详细报道与辩论详情页 */
 .modal{display:none;position:fixed;inset:0;background:#0b0e14;z-index:100;overflow-y:auto;padding:12px 12px 96px}
 .modal.open{display:block}
 .hero-box{border-radius:14px;overflow:hidden;margin-bottom:12px;border:1px solid #232a3b;background:#141822}
@@ -51,7 +44,7 @@ body{background:#0b0e14;color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFo
 .hero-box video,.hero-box iframe{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
 .hero-cap{padding:8px 12px;font-size:11px;color:#9ca3af;background:#111520;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .src-card{background:#121724;border:1px solid #263147;border-radius:12px;padding:10px 12px;margin-bottom:12px}
-.sec-hd{font-size:12px;font-weight:700;color:#9ca3af;margin:13px 0 7px;letter-spacing:.3px}
+.sec-hd{font-size:12px;font-weight:700;color:#9ca3af;margin:13px 0 7px}
 .report-box{background:#141822;border:1px solid #232a3b;border-left:3px solid #ff2442;border-radius:14px;padding:13px;margin-bottom:12px}
 .report-text{font-size:14px;color:#e5e7eb;line-height:1.75;white-space:pre-line}
 .zhihu-ans{background:#141822;border:1px solid #232a3b;border-radius:14px;padding:13px;margin-bottom:12px}
@@ -81,8 +74,8 @@ textarea{width:100%;min-height:82px;background:#0c0f16;border:1px solid #232a3b;
         <button class="btn btn-ghost" id="sortBtn" onclick="toggleSort()">最新↓</button>
       </div>
     </div>
-    <div class="sub" id="statusBar">正在加载 120 张独立图库与多源深度报道...</div>
-    <input class="search" id="searchBox" placeholder="搜索报道标题、详细内容、地区、信源..." oninput="resetPageAndRender()" />
+    <div class="sub" id="statusBar">就绪</div>
+    <input class="search" id="searchBox" placeholder="搜索报道标题、详细内容、信源..." oninput="resetPageAndRender()" />
     <div class="tabs" id="catTabs">
       <span class="tab active" onclick="chooseCat('全部',this)">全部</span>
       <span class="tab" onclick="chooseCat('全球国际',this)">全球国际</span>
@@ -120,7 +113,6 @@ textarea{width:100%;min-height:82px;background:#0c0f16;border:1px solid #232a3b;
     <button class="btn btn-ghost" onclick="closeDetail()">← 返回列表</button>
     <a id="dOriginLink" class="btn btn-blue" href="#" target="_blank" rel="noopener" style="display:none">阅读原文 ↗</a>
   </div>
-
   <div class="hero-box" id="dHeroBox">
     <div id="dMediaSlot"></div>
     <div class="hero-cap">
@@ -128,24 +120,19 @@ textarea{width:100%;min-height:82px;background:#0c0f16;border:1px solid #232a3b;
       <span id="dMediaKind"></span>
     </div>
   </div>
-
   <h2 id="dTitle" style="font-size:18.5px;line-height:1.45;margin-bottom:8px"></h2>
-
   <div class="src-card">
     <div style="font-size:12px;font-weight:700;color:#e5e7eb" id="dSrcLine"></div>
     <div style="font-size:11px;color:#9ca3af;margin-top:3px" id="dTimeLine"></div>
   </div>
-
   <div class="report-box">
     <div class="sec-hd" style="margin-top:0;color:#fda4af">详细报道说明 · 事件脉络与关键细节</div>
     <div class="report-text" id="dFullReport"></div>
   </div>
-
   <div class="sec-hd">多视角观点交锋</div>
   <div class="panel"><span class="tag pro" id="dL1"></span><div id="dT1" style="font-size:13.5px"></div></div>
   <div class="panel"><span class="tag con" id="dL2"></span><div id="dT2" style="font-size:13.5px"></div></div>
   <div class="panel"><span class="tag deep" id="dL3"></span><div id="dT3" style="font-size:13.5px"></div></div>
-
   <div class="zhihu-ans">
     <div class="sec-hd" style="margin-top:0;color:#60a5fa">深度拆解与使用场景对照</div>
     <div class="ans-text" id="dLongAns"></div>
@@ -155,10 +142,9 @@ textarea{width:100%;min-height:82px;background:#0c0f16;border:1px solid #232a3b;
       <span id="copyTip" style="font-size:11px;color:#34d399"></span>
     </div>
   </div>
-
   <div class="panel">
     <div class="sec-hd" style="margin-top:0">我的随想 & 反方三点质询</div>
-    <textarea id="noteInput" placeholder="记录你对这篇报道的观察、疑问或真实体验，点紫色按钮看反方三点质询..."></textarea>
+    <textarea id="noteInput" placeholder="记录你对这篇报道的观察、疑问或真实体验..."></textarea>
     <div class="row" style="justify-content:flex-start">
       <button class="btn" onclick="saveNote()">保存随想</button>
       <button class="btn btn-purple" onclick="runRebuttal()">⚡ 反方三点质询</button>
@@ -178,150 +164,157 @@ textarea{width:100%;min-height:82px;background:#0c0f16;border:1px solid #232a3b;
 </div>
 
 <script>
-// 120 张独立编号直链图库（#001 ～ #120），不设小上限
-var IMG_BANK_120=(function(){
-  var seeds=[
-    "photo-1511707171634-5f897ff02aa9","photo-1526406915894-7bcd65f60845","photo-1519389950473-47ba0277781c","photo-1550745165-9bc0b252726f",
-    "photo-1518770660439-4636190af475","photo-1677442136019-21780ecad995","photo-1620712943543-bcc4688e7485","photo-1555949963-aa79dcee981c",
-    "photo-1531297484001-80022131f5a1","photo-1488590528505-98d2b5aba04b","photo-1461749280684-dccba630e2f6","photo-1504639725590-34d0984388bd",
-    "photo-1551288049-bebda4e38f71","photo-1517694712202-14dd9538aa97","photo-1581091226825-a6a2a5aee158","photo-1581092160562-40aa08e78837",
-    "photo-1563986768609-322da13575f3","photo-1550751827-4bd374c3f58b","photo-1525547719571-a2d4ac8945e2","photo-1542831371-29b0f74f9713",
-    "photo-1451187580459-43490279c0fa","photo-1480714378408-67cf0d13bc1b","photo-1502920917128-1aa500764cbd","photo-1449824913935-59a10b8d2000",
-    "photo-1477959858617-67f85cf4f1df","photo-1513635269975-59663e0ac1ad","photo-1540959733332-eab4deabeeaf","photo-1525625293386-3f8f99389edd",
-    "photo-1506744038136-46273834b3fb","photo-1469474968028-56623f02e42e","photo-1499750310107-5fef28a66643","photo-1516321318423-f06f85e504b3",
-    "photo-1498050108023-c5249f4df085","photo-1507238691740-187a5b1d37b8","photo-1432821596592-e2c18b78144f","photo-1484480974693-6ca0a78fb36b",
-    "photo-1515378791036-0648a3ef77b2","photo-1522202176988-66273c2fd55f","photo-1517245386807-bb43f82c33c4","photo-1501504905252-473c47e087f8",
-    "photo-1556761175-5973dc0f32e7","photo-1521737604893-d14cc237f11d","photo-1531403009284-440f080d1e12","photo-1552664730-d307ca884978",
-    "photo-1542744173-8e7e53415bb0","photo-1508780709619-79562169bc64","photo-1486312338219-ce68d2c6f44d","photo-1505373877841-8d25f7d46678",
-    "photo-1523275335684-37898b6baf30","photo-1546868871-7041f2a55e12","photo-1585399000684-d2f72660f092","photo-1593642632823-8f785ba67e45",
-    "photo-1587202372775-e229f172b9d7","photo-1591488320449-011701bb6704","photo-1612815154858-60aa4c59eaa6","photo-1542393545-10f5cde2c810",
-    "photo-1558655146-9f40138edfeb","photo-1561070791-2526d30994b5","photo-1572569511254-d8f925fe2cbb","photo-1509198397868-475647b2a1e5"
-  ];
-  var list=[];
-  for(var i=0;i<120;i++){
-    var id=seeds[i%seeds.length];
-    var w=700+(i%12)*20;
-    list.push({
-      code:"#"+String(i+1).padStart(3,"0"),
-      url:"https://images.unsplash.com/"+id+"?auto=format&fit=crop&w="+w+"&q=75&sig="+(i+1)
-    });
-  }
-  return list;
-})();
-
-var detailedTopics=[
-{
-  cat:"科技数码",src:"移动交互深度报道",ageTag:"近48小时",ageHours:4,heatScore:99.5,bankIdx:0,
-  title:"折叠屏外屏与窄屏适配：固定栏位与未重排布局为何总在右侧留出闲置空白？",
-  fullReport:"【事件背景】随着折叠屏手机形态在日常通勤、差旅和居家场景中高频出现，不少用户发现当页面或应用运行在较窄的外屏视口、分屏窗口或特定缩放比例下时，屏幕右侧或边缘常出现一块“什么都点不动、也没有内容”的空白区，或者正文被挤压成细长条。\n\n【成因拆解】一方面，部分移动端页面和组件在编写样式时依赖固定像素宽度或绝对定位的侧边/顶部栏位，当实际视口宽度发生变化时，容器无法顺滑重排；另一方面，部分浏览器或系统级适配策略在面对未声明响应式断点的页面时，会保留默认留白或触发局部缩放错位。\n\n【核心争议】用户普遍希望在有限的屏幕面积里获得更充分、更顺手的有效信息与操作空间，而部分系统或界面设计则强调留出边界以防边缘误触和手势冲突。两者之间的平衡点，决定了窄屏体验究竟是“清爽顺手”还是“憋屈浪费”。",
-  longAns:"在窄屏或折叠屏外屏上评判一个页面好不好用，最直观的标准就是“能不能一只手顺畅看完、点准、写完”。\n\n如果右侧长期留白，本质上是布局结构没有随宽度自适应；如果文字被挤得每行只有几个字，阅读节奏就会被打断。真正成熟的适配应当做到：卡片流按视口自动切换单列或双列、弹窗铺满有效可视区、核心按钮触控热区充足且不遮挡正文。",
-  d:[
-    ["正向视角 · 边界与防误触","固定边距或安全间距能在一定程度上减少边缘误触，给系统手势留出缓冲空间。"],
-    ["反向视角 · 空间浪费明显","外屏和窄分屏本来横向空间就紧张，大片闲置空白会直接拉低信息密度与操作效率。"],
-    ["深层观察 · 自适应优于硬塞","与其把宽屏页面硬塞进小框，不如按屏幕宽度重新排布层级，让核心内容占C位。"]
-  ]
-},
-{
-  cat:"AI与效率",src:"无代码产品观察",ageTag:"近48小时",ageHours:7,heatScore:98.8,bankIdx:5,
-  title:"零代码用 AI 搭应用：从手机原型到稳定上线的关键门槛与避坑实录",
-  fullReport:"【事件背景】越来越多没有编程基础的人开始尝试借助 AI 对话生成网页、工具和原型，甚至全程在手机浏览器里完成代码编写、云端托管与线上预览。这种“零门槛造物”方式让个人想法能够快速变成可点击的真实页面。\n\n【实践过程】在纯手机端的实际搭建中，早期通过快捷指令或本地长文本传递代码时，常遇到富文本转换、字符长度限制或单文件体积过大导致的“吞代码”、白屏与黑屏问题。转入 GitHub 仓库托管与 GitHub Pages 发布后，代码得以完整保存在云端，数据也能通过 localStorage 留在浏览器本地。\n\n【现存挑战】从“页面能打开”到“内容够丰富、多源拉取稳、浏览器不读旧缓存”，每一步都需要反复验证。尤其是浏览器缓存机制常常让人在更新代码后仍看到旧版页面，需要通过版本号参数或缓存控制头来破除。",
-  longAns:"零代码做工具最大的优势是“想法来了就能试”，但要让它真正好用，不能只停留在能弹个框、能看几行假字。\n\n把云端托管、本地存储、多源拉取和详实内容串起来之后，它才从一个“玩具原型”变成每天愿意点开顺手记随想、看热点的个人工具。",
-  d:[
-    ["正向视角 · 试错成本极低","不写底层代码也能在手机上搭出可用网页并发布上线，极大缩短了从想法到验证的路径。"],
-    ["反向视角 · 细节调试容易卡壳","遇到缓存不更新、接口超时或长代码粘贴不全时，缺乏排查经验容易反复折腾。"],
-    ["深层观察 · 先跑通再做厚","先把托管、存数据和拉内容的主链路打通，再往里填充详实报道与交互，效率最高。"]
-  ]
-},
-{
-  cat:"科技数码",src:"硬件与交互专题",ageTag:"近48小时",ageHours:10,heatScore:97.6,bankIdx:4,
-  title:"消费级语音机器人 vs 具身硬件：为什么“只会接话”的设备难留住人？",
-  fullReport:"【事件背景】近年市场上涌现出不少主打“智能陪伴”“桌面语音交互”的消费级机器人与语音助手产品，但不少用户上手后发现，它们更多是按预设脚本和固定话术应答，缺乏对真实环境与复杂上下文的深度理解。\n\n【对比观察】与单纯依赖固定语音脚本的消费级语音玩具相比，专注机器人运动控制、高动态平衡与硬件本体的企业，因其扎实的机械结构、驱动与感知工程积累，在行业与公众讨论中呈现出截然不同的技术含金量。\n\n【行业启示】当用户面对的是“只能听懂几句固定口令、跨任务就卡壳”的交互时，新鲜感往往很快消退；只有真正能理解意图、执行复杂任务或具备扎实物理能力的系统，才能撑起长期使用价值。",
-  longAns:"区分一款智能设备是“真有用”还是“套壳话术机”，只要看两件事：遇到没见过的场景能不能接住，以及能不能帮人省掉真实操作步骤。\n\n如果只是把固定回复包一层可爱的壳，新鲜劲一过就很容易吃灰。",
-  d:[
-    ["正向视角 · 交互形态持续演进","自然语言与多模态能力仍在快速迭代，未来在特定场景下仍有提升空间。"],
-    ["反向视角 · 固定脚本体验有限","依赖死板话术和单一指令的设备，面对复杂需求时容易显得机械且笨拙。"],
-    ["深层观察 · 实用性决定留存","无论是数字工具还是物理硬件，真正解决痛点与省去麻烦才是留住用户的核心。"]
-  ]
-},
-{
-  cat:"内容生活",src:"内容生态观察",ageTag:"近48小时",ageHours:15,heatScore:96.3,bankIdx:30,
-  title:"AI 短剧与同质化带货刷屏：为什么越来越多用户开始偏爱克制、清爽的信息流？",
-  fullReport:"【事件背景】在主流短视频与社交信息流中，批量生成的 AI 短剧、模板化情绪剧情以及高频电商带货占据了大量版面。不少用户在日常刷屏时感到信息过载与审美疲劳，开始寻找更安静、少推销、重内容本身的阅读方式。\n\n【体验变化】当信息流被同质化套路和商业推销填满时，用户的注意力会被不断打断，甚至产生抵触情绪。相比之下，结构清晰的双列图文卡片、有来龙去脉的详细报道以及能沉淀个人随想的笔记空间，更能让人静下心来思考。\n\n【生态思考】内容平台需要在商业变现与用户体验之间寻找分寸；而对个人用户而言，建立自己的聚合阅读与随想记录习惯，正在成为对抗噪音的实用方式。",
-  longAns:"刷内容最怕两件事：一是满屏都是复制粘贴的套路，二是刚看进一点东西就被生硬推销打断。\n\n把“看热点”和“记随想”放在一起，看别人怎么说、再写下自己怎么想，比单纯被动刷屏更有获得感。",
-  d:[
-    ["正向视角 · 碎片消遣门槛低","流水线短内容节奏快、门槛低，在纯放松或打发零碎时间时有一定受众。"],
-    ["反向视角 · 同质化与噪音偏重","大量相似模板和高频带货会挤占深度内容空间，容易让人越刷越累。"],
-    ["深层观察 · 夺回阅读节奏","按自己的兴趣筛内容、留出安静思考与记录的空间，才能让刷手机变成有效输入。"]
-  ]
-},
-{
-  cat:"内容生活",src:"创作者实践笔记",ageTag:"近30天",ageHours:54,heatScore:95.1,bankIdx:31,
-  title:"做产品与内容分享时：照搬模板参数还是讲透真实体验与细节打磨？",
-  fullReport:"【事件背景】无论是做数码电子产品分享、工作流教程还是生活观察，很多创作者都会面临“怎么写、怎么剪、怎么讲才不空洞”的问题。单纯堆砌表面参数或套用空泛模板，往往难以让人记住；而结合真实使用过程、细节对比与坦诚说明优缺点的表达，更容易获得认可。\n\n【细节价值】在内容制作与后期呈现上，清晰准确的字幕、自然顺耳的音色与节奏、直观的画面标注，以及对真实痛点的剖析，都会直接影响观众的理解效率与信任度。\n\n【创作取舍】追求“面面俱到却没有重点”的泛泛而谈，往往不如把一两个核心体验讲深、讲透、讲明白。真实感与清晰度，才是长久吸引同频读者的关键。",
-  longAns:"真正让人愿意看完、甚至愿意收藏转发的内容，很少是靠华丽辞藻堆出来的，而是靠“说清事实 + 讲透感受 + 亮出观点”。\n\n把复杂的事情拆明白，把自己的真实判断写下来，哪怕篇幅长一点，只要言之有物就值得看。",
-  d:[
-    ["正向视角 · 真实细节更有说服力","结合真实使用场景与具体细节来说明，能帮读者更快看清实际表现与适用边界。"],
-    ["反向视角 · 基础事实不能缺失","只谈主观感受而忽略客观事实与背景说明，也可能导致信息不够完整。"],
-    ["深层观察 · 事实与观点并重","先交代清楚事情原貌与关键细节，再给出理性分析与个人随想，体验最扎实。"]
-  ]
-},
-{
-  cat:"全球国际",src:"全球视野观察",ageTag:"近30天",ageHours:80,heatScore:94.2,bankIdx:20,
-  title:"各国城市与科技动态观察：跨地区报道如何帮我们跳出单一视角看世界？",
-  fullReport:"【事件背景】全球各地在数字基础设施、城市生活节奏、科技创新与公共服务上的探索各具特色。不同国家和地区的媒体与创作者在报道同一类现象时，往往会从本地关切出发，呈现不同的切入点与背景细节。\n\n【多源对照的价值】只看单一渠道或单一地区的声音，容易形成信息盲区；将多个国际媒体与观察源放在一起对照阅读，既能看到全球范围内的共性趋势，也能察觉不同地区在落地节奏与现实条件上的差异。\n\n【阅读建议】面对海量国际与各地新闻，不必追求每一条都浅尝辄止，而是优先挑选与自己关注领域相关的报道，仔细看清事件起因、各方说法与实际影响。",
-  longAns:"看各国各地的新闻和热点，最大的收获不是记住了多少零碎标题，而是学会从多维度理解同一件事为什么在不同地方会有不同反应。\n\n有原文出处、有详细说明、再配上自己的独立思考，这才是高质量的资讯阅读。",
-  d:[
-    ["正向视角 · 拓宽视野与对照参考","多看不同地区和信源的报道，有助于更全面地了解全球动态与多样化做法。"],
-    ["反向视角 · 信息量大需精选","全球新闻数量庞大，不加筛选地全盘接收容易造成精力分散。"],
-    ["深层观察 · 重质胜于重盲目追多","挑出真正有细节、有深度的报道细看，比匆忙扫几十条空洞标题更有价值。"]
-  ]
-}
+var IMG_BANK=[
+  "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1585399000684-d2f72660f092?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1542393545-10f5cde2c810?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?auto=format&fit=crop&w=720&q=75",
+  "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=720&q=75"
 ];
 
-function buildRichSeedItems(){
-  var list=[];
-  for(var i=0;i<detailedTopics.length;i++){
-    var dt=detailedTopics[i];
-    var picObj=IMG_BANK_120[dt.bankIdx%IMG_BANK_120];
-    list.push({
-      id:"rich_"+i,
-      cat:dt.cat,
-      src:dt.src,
-      url:"",
-      pubRaw:dt.ageTag,
-      ageTag:dt.ageTag,
-      ageLabel:dt.ageTag,
-      ageHours:dt.ageHours,
-      ts:Date.now()-dt.ageHours*3600000,
-      heatScore:dt.heatScore,
-      img:picObj.url,
-      imgOrigin:"独立图库 "+picObj.code,
-      mp4:"",
-      ytId:"",
-      hasRealVideo:false,
-      title:dt.title,
-      brief:dt.fullReport,
-      fullReport:dt.fullReport,
-      longAns:dt.longAns,
-      d:dt.d
-    });
+var SEED_ITEMS=[
+  {
+    id:"s1",cat:"科技数码",src:"移动交互深度报道",url:"",pubRaw:"近48小时",ageTag:"近48小时",ageLabel:"近48小时",ageHours:4,ts:Date.now()-14400000,heatScore:99.5,
+    img:IMG_BANK[0],imgOrigin:"独立图库 #01",mp4:"",ytId:"",hasRealVideo:false,
+    title:"折叠屏外屏与窄屏适配：固定栏位与未重排布局为何总在右侧留出闲置空白？",
+    fullReport:"【事件背景】在折叠屏外屏或窄视口模式下，不少移动端页面与组件沿用固定宽度或默认边距，导致小屏下正文被挤窄，或在侧边留出大片无法交互的空白区。\n\n【成因与现象】当页面容器没有随视口宽度自适应重排，或者浏览器缩放比例与容器宽度不匹配时，就会出现留白或拥挤。\n\n【核心议题】界面应通过流式布局与自适应控件主动贴合窄屏，还是依赖系统或手动缩放来补救？",
+    longAns:"窄屏体验的核心在于“有效空间利用率”与“单手点按顺手度”。把次要信息折叠进弹窗、让主内容流式排布，能大幅减少反复滑动与缩放。",
+    d:[
+      ["正向视角 · 边界防误触","保留适度边距有助于避免边缘误触与手势冲突。"],
+      ["反向视角 · 浪费有效空间","窄屏下大块闲置空白会直接降低信息密度与操作效率。"],
+      ["深层拆解 · 布局自适应","按视口宽度动态调整结构，才能兼顾清爽与实用。"]
+    ]
+  },
+  {
+    id:"s2",cat:"AI与效率",src:"无代码产品观察",url:"",pubRaw:"近48小时",ageTag:"近48小时",ageHours:7,ts:Date.now()-25200000,heatScore:98.8,
+    img:IMG_BANK[5],imgOrigin:"独立图库 #06",mp4:"",ytId:"",hasRealVideo:false,
+    title:"零代码用 AI 搭应用：从手机原型到稳定上线的关键门槛与避坑实录",
+    fullReport:"【事件背景】借助 AI 生成网页与应用原型，让非编程背景用户也能在手机上快速搭出可用工具。\n\n【实践过程】早期通过快捷指令或长文本粘贴容易遭遇截断与黑屏，转入 GitHub 仓库托管与 Pages 发布后，代码完整性与本地数据留存得到了明显改善。\n\n【现存挑战】浏览器缓存、多源联网稳定性以及报道内容的详实度，决定了它能否从原型变成日常顺手的工具。",
+    longAns:"先打通稳定托管与本地笔记留存，再逐步扩充内容与多源抓取，能让零代码迭代少走弯路。",
+    d:[
+      ["正向视角 · 试错门槛低","一个人就能快速把想法变成可打开测试的网页应用。"],
+      ["反向视角 · 联调易卡壳","遇到浏览器缓存或接口波动时，排查细节仍需耐心。"],
+      ["深层拆解 · 稳扎稳打","先保核心功能不报错、数据不丢，再加丰富内容。"]
+    ]
+  },
+  {
+    id:"s3",cat:"科技数码",src:"硬件与交互专题",url:"",pubRaw:"近48小时",ageTag:"近48小时",ageHours:10,ts:Date.now()-36000000,heatScore:97.6,
+    img:IMG_BANK[4],imgOrigin:"独立图库 #05",mp4:"",ytId:"",hasRealVideo:false,
+    title:"消费级语音机器人 vs 具身硬件：为什么“只会接话”的设备难留住人？",
+    fullReport:"【事件背景】不少主打语音交互的消费级设备停留在固定话术与简单问答，缺乏真实环境感知与执行能力；而专注运动控制与硬件本体的机器人公司则展现出不同的工程路线。\n\n【体验差异】当设备只能按固定脚本回复、遇到复杂任务就卡壳时，新鲜感往往很快消退。\n\n【行业思考】真正能留住用户的，是能解决真实问题或具备扎实物理执行能力的系统。",
+    longAns:"区分噱头与实用，关键看它能否在真实场景里稳定完成任务，而不是只靠固定话术应答。",
+    d:[
+      ["正向视角 · 交互持续演进","多模态与语音能力仍在推进，特定场景有改进空间。"],
+      ["反向视角 · 脚本化体验受限","死板话术面对复杂上下文时容易显得机械笨拙。"],
+      ["深层拆解 · 实用价值优先","能帮人省事或完成物理动作，才有长期生命力。"]
+    ]
+  },
+  {
+    id:"s4",cat:"内容生活",src:"内容生态观察",url:"",pubRaw:"近48小时",ageTag:"近48小时",ageHours:15,ts:Date.now()-54000000,heatScore:96.3,
+    img:IMG_BANK[30],imgOrigin:"独立图库 #31",mp4:"",ytId:"",hasRealVideo:false,
+    title:"AI 短剧与同质化带货刷屏：为什么越来越多用户开始偏爱克制、清爽的信息流？",
+    fullReport:"【事件背景】批量生成的短剧套路与高频带货占据大量短视频版面，不少用户在日常刷屏时感到疲惫与噪音干扰。\n\n【阅读转向】清爽的卡片流、详实的报道说明与个人随想笔记，正在成为更安静、更有思考空间的替代选择。\n\n【生态平衡】在商业化与阅读克制之间找到分寸，才能让内容生态更健康。",
+    longAns:"少一点生硬推销和同质化套路，多一点真实报道与独立记录，刷内容才不容易变成消耗。",
+    d:[
+      ["正向视角 · 消遣门槛低","短平快内容适合打发零碎时间，上手没有负担。"],
+      ["反向视角 · 噪音与套路偏多","高频推销与相似模板容易让人产生审美疲劳。"],
+      ["深层拆解 · 夺回注意力","按自己的节奏看内容、记随想，体验更踏实。"]
+    ]
+  },
+  {
+    id:"s5",cat:"内容生活",src:"创作者实践笔记",url:"",pubRaw:"近30天",ageTag:"近30天",ageHours:54,ts:Date.now()-194400000,heatScore:95.1,
+    img:IMG_BANK[31],imgOrigin:"独立图库 #32",mp4:"",ytId:"",hasRealVideo:false,
+    title:"做产品与内容分享时：照搬模板参数还是讲透真实体验与细节打磨？",
+    fullReport:"【事件背景】无论是数码设备分享还是方法经验记录，单纯罗列参数或套用模板往往显得空洞。\n\n【细节价值】真实使用场景、清晰准确的字幕、顺耳的音色与坦诚的优缺点说明，更能建立真实感。\n\n【表达建议】把一两个核心体验讲深、讲透，比面面俱到却没有重点更有说服力。",
+    longAns:"把真实发生的事、具体细节和自己的判断说清楚，内容自然会有分量。",
+    d:[
+      ["正向视角 · 真实感更打动人","结合真实体验与细节能帮读者看清实际表现。"],
+      ["反向视角 · 基础事实不可少","缺少客观事实支撑时，单靠情绪容易片面。"],
+      ["深层拆解 · 事实加思考","先交代清楚事实，再给出理性分析最稳妥。"]
+    ]
+  },
+  {
+    id:"s6",cat:"全球国际",src:"全球视野观察",url:"",pubRaw:"近30天",ageTag:"近30天",ageHours:80,ts:Date.now()-288000000,heatScore:94.2,
+    img:IMG_BANK[20],imgOrigin:"独立图库 #21",mp4:"",ytId:"",hasRealVideo:false,
+    title:"各国城市与科技动态观察：跨地区报道如何帮我们跳出单一视角看世界？",
+    fullReport:"【事件背景】不同国家和地区在科技应用、城市生活与公共服务上的推进节奏各不相同。\n\n【对照意义】多看不同信源与地区的报道，有助于理解同一现象在不同环境下的差异。\n\n【阅读方式】结合原文出处与背景说明细看重点议题，比盲目追逐碎片标题更有收获。",
+    longAns:"多维度对照不同信源的报道，能帮助我们更客观地看清事情全貌。",
+    d:[
+      ["正向视角 · 视野更开阔","跨地区与多信源对照能减少单一视角盲区。"],
+      ["反向视角 · 信息量大需筛选","海量新闻需要挑重点看，避免精力分散。"],
+      ["深层拆解 · 精读胜于泛览","看清背景、细节与各方说法，收获更实在。"]
+    ]
   }
-  return list;
-}
+];
 
-var items=[],filtered=[],visibleCount=24,PAGE_SIZE=24;
+var items=SEED_ITEMS.slice(),filtered=[],visibleCount=24,PAGE_SIZE=24;
 var activeCat="全部",activeTime="全部",sortMode="time",currentItem=null;
 var notesStore={},likedMap={},agreedMap={};
 try{
-  var sn=localStorage.getItem("hot_full_notes_v11");if(sn)notesStore=JSON.parse(sn);
-  var sl=localStorage.getItem("hot_full_likes_v11");if(sl)likedMap=JSON.parse(sl);
-  var sa=localStorage.getItem("hot_full_agrees_v11");if(sa)agreedMap=JSON.parse(sa);
+  var sn=localStorage.getItem("hot_v12_notes");if(sn)notesStore=JSON.parse(sn);
+  var sl=localStorage.getItem("hot_v12_likes");if(sl)likedMap=JSON.parse(sl);
+  var sa=localStorage.getItem("hot_v12_agrees");if(sa)agreedMap=JSON.parse(sa);
 }catch(e){}
-function saveNotesStore(){try{localStorage.setItem("hot_full_notes_v11",JSON.stringify(notesStore))}catch(e){}}
+function saveNotesStore(){try{localStorage.setItem("hot_v12_notes",JSON.stringify(notesStore))}catch(e){}}
 function saveSocialStore(){
   try{
-    localStorage.setItem("hot_full_likes_v11",JSON.stringify(likedMap));
-    localStorage.setItem("hot_full_agrees_v11",JSON.stringify(agreedMap));
+    localStorage.setItem("hot_v12_likes",JSON.stringify(likedMap));
+    localStorage.setItem("hot_v12_agrees",JSON.stringify(agreedMap));
   }catch(e){}
 }
 
@@ -356,19 +349,12 @@ function extractRealMedia(it,rawHtml){
 }
 
 function parseAge(pubStr){
-  if(!pubStr)return {hours:12,label:"近期"};
+  if(!pubStr)return {hours:12,label:"近期",ts:Date.now()-43200000};
   var ts=Date.parse(pubStr);
-  if(isNaN(ts))return {hours:18,label:String(pubStr).slice(0,16)};
+  if(isNaN(ts))return {hours:18,label:String(pubStr).slice(0,16),ts:Date.now()-64800000};
   var h=Math.max(1,Math.round((Date.now()-ts)/3600000));
   var lbl=h<=48?(h+"小时前"):(Math.ceil(h/24)+"天前");
   return {hours:h,label:lbl,ts:ts};
-}
-
-function composeDetailedReport(title,srcName,pubLabel,desc,url,age){
-  var p1="【报道概览】本条内容来自「"+srcName+"」发布（"+pubLabel+"），报道主题为「"+title+"」。";
-  var p2="【核心内容说明】"+desc;
-  var p3="【背景与阅读提示】该动态属于"+(age.hours<=48?"近 48 小时内":"近 30 天内")+"的关注焦点。若需查看完整图文排版、补充数据或原始上下文，可通过详情页顶部的「阅读原文 ↗」直达信源页面核对。";
-  return p1+"\n\n"+p2+"\n\n"+p3;
 }
 
 function fetchFeedSource(fc,bankOffset){
@@ -384,14 +370,14 @@ function fetchFeedSource(fc,bankOffset){
       var rawHtml=(raw.content||raw.description||"");
       var desc=stripHtml(rawHtml);
       if(!desc||desc.toLowerCase().indexOf("comments")===0){
-        desc="信源 "+fc.name+" 提供了该条目的原始链接，报道正文细节请点击详情页右上角「阅读原文 ↗」查看完整页面。";
+        desc="该条内容来自「"+fc.name+"」，详细报道请点击详情页右上角「阅读原文 ↗」查看完整页面。";
       }
       var media=extractRealMedia(raw,rawHtml);
-      var picObj=IMG_BANK_120[(bankOffset+i)%IMG_BANK_120.length];
-      var finalImg=media.img||picObj.url;
-      var imgOrigin=media.img?"信源原图":("独立图库 "+picObj.code);
+      var bIdx=(bankOffset+i)%IMG_BANK.length;
+      var finalImg=media.img||IMG_BANK[bIdx];
+      var imgOrigin=media.img?"信源原图":("独立图库 #"+String(bIdx+1).padStart(2,"0"));
       var pubLabel=raw.pubDate||age.label;
-      var fullRep=composeDetailedReport(title,fc.name,pubLabel,desc,raw.link||"",age);
+      var fullRep="【报道概览】来源："+fc.name+"（"+pubLabel+"）\n主题："+title+"\n\n【报道内容】"+desc+"\n\n【补充说明】该条目属于"+(age.hours<=48?"近48小时内":"近30天内")+"抓获的公开报道，可点击「阅读原文 ↗」查看原站完整内容。";
       var hnPoints=0;
       var pm=title.match(/\((\d+)\s*points?\)/i);
       if(pm)hnPoints=parseInt(pm[1],10);
@@ -399,28 +385,16 @@ function fetchFeedSource(fc,bankOffset){
 
       out.push({
         id:fc.name+"_"+i+"_"+encodeURIComponent(title.slice(0,14)),
-        cat:fc.cat,
-        src:fc.name,
-        url:raw.link||"",
-        pubRaw:pubLabel,
-        ageTag:age.hours<=48?"近48小时":"近30天",
-        ageLabel:age.label,
-        ageHours:age.hours,
-        ts:age.ts||Date.now()-age.hours*3600000,
-        heatScore:heat,
-        img:finalImg,
-        imgOrigin:imgOrigin,
-        mp4:media.mp4,
-        ytId:media.ytId,
-        hasRealVideo:media.hasRealVideo,
-        title:title,
-        brief:desc,
-        fullReport:fullRep,
-        longAns:"【详实梳理】\n围绕「"+title+"」，目前公开报道主要集中在事件进展、各方态度与后续影响三个层面。\n\n建议结合信源「"+fc.name+"」的原文内容，对照你日常关心的领域或使用习惯，独立判断它的实际意义，再在下方写下随想或用反方三点质询检验自己的看法。",
+        cat:fc.cat,src:fc.name,url:raw.link||"",pubRaw:pubLabel,
+        ageTag:age.hours<=48?"近48小时":"近30天",ageLabel:age.label,ageHours:age.hours,ts:age.ts,
+        heatScore:heat,img:finalImg,imgOrigin:imgOrigin,
+        mp4:media.mp4,ytId:media.ytId,hasRealVideo:media.hasRealVideo,
+        title:title,brief:desc,fullReport:fullRep,
+        longAns:"来源："+fc.name+"（"+pubLabel+"）\n\n建议结合原报道上下文与自身关注点进行独立判断，并在下方记录你的随想或进行反方三点质询。",
         d:[
-          ["推进与关注视角","该报道呈现了相关领域或地区的最新动态，有助于及时掌握变化脉络。"],
-          ["审慎与核实视角","单篇快讯或摘要往往只覆盖局部信息，后续进展与细节仍需结合更多报道观察。"],
-          ["深入拆解视角","关注事件背后的真实原因与长期影响，比单纯停留在标题情绪上更有价值。"]
+          ["推进视角","展现了相关领域或地区的最新动态。"],
+          ["审慎视角","单篇报道细节有限，后续变化仍需持续观察。"],
+          ["拆解视角","关注事件起因、实际影响与自身场景的关联。"]
         ]
       });
     }
@@ -430,11 +404,10 @@ function fetchFeedSource(fc,bankOffset){
 
 function refreshAll(){
   var bar=document.getElementById("statusBar");
-  var baseList=buildRichSeedItems();
-  items=baseList.slice();
+  items=SEED_ITEMS.slice();
   visibleCount=PAGE_SIZE;
   renderFeed();
-  bar.innerText="已加载 "+baseList.length+" 篇详实长文专题 · 正在联网抓取全球实时报道...";
+  bar.innerText="已显示 "+items.length+" 篇详实长文 · 正在联网抓取实时报道...";
 
   var feeds=[
     {name:"BBC World",cat:"全球国际",rss:"https://feeds.bbci.co.uk/news/world/rss.xml"},
@@ -451,7 +424,7 @@ function refreshAll(){
 
   var done=0,liveMerged=[],okList=[];
   feeds.forEach(function(fc,idx){
-    fetchFeedSource(fc,idx*10+6).then(function(list){
+    fetchFeedSource(fc,idx*6).then(function(list){
       if(list.length>0){
         liveMerged=liveMerged.concat(list);
         okList.push(fc.name+"("+list.length+")");
@@ -459,13 +432,13 @@ function refreshAll(){
     }).finally(function(){
       done++;
       if(done===feeds.length){
-        items=liveMerged.concat(baseList);
+        items=liveMerged.concat(SEED_ITEMS);
         visibleCount=PAGE_SIZE;
         renderFeed();
         if(liveMerged.length>0){
-          bar.innerText="共 "+items.length+" 条（含 "+liveMerged.length+" 条联网报道："+okList.join(" · ")+" + "+baseList.length+" 篇详实长文）· 120张独立图库已启用";
+          bar.innerText="共 "+items.length+" 条（联网 "+liveMerged.length+" 条："+okList.join(" · ")+"）";
         }else{
-          bar.innerText="共 "+items.length+" 篇详实长文专题（当前网络未能连上外部 RSS 接口）· 120张独立图库已启用";
+          bar.innerText="共 "+items.length+" 篇详实长文（当前网络未能连上外部 RSS 接口）";
         }
       }
     });
@@ -555,7 +528,7 @@ function renderFeed(){
       '</div>'+
     '</div>';
   }
-  document.getElementById("feedGrid").innerHTML=html||'<div class="panel">当前筛选条件下没有匹配条目，试试切换「全部」或点「↻ 联网抓真实报道」。</div>';
+  document.getElementById("feedGrid").innerHTML=html||'<div class="panel">当前筛选下没有匹配条目。</div>';
 
   var txtEl=document.getElementById("loadMoreTxt");
   var btnEl=document.getElementById("loadMoreBtn");
@@ -669,7 +642,7 @@ function copyTopicShare(){
 function runRebuttal(){
   var raw=(document.getElementById("noteInput").value||"").trim();
   var a=raw?("针对你说的「"+raw.slice(0,26)+(raw.length>26?"…":"")+"」"):"针对这篇报道";
-  document.getElementById("rp1").innerText="1. 前提核对："+a+"，报道里的关键事实与背景是否完整？有没有遗漏前提？";
+  document.getElementById("rp1").innerText="1. 前提核对："+a+"，报道里的关键事实与背景是否完整？";
   document.getElementById("rp2").innerText="2. 反方立场：如果站在完全相反的立场，最核心的反驳理由是什么？";
   document.getElementById("rp3").innerText="3. 现实代价：顺着这个判断走，可能会忽略哪些代价或副作用？";
   document.getElementById("rebutPanel").style.display="block";
